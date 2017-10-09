@@ -3,7 +3,7 @@ public class coordinate
   private int xValue;
   private int yValue;
 
-  coordinate(x, y)
+  coordinate(int x, int y)
   {
     xValue = x;
     yValue = y;
