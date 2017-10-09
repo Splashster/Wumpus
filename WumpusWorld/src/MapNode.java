@@ -38,30 +38,30 @@ public class MapNode
   void setWumpus()
   {
     wumpus=true;
-    northNeighbor.setStench();
-    southNeighbor.setStench();
-    eastNeighbor.setStench();
-    westNeighbor.setStench();
+    if(northNeighbor != null) {northNeighbor.setStench();}
+    if(southNeighbor != null) {southNeighbor.setStench();}
+    if(eastNeighbor != null) {eastNeighbor.setStench();}
+    if(westNeighbor != null) {westNeighbor.setStench();} 
   }
   void setStench() {stench=true;}
 
   void setPit()
   {
     pit=true;
-    northNeighbor.setBreeze();
-    southNeighbor.setBreeze();
-    eastNeighbor.setBreeze();
-    westNeighbor.setBreeze();
+    if(northNeighbor != null) {northNeighbor.setBreeze();}
+    if(southNeighbor != null) {southNeighbor.setBreeze();}
+    if(eastNeighbor != null) {eastNeighbor.setBreeze();}
+    if(westNeighbor != null) {westNeighbor.setBreeze();}
   }
   void setBreeze() {breeze=true;}
 
   void setGold()
   {
     gold=true;
-    northNeighbor.setGlitter();
-    southNeighbor.setGlitter();
-    eastNeighbor.setGlitter();
-    westNeighbor.setGlitter();
+    if(northNeighbor != null) {northNeighbor.setGlitter();}
+    if(southNeighbor != null) {southNeighbor.setGlitter();}
+    if(eastNeighbor != null) {eastNeighbor.setGlitter();}
+    if(westNeighbor != null) {westNeighbor.setGlitter();}
   }
   void setGlitter() {glitter=true;}
 
@@ -70,10 +70,10 @@ public class MapNode
   void setSupmuw()
   {
     supmuw=true;
-    northNeighbor.setMoo();
-    southNeighbor.setMoo();
-    eastNeighbor.setMoo();
-    westNeighbor.setMoo();
+    if(northNeighbor != null) {northNeighbor.setMoo();}
+    if(southNeighbor != null) {southNeighbor.setMoo();}
+    if(eastNeighbor != null) {eastNeighbor.setMoo();}
+    if(westNeighbor != null) {westNeighbor.setMoo();}
   }
   void setMoo() {moo=true;}
 
