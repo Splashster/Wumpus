@@ -29,7 +29,7 @@ public class Map
         if(x == wumpus.getX() && y == wumpus.getY()) {map[x][y].setWumpus();}
         if(x == supmuw.getX() && y == supmuw.getY()) {map[x][y].setSupmuw();}
         if(x == gold.getX() && y == gold.getY()) {map[x][y].setGold();}
-        //for(coordinate p : pits) {if(x == p.getX() && y == p.getY()) {map[x][y].setPit();}}
+        for(coordinate p : pits) {if(x == p.getX() && y == p.getY()) {map[x][y].setPit();}}
       }
     }
   }
@@ -38,14 +38,13 @@ public class Map
   {
     for(int y=0; y<10; y++)
     {
-      System.out.println("+----------++----------++----------++----------++----------++----------++----------++----------++----------++----------+");
-      System.out.println("|  " +   map[0][y].getWumpus() + "   ||  " +   map[1][y].getWumpus() + "   ||  " +   map[2][y].getWumpus() + "   ||  " +   map[3][y].getWumpus() + "   ||  " +   map[4][y].getWumpus() + "   ||  " +   map[5][y].getWumpus() + "   ||  " +   map[6][y].getWumpus() + "   ||  " +   map[7][y].getWumpus() + "   ||  " +   map[8][y].getWumpus() + "   ||  " +   map[9][y].getWumpus() + "   |");
-      System.out.println("|          ||          ||          ||          ||          ||          ||          ||          ||          ||          |");
-      System.out.println("|          ||          ||          ||          ||          ||          ||          ||          ||          ||          |");
-      System.out.println("|          ||          ||          ||          ||          ||          ||          ||          ||          ||          |");
-      System.out.println("+----------++----------++----------++----------++----------++----------++----------++----------++----------++----------+");
+      System.out.println("+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+");
+      System.out.println("|  " +   map[0][y].getPit() + "   |  " +   map[1][y].getPit() + "   |  " +   map[2][y].getPit() + "   |  " +   map[3][y].getPit() + "   |  " +   map[4][y].getPit() + "   |  " +   map[5][y].getPit() + "   |  " +   map[6][y].getPit() + "   |  " +   map[7][y].getPit() + "   |  " +   map[8][y].getPit() + "   |  " +   map[9][y].getPit() + "   |");
+      System.out.println("|          |          |          |          |          |          |          |          |          |          |");
+      System.out.println("|          |          |          |          |          |          |          |          |          |          |");
+      System.out.println("|          |          |          |          |          |          |          |          |          |          |");
     }
-
+    System.out.println("+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+");
 
   }
 }
