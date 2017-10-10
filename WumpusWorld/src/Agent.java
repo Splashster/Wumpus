@@ -18,8 +18,23 @@ public class Agent()
   //The agent's knowledgeBase
   private KnowledgeBase KB;
 
+  //Does agent still have the arrow
+  private boolean hasArrow;
+
+  //Does the agent smell the Wumpus
+  private boolean canSmell;
+
+  //Does the agent feel the breeze
+  private boolean feelsBreeze;
+
+  //Does the agent hear the supmuw
+  private boolean canHear;
+
+  //Does the agent see the glitter from the gold
+  private boolean seeGlitter;
+
   Agent()
   {
-    
+
   }
 }
