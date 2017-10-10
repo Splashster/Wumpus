@@ -1,7 +1,10 @@
+//Simple class to store X-Y coordinate pairs
 public class coordinate
 {
   private int xValue;
   private int yValue;
+
+  coordinate() {}
 
   coordinate(int x, int y)
   {

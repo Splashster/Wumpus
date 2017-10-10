@@ -1,10 +1,12 @@
 public class MapNode
 {
+  //Define neighboring nodes
   private MapNode northNeighbor;
   private MapNode southNeighbor;
   private MapNode eastNeighbor;
   private MapNode westNeighbor;
 
+  //Define all posssible attributes allowed within the node
   private boolean wumpus;
   private boolean stench;
   private boolean pit;
@@ -18,6 +20,7 @@ public class MapNode
 
   MapNode()
   {
+    //Set all attributes to false by default
     wumpus = false;
     stench = false;
     pit = false;
@@ -30,38 +33,40 @@ public class MapNode
     noTrespassing = false;
   }
 
+  //Allow neighboring nodes to be set
   void setNorthNeighbor(MapNode north) {northNeighbor = north;}
   void setSouthNeighbor(MapNode south) {southNeighbor = south;}
   void setEastNeighbor(MapNode east) {eastNeighbor = east;}
   void setWestNeighbor(MapNode west) {westNeighbor = west;}
 
+  //Set specified attributes, sense attributes are automatically set in all neighboring nodes
   void setWumpus()
   {
     wumpus=true;
-    northNeighbor.setStench();
-    southNeighbor.setStench();
-    eastNeighbor.setStench();
-    westNeighbor.setStench();
+    if(northNeighbor != null) {northNeighbor.setStench();}
+    if(southNeighbor != null) {southNeighbor.setStench();}
+    if(eastNeighbor != null) {eastNeighbor.setStench();}
+    if(westNeighbor != null) {westNeighbor.setStench();}
   }
   void setStench() {stench=true;}
 
   void setPit()
   {
     pit=true;
-    northNeighbor.setBreeze();
-    southNeighbor.setBreeze();
-    eastNeighbor.setBreeze();
-    westNeighbor.setBreeze();
+    if(northNeighbor != null) {northNeighbor.setBreeze();}
+    if(southNeighbor != null) {southNeighbor.setBreeze();}
+    if(eastNeighbor != null) {eastNeighbor.setBreeze();}
+    if(westNeighbor != null) {westNeighbor.setBreeze();}
   }
   void setBreeze() {breeze=true;}
 
   void setGold()
   {
     gold=true;
-    northNeighbor.setGlitter();
-    southNeighbor.setGlitter();
-    eastNeighbor.setGlitter();
-    westNeighbor.setGlitter();
+    if(northNeighbor != null) {northNeighbor.setGlitter();}
+    if(southNeighbor != null) {southNeighbor.setGlitter();}
+    if(eastNeighbor != null) {eastNeighbor.setGlitter();}
+    if(westNeighbor != null) {westNeighbor.setGlitter();}
   }
   void setGlitter() {glitter=true;}
 
@@ -70,15 +75,16 @@ public class MapNode
   void setSupmuw()
   {
     supmuw=true;
-    northNeighbor.setMoo();
-    southNeighbor.setMoo();
-    eastNeighbor.setMoo();
-    westNeighbor.setMoo();
+    if(northNeighbor != null) {northNeighbor.setMoo();}
+    if(southNeighbor != null) {southNeighbor.setMoo();}
+    if(eastNeighbor != null) {eastNeighbor.setMoo();}
+    if(westNeighbor != null) {westNeighbor.setMoo();}
   }
   void setMoo() {moo=true;}
 
   void setNoTrespassing() {noTrespassing=true;}
 
+  //Functions to get boolean values
   boolean getWumpus() {return wumpus;}
   boolean getStench() {return stench;}
   boolean getPit() {return pit;}
