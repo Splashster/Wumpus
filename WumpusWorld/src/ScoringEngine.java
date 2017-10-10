@@ -12,10 +12,12 @@ public class ScoringEngine
   7 - Found Gold
   */
   private int[][] scoreTable;
+  private int gameScore;
 
-  ScoringEngine()
+  public ScoringEngine()
   {
     scoreTable = new int[7][2];
+    gameScore = 0;
 
     scoreTable[0][0] = 1;
     scoreTable[0][1] = -1;
@@ -33,8 +35,11 @@ public class ScoringEngine
     scoreTable[6][1] = 1000;
   }
 
-  int scoreEvent(int e)
+  public int scoreEvent(int e)
   {
-    return scoreTable[e-1][1];
+    gameScore += scoreTable[e-1][1]
+    return gameScore;
   }
+
+  public int getGameScore() {return gameScore;}
 }
