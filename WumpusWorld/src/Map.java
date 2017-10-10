@@ -36,6 +36,10 @@ public class Map
     }
   }
 
+ /*public Mapnode getNodeInformation(int x, int y){
+   return map[x][y];
+ }*/
+
   //Function to display map will all elements visible
   void print()
   {
