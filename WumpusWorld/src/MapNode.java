@@ -1,10 +1,12 @@
 public class MapNode
 {
+  //Define neighboring nodes
   private MapNode northNeighbor;
   private MapNode southNeighbor;
   private MapNode eastNeighbor;
   private MapNode westNeighbor;
 
+  //Define all posssible attributes allowed within the node
   private boolean wumpus;
   private boolean stench;
   private boolean pit;
@@ -18,6 +20,7 @@ public class MapNode
 
   MapNode()
   {
+    //Set all attributes to false by default
     wumpus = false;
     stench = false;
     pit = false;
@@ -30,18 +33,20 @@ public class MapNode
     noTrespassing = false;
   }
 
+  //Allow neighboring nodes to be set
   void setNorthNeighbor(MapNode north) {northNeighbor = north;}
   void setSouthNeighbor(MapNode south) {southNeighbor = south;}
   void setEastNeighbor(MapNode east) {eastNeighbor = east;}
   void setWestNeighbor(MapNode west) {westNeighbor = west;}
 
+  //Set specified attributes, sense attributes are automatically set in all neighboring nodes
   void setWumpus()
   {
     wumpus=true;
     if(northNeighbor != null) {northNeighbor.setStench();}
     if(southNeighbor != null) {southNeighbor.setStench();}
     if(eastNeighbor != null) {eastNeighbor.setStench();}
-    if(westNeighbor != null) {westNeighbor.setStench();} 
+    if(westNeighbor != null) {westNeighbor.setStench();}
   }
   void setStench() {stench=true;}
 
@@ -79,6 +84,7 @@ public class MapNode
 
   void setNoTrespassing() {noTrespassing=true;}
 
+  //Functions to get boolean values
   boolean getWumpus() {return wumpus;}
   boolean getStench() {return stench;}
   boolean getPit() {return pit;}

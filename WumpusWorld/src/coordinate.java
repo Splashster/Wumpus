@@ -1,3 +1,4 @@
+//Simple class to store X-Y coordinate pairs
 public class coordinate
 {
   private int xValue;
