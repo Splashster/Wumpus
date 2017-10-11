@@ -2,7 +2,7 @@ public class Map
 {
   private MapNode[][] map;
 
-  Map(coordinate start, coordinate wumpus, coordinate supmuw, coordinate gold, coordinate[] pits)
+  public Map(coordinate start, coordinate wumpus, coordinate supmuw, coordinate gold, coordinate[] pits)
   {
     map = new MapNode[10][10];
 
@@ -41,12 +41,12 @@ public class Map
  }
 
   //Function to display map will all elements visible
-  void print()
+  public void print()
   {
-    for(int y=0; y<10; y++)
+    for(int y=9; y>0; y--)
     {
       System.out.println("+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+");
-      System.out.println("|  " +   map[0][y].getPit() + "   |  " +   map[1][y].getPit() + "   |  " +   map[2][y].getPit() + "   |  " +   map[3][y].getPit() + "   |  " +   map[4][y].getPit() + "   |  " +   map[5][y].getPit() + "   |  " +   map[6][y].getPit() + "   |  " +   map[7][y].getPit() + "   |  " +   map[8][y].getPit() + "   |  " +   map[9][y].getPit() + "   |");
+      System.out.println("|  " +   map[0][y].getAttr() + "   |  " +   map[1][y].getAttr() + "   |  " +   map[2][y].getAttr() + "   |  " +   map[3][y].getAttr() + "   |  " +   map[4][y].getAttr() + "   |  " +   map[5][y].getAttr() + "   |  " +   map[6][y].getAttr() + "   |  " +   map[7][y].getAttr() + "   |  " +   map[8][y].getAttr() + "   |  " +   map[9][y].getAttr() + "   |");
       System.out.println("|          |          |          |          |          |          |          |          |          |          |");
       System.out.println("|          |          |          |          |          |          |          |          |          |          |");
       System.out.println("|          |          |          |          |          |          |          |          |          |          |");

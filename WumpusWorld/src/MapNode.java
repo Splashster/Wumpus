@@ -18,7 +18,9 @@ public class MapNode
   private boolean moo;
   private boolean noTrespassing;
 
-  MapNode()
+  private String attributes;
+
+  public MapNode()
   {
     //Set all attributes to false by default
     wumpus = false;
@@ -31,68 +33,113 @@ public class MapNode
     supmuw = false;
     moo = false;
     noTrespassing = false;
+
+    attributes = "";
   }
 
   //Allow neighboring nodes to be set
-  void setNorthNeighbor(MapNode north) {northNeighbor = north;}
-  void setSouthNeighbor(MapNode south) {southNeighbor = south;}
-  void setEastNeighbor(MapNode east) {eastNeighbor = east;}
-  void setWestNeighbor(MapNode west) {westNeighbor = west;}
+  public void setNorthNeighbor(MapNode north) {northNeighbor = north;}
+  public void setSouthNeighbor(MapNode south) {southNeighbor = south;}
+  public void setEastNeighbor(MapNode east) {eastNeighbor = east;}
+  public void setWestNeighbor(MapNode west) {westNeighbor = west;}
 
   //Set specified attributes, sense attributes are automatically set in all neighboring nodes
-  void setWumpus()
+  public void setWumpus()
   {
     wumpus=true;
     if(northNeighbor != null) {northNeighbor.setStench();}
     if(southNeighbor != null) {southNeighbor.setStench();}
     if(eastNeighbor != null) {eastNeighbor.setStench();}
     if(westNeighbor != null) {westNeighbor.setStench();}
-  }
-  void setStench() {stench=true;}
 
-  void setPit()
+    attributes += "Wumpus";
+  }
+  public void setStench()
+  {
+    stench=true;
+
+    attributes += "Stench";
+  }
+
+  public void setPit()
   {
     pit=true;
     if(northNeighbor != null) {northNeighbor.setBreeze();}
     if(southNeighbor != null) {southNeighbor.setBreeze();}
     if(eastNeighbor != null) {eastNeighbor.setBreeze();}
     if(westNeighbor != null) {westNeighbor.setBreeze();}
-  }
-  void setBreeze() {breeze=true;}
 
-  void setGold()
+    attributes += "Pit";
+  }
+  public void setBreeze()
+  {
+    breeze=true;
+
+    attributes += "Breeze";
+  }
+
+  public void setGold()
   {
     gold=true;
     if(northNeighbor != null) {northNeighbor.setGlitter();}
     if(southNeighbor != null) {southNeighbor.setGlitter();}
     if(eastNeighbor != null) {eastNeighbor.setGlitter();}
     if(westNeighbor != null) {westNeighbor.setGlitter();}
+
+    attributes += "Gold";
   }
-  void setGlitter() {glitter=true;}
+  public void setGlitter()
+  {
+    glitter=true;
 
-  void setStart() {start=true;}
+    attributes += "Glitter";
+  }
 
-  void setSupmuw()
+  public void setStart()
+  {
+    start=true;
+
+    attributes += "Start";
+  }
+
+  public void setSupmuw()
   {
     supmuw=true;
     if(northNeighbor != null) {northNeighbor.setMoo();}
     if(southNeighbor != null) {southNeighbor.setMoo();}
     if(eastNeighbor != null) {eastNeighbor.setMoo();}
     if(westNeighbor != null) {westNeighbor.setMoo();}
-  }
-  void setMoo() {moo=true;}
 
-  void setNoTrespassing() {noTrespassing=true;}
+    attributes += "Supmuw";
+  }
+  public void setMoo()
+  {
+    moo=true;
+
+    attributes += "Moo";
+  }
+
+  public void setNoTrespassing()
+  {
+    noTrespassing=true;
+
+    attributes += "No Trespassing";
+  }
 
   //Functions to get boolean values
-  boolean getWumpus() {return wumpus;}
-  boolean getStench() {return stench;}
-  boolean getPit() {return pit;}
-  boolean getBreeze() {return breeze;}
-  boolean getGold() {return gold;}
-  boolean getGlitter() {return glitter;}
-  boolean getStart() {return start;}
-  boolean getSupmuw() {return supmuw;}
-  boolean getMoo() {return moo;}
-  boolean getNoTrespassing() {return noTrespassing;}
+  public boolean getWumpus() {return wumpus;}
+  public boolean getStench() {return stench;}
+  public boolean getPit() {return pit;}
+  public boolean getBreeze() {return breeze;}
+  public boolean getGold() {return gold;}
+  public boolean getGlitter() {return glitter;}
+  public boolean getStart() {return start;}
+  public boolean getSupmuw() {return supmuw;}
+  public boolean getMoo() {return moo;}
+  public boolean getNoTrespassing() {return noTrespassing;}
+
+  public String getAttr()
+  {
+    return attributes;
+  }
 }
