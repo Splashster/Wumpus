@@ -37,9 +37,11 @@ public class ScoringEngine
 
   public int scoreEvent(int e)
   {
-    gameScore += scoreTable[e-1][1]
+    gameScore += scoreTable[e-1][1];
     return gameScore;
   }
 
   public int getGameScore() {return gameScore;}
+
+  public void removeWumpus() {scoreTable[4][1] = 0;}
 }

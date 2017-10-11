@@ -36,7 +36,7 @@ public class Map
     }
   }
 
- public Mapnode getNodeInformation(int x, int y){
+ public MapNode getNodeInformation(int x, int y){
    return map[x][y];
  }
 

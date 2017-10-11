@@ -1,6 +1,16 @@
 public class WumplusWorld
 {
-  WumplusWorld()
+  private Map m;
+  private Agent a;
+  private ScoringEngine se;
+
+  public WumplusWorld()
+  {
+    a = new Agent(false, false, false, false);
+    se = new ScoringEngine();
+  }
+
+  public void generateMap()
   {
     //Set coordinates for User-specified attributes
     coordinate s = new coordinate(0,0);
@@ -17,5 +27,21 @@ public class WumplusWorld
     System.out.println(m.getNodeInformation(0,0));
     //Print map layout
     m.print();
+  }
+
+  public MapNode move(int x, int y)
+  {
+    //returns mapnode of current location
+    return null;
+  }
+
+  public void killWumpus()
+  {
+    se.removeWumpus();
+  }
+
+  public void startGame()
+  {
+
   }
 }
