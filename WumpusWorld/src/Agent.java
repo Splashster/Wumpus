@@ -1,4 +1,4 @@
-public class Agent()
+public class Agent
 {
   //Agent's current position
   private coordinate current_position;
@@ -16,10 +16,29 @@ public class Agent()
   private coordinate wumpusPosition;
 
   //The agent's knowledgeBase
-  private KnowledgeBase KB;
+  //private KnowledgeBase KB;
 
-  Agent()
+  //Does the agent smell the Wumpus
+  private boolean canSmell;
+
+  //Does the agent feel the breeze
+  private boolean feelsBreeze;
+
+  //Does the agent hear the supmuw
+  private boolean canHear;
+
+  //Does the agent see the glitter from the gold
+  private boolean seeGlitter;
+
+  Agent(boolean smell, boolean breeze, boolean hear, boolean glitter)
   {
-    
+    this.current_position = new coordinate (1,1);
+    this.previous_position = new coordinate (1,1);
+    this.hasArrow = true;
+    this.wumpusAlive = true;
+    this.canSmell = smell;
+    this.feelsBreeze = breeze;
+    this.canHear = hear;
+    this.seeGlitter = glitter;
   }
 }
