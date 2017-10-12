@@ -22,7 +22,7 @@ public class MapNode
   private boolean moo;
   private boolean noTrespassing;
 
-  private String attributes;
+  private String attributes[];
 
   public MapNode(coordinate c)
   {
@@ -41,7 +41,12 @@ public class MapNode
     noTrespassing = false;
     agent = true;
 
-    attributes = "";
+    attributes = new String[4];
+
+    for(int i=0; i<4; i++)
+    {
+      attributes[i] = "        ";
+    }
   }
 
   //Allow neighboring nodes to be set
@@ -52,7 +57,7 @@ public class MapNode
 
   //Set specified attributes, sense attributes are automatically set in all neighboring nodes
   public void setAgent(){
-    attributes += "Tarzan";
+    //attributes += "Tarzan";
   }
   public void setWumpus()
   {
@@ -62,13 +67,19 @@ public class MapNode
     if(eastNeighbor != null) {eastNeighbor.setStench();}
     if(westNeighbor != null) {westNeighbor.setStench();}
 
-    attributes += "Wumpus";
+    attributes[0] = "/\\_/\\   ";
+    attributes[1] = "(•ㅅ•)  ";
+    attributes[2] = "|   \\   ";
+    attributes[3] = "(\")_(\") ";
   }
   public void setStench()
   {
     stench=true;
 
-    attributes += "Stench";
+    attributes[0] = "        ";
+    attributes[1] = " ( ( (  ";
+    attributes[2] = " ) ) )  ";
+    attributes[3] = "( ( (   ";
   }
 
   public void setPit()
@@ -79,13 +90,19 @@ public class MapNode
     if(eastNeighbor != null) {eastNeighbor.setBreeze();}
     if(westNeighbor != null) {westNeighbor.setBreeze();}
 
-    attributes += "Pit";
+    attributes[0] = "        ";
+    attributes[1] = "XXXXXXXX";
+    attributes[2] = "XXXXXXXX";
+    attributes[3] = "XXXXXXXX";
   }
   public void setBreeze()
   {
     breeze=true;
 
-    attributes += "Breeze";
+    attributes[0] = "        ";
+    attributes[1] = "~~~   ~~";
+    attributes[2] = "  ~~~~  ";
+    attributes[3] = "~~  ~~~~";
   }
 
   public void setGold()
@@ -96,20 +113,26 @@ public class MapNode
     if(eastNeighbor != null) {eastNeighbor.setGlitter();}
     if(westNeighbor != null) {westNeighbor.setGlitter();}
 
-    attributes += "Gold";
+    attributes[0] = "        ";
+    attributes[1] = "  $$$$  ";
+    attributes[2] = " $$$$$$ ";
+    attributes[3] = "|______|";
   }
   public void setGlitter()
   {
     glitter=true;
 
-    attributes += "Glitter";
+    attributes[0] = "        ";
+    attributes[1] = "*       ";
+    attributes[2] = "   *    ";
+    attributes[3] = "*     * ";
   }
 
   public void setStart()
   {
     start=true;
 
-    attributes += "Start";
+    //attributes += "Start";
   }
 
   public void setSupmuw()
@@ -120,20 +143,26 @@ public class MapNode
     if(eastNeighbor != null) {eastNeighbor.setMoo();}
     if(westNeighbor != null) {westNeighbor.setMoo();}
 
-    attributes += "Supmuw";
+    attributes[0] = "        ";
+    attributes[1] = "(\\_/)   ";
+    attributes[2] = "( •,•)  ";
+    attributes[3] = "(\")_(\") ";
   }
   public void setMoo()
   {
     moo=true;
 
-    attributes += "Moo";
+    attributes[0] = "        ";
+    attributes[1] = " ((  )) ";
+    attributes[2] = "((MOO!))";
+    attributes[3] = " ((  )) ";
   }
 
   public void setNoTrespassing()
   {
     noTrespassing=true;
 
-    attributes += "No Trespassing";
+    //attributes += "No Trespassing";
   }
 
   public coordinate getCoordinates() {return location;}
@@ -150,8 +179,23 @@ public class MapNode
   public boolean getMoo() {return moo;}
   public boolean getNoTrespassing() {return noTrespassing;}
 
-  public String getAttr()
+  public String getAttr1()
   {
-    return attributes;
+    return attributes[0];
+  }
+
+  public String getAttr2()
+  {
+    return attributes[1];
+  }
+
+  public String getAttr3()
+  {
+    return attributes[2];
+  }
+
+  public String getAttr4()
+  {
+    return attributes[3];
   }
 }
