@@ -32,8 +32,7 @@ public class Agent
 
   private WumplusWorld theWorld;
 
-  Agent(boolean smell, boolean breeze, boolean hear, boolean glitter)
-  {
+  Agent(boolean smell, boolean breeze, boolean hear, boolean glitter){
     this.current_position = new coordinate (0,0);
     this.previous_position = new coordinate (0,0);
     this.hasArrow = true;
@@ -42,6 +41,15 @@ public class Agent
     this.feelsBreeze = breeze;
     this.canHear = hear;
     this.seeGlitter = glitter;
+  }
+
+  public void setAgentPosition(int x, int y){
+     previous_position = current_position;
+     current_position = new coordinate (x,y);
+  }
+
+  public coordinate getAgentPosition(){
+    return current_position;
   }
 
 }

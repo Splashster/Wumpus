@@ -1,13 +1,13 @@
 public class WumplusWorld
 {
   private Map m;
-  private Agent a;
+  private Agent agent;
   private ScoringEngine se;
   private MapNode[][] theWorld;
 
   public WumplusWorld()
   {
-    a = new Agent(false, false, false, false);
+    agent = new Agent(false, false, false, false);
     se = new ScoringEngine();
   }
 
@@ -32,6 +32,10 @@ public class WumplusWorld
   public MapNode move(int x, int y){
     //returns mapnode of current location
     return null;
+  }
+
+  public void moveAgent(int x, int y){
+    agent.setAgentPosition(x, y);
   }
 
   //Gets the attributes for the node the Agent is currently in
