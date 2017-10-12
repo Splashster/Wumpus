@@ -3,6 +3,7 @@ public class WumplusWorld
   private Map m;
   private Agent a;
   private ScoringEngine se;
+  private MapNode[][] theWorld;
 
   public WumplusWorld()
   {
@@ -22,17 +23,20 @@ public class WumplusWorld
     p[2] = new coordinate(2,3);
     coordinate g = new coordinate(9,9);
     //Create map with given attributes
-    Map m = new Map(s, w, sup, g, p);
-    Agent a = new Agent(false, false, false, false);
-    System.out.println(m.getNodeInformation(0,0));
+    m = new Map(s, w, sup, g, p);
+    theWorld = m.getMap();
     //Print map layout
     m.print();
   }
 
-  public MapNode move(int x, int y)
-  {
+  public MapNode move(int x, int y){
     //returns mapnode of current location
     return null;
+  }
+
+  //Gets the attributes for the node the Agent is currently in
+  public String getPerception(int x, int y){
+    return theWorld[x][y].getAttr();
   }
 
   public void killWumpus()

@@ -7,5 +7,6 @@ public class WumpusDriver{
       System.out.println("The Wumpus Says COME TO MEEEEEE");
       WumplusWorld ww = new WumplusWorld();
       ww.generateMap();
+      System.out.println(ww.getPerception(9,6));
   }
 }
