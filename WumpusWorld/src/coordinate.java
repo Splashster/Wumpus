@@ -13,4 +13,8 @@ public class coordinate
   public int getX() {return xValue;}
 
   public int getY() {return yValue;}
+
+  public void setX(int x) {xValue = x;}
+
+  public void setY(int y) {yValue = y;}
 }

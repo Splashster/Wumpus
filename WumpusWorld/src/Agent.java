@@ -49,6 +49,8 @@ public class Agent
   }
 
   public coordinate getAgentPosition(){
+    //String position = "";
+    //position += current_position.getX() + ", " + current_position.getY();
     return current_position;
   }
 

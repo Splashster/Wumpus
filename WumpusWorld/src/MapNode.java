@@ -150,8 +150,11 @@ public class MapNode
   public boolean getMoo() {return moo;}
   public boolean getNoTrespassing() {return noTrespassing;}
 
-  public String getAttr()
-  {
+  public String getAttr(){
     return attributes;
+  }
+
+  public void removeAttr(){
+    attributes.replace("Tarzan", "");
   }
 }
