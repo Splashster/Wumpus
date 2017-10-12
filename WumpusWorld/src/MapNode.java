@@ -57,7 +57,10 @@ public class MapNode
 
   //Set specified attributes, sense attributes are automatically set in all neighboring nodes
   public void setAgent(){
-    //attributes += "Tarzan";
+    attributes[0] = " Tarzan ";
+    attributes[1] = " Tarzan ";
+    attributes[2] = " Tarzan ";
+    attributes[3] = " Tarzan ";
   }
   public void setWumpus()
   {
@@ -197,5 +200,12 @@ public class MapNode
   public String getAttr4()
   {
     return attributes[3];
+  }
+
+  public void removeAttr(){
+    attributes[0].replace("Tarzan", "        ");
+    attributes[1].replace("Tarzan", "        ");
+    attributes[2].replace("Tarzan", "        ");
+    attributes[3].replace("Tarzan", "        ");
   }
 }
