@@ -1,5 +1,8 @@
 public class MapNode
 {
+  //Location of MapNode
+  private coordinate location;
+
   //Define neighboring nodes
   private MapNode northNeighbor;
   private MapNode southNeighbor;
@@ -20,8 +23,10 @@ public class MapNode
 
   private String attributes;
 
-  public MapNode()
+  public MapNode(coordinate c)
   {
+    location = c;
+
     //Set all attributes to false by default
     wumpus = false;
     stench = false;
@@ -125,6 +130,8 @@ public class MapNode
 
     attributes += "No Trespassing";
   }
+
+  public coordinate getCoordinates() {return location;}
 
   //Functions to get boolean values
   public boolean getWumpus() {return wumpus;}
