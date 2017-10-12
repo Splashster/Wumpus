@@ -71,7 +71,7 @@ public class MapNode
     if(westNeighbor != null) {westNeighbor.setStench();}
 
     attributes[0] = "/\\_/\\   ";
-    attributes[1] = "(*,*)  ";
+    attributes[1] = "(*,*)   ";
     attributes[2] = "|   \\   ";
     attributes[3] = "(\")_(\") ";
   }
