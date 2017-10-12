@@ -30,10 +30,12 @@ public class Agent
   //Does the agent see the glitter from the gold
   private boolean seeGlitter;
 
+  private WumplusWorld theWorld;
+
   Agent(boolean smell, boolean breeze, boolean hear, boolean glitter)
   {
-    this.current_position = new coordinate (1,1);
-    this.previous_position = new coordinate (1,1);
+    this.current_position = new coordinate (0,0);
+    this.previous_position = new coordinate (0,0);
     this.hasArrow = true;
     this.wumpusAlive = true;
     this.canSmell = smell;
@@ -41,4 +43,5 @@ public class Agent
     this.canHear = hear;
     this.seeGlitter = glitter;
   }
+
 }

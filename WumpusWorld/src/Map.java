@@ -36,9 +36,8 @@ public class Map
     }
   }
 
- public MapNode getNodeInformation(int x, int y){
-   return map[x][y];
- }
+ public MapNode[][] getMap(){return map;} 
+ public String getNodeInformation(int x, int y){return map[x][y].getAttr();}
 
   //Function to display map will all elements visible
   public void print()
