@@ -10,6 +10,7 @@ public class MapNode
   private MapNode westNeighbor;
 
   //Define all posssible attributes allowed within the node
+  private boolean agent;
   private boolean wumpus;
   private boolean stench;
   private boolean pit;
@@ -38,6 +39,7 @@ public class MapNode
     supmuw = false;
     moo = false;
     noTrespassing = false;
+    agent = true;
 
     attributes = "";
   }
@@ -49,6 +51,9 @@ public class MapNode
   public void setWestNeighbor(MapNode west) {westNeighbor = west;}
 
   //Set specified attributes, sense attributes are automatically set in all neighboring nodes
+  public void setAgent(){
+    attributes += "Tarzan";
+  }
   public void setWumpus()
   {
     wumpus=true;
