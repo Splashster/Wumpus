@@ -16,6 +16,7 @@ public class Map
     }
 
     //initialize attributes of each MapNode
+    map[1][1].setAgent();
     for(int x=0; x<10; x++)
     {
       for(int y=0; y<10; y++)
@@ -36,7 +37,7 @@ public class Map
     }
   }
 
- public MapNode[][] getMap(){return map;} 
+ public MapNode[][] getMap(){return map;}
  public String getNodeInformation(int x, int y){return map[x][y].getAttr();}
 
   //Function to display map will all elements visible
