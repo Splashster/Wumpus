@@ -5,13 +5,15 @@ public class Map
   public Map(coordinate start, coordinate wumpus, coordinate supmuw, coordinate gold, coordinate[] pits)
   {
     map = new MapNode[10][10];
+    coordinate c;
 
     //initialize map to graph of MapNodes
     for(int x=0; x<10; x++)
     {
       for(int y=0; y<10; y++)
       {
-        map[x][y] = new MapNode();
+        c = new coordinate(x, y);
+        map[x][y] = new MapNode(c);
       }
     }
 
