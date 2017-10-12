@@ -38,13 +38,13 @@ public class Map
     }
   }
 
- public MapNode[][] getMap(){return map;} 
+ public MapNode[][] getMap(){return map;}
  public String getNodeInformation(int x, int y){return map[x][y].getAttr();}
 
   //Function to display map will all elements visible
   public void print()
   {
-    for(int y=9; y>0; y--)
+    for(int y=9; y>=0; y--)
     {
       System.out.println("+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+");
       System.out.println("|  " +   map[0][y].getAttr() + "   |  " +   map[1][y].getAttr() + "   |  " +   map[2][y].getAttr() + "   |  " +   map[3][y].getAttr() + "   |  " +   map[4][y].getAttr() + "   |  " +   map[5][y].getAttr() + "   |  " +   map[6][y].getAttr() + "   |  " +   map[7][y].getAttr() + "   |  " +   map[8][y].getAttr() + "   |  " +   map[9][y].getAttr() + "   |");
