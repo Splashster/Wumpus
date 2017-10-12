@@ -45,10 +45,10 @@ public class Map
   //Function to display map will all elements visible
   public void print()
   {
-    for(int y=9; y>=0; y--)
+    for(int x=9; x>=0; x--)
     {
       System.out.println("+----------+----------+----------+----------+----------+----------+----------+----------+----------+----------+");
-      System.out.println("|  " +   map[0][y].getAttr() + "   |  " +   map[1][y].getAttr() + "   |  " +   map[2][y].getAttr() + "   |  " +   map[3][y].getAttr() + "   |  " +   map[4][y].getAttr() + "   |  " +   map[5][y].getAttr() + "   |  " +   map[6][y].getAttr() + "   |  " +   map[7][y].getAttr() + "   |  " +   map[8][y].getAttr() + "   |  " +   map[9][y].getAttr() + "   |");
+      System.out.println("|  " +   map[x][0].getAttr() + "   |  " +   map[x][1].getAttr() + "   |  " +   map[x][2].getAttr() + "   |  " +   map[x][3].getAttr() + "   |  " +   map[x][4].getAttr() + "   |  " +   map[x][5].getAttr() + "   |  " +   map[x][6].getAttr() + "   |  " +   map[x][7].getAttr() + "   |  " +   map[x][8].getAttr() + "   |  " +   map[x][9].getAttr() + "   |");
       System.out.println("|          |          |          |          |          |          |          |          |          |          |");
       System.out.println("|          |          |          |          |          |          |          |          |          |          |");
       System.out.println("|          |          |          |          |          |          |          |          |          |          |");
