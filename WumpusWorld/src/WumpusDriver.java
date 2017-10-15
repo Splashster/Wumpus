@@ -12,13 +12,13 @@ public class WumpusDriver{
       //System.out.println(ww.getPerception(9,6));
       int x, y;
       Random randomGenerator = new Random();
-      System.out.println("Tarzan's Current Position: " + ww.getAgentPosition().getX() + "," + ww.getAgentPosition().getY());
+      System.out.println("Tarzan's Current Position: " + ww.getAgentPosition().getY() + "," + ww.getAgentPosition().getX());
 
       for(int i = 0; i < 9; i++){
          x = randomGenerator.nextInt(9)+1;
          y = randomGenerator.nextInt(9)+1;
          ww.moveAgent(x,y);
-         System.out.println("Tarzan's Current Position: " + ww.getAgentPosition().getX() + "," +  ww.getAgentPosition().getY());
+         System.out.println("Tarzan's Current Position: " + ww.getAgentPosition().getY() + "," +  ww.getAgentPosition().getX());
          try{TimeUnit.SECONDS.sleep(1);}catch(Exception e){}
 
       }

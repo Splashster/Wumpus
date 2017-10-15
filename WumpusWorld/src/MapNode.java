@@ -17,7 +17,6 @@ public class MapNode
   private boolean breeze;
   private boolean gold;
   private boolean glitter;
-  private boolean start;
   private boolean supmuw;
   private boolean moo;
   private boolean noTrespassing;
@@ -29,17 +28,16 @@ public class MapNode
     location = c;
 
     //Set all attributes to false by default
+    agent = false;
     wumpus = false;
     stench = false;
     pit = false;
     breeze = false;
     gold = false;
     glitter = false;
-    start = false;
     supmuw = false;
     moo = false;
     noTrespassing = false;
-    agent = true;
 
     attributes = new String[4];
 
@@ -57,10 +55,21 @@ public class MapNode
 
   //Set specified attributes, sense attributes are automatically set in all neighboring nodes
   public void setAgent(){
-    attributes[0] = " Tarzan ";
-    attributes[1] = " Tarzan ";
-    attributes[2] = " Tarzan ";
-    attributes[3] = " Tarzan ";
+    //agent = true;
+
+    attributes[0] = " +====> ";
+    attributes[1] = " \\ O __ ";
+    attributes[2] = "   |    ";
+    attributes[3] = "  / \\   ";
+  }
+  public void setAgentGold()
+  {
+    //agent = true;
+
+    attributes[0] = "+====>  ";
+    attributes[1] = "\\ O _$  ";
+    attributes[2] = "  |     ";
+    attributes[3] = " / \\    ";
   }
   public void setWumpus()
   {
@@ -75,14 +84,79 @@ public class MapNode
     attributes[2] = "|   \\   ";
     attributes[3] = "(\")_(\") ";
   }
+  public void setDeadWumpus()
+  {
+    wumpus=false;
+    if(northNeighbor != null) {northNeighbor.removeStench();}
+    if(southNeighbor != null) {southNeighbor.removeStench();}
+    if(eastNeighbor != null) {eastNeighbor.removeStench();}
+    if(westNeighbor != null) {westNeighbor.removeStench();}
+
+    attributes[0] = "/\\_/\\   ";
+    attributes[1] = "(x,x)   ";
+    attributes[2] = "|   \\   ";
+    attributes[3] = "(\")_(\") ";
+  }
   public void setStench()
   {
     stench=true;
 
-    attributes[0] = "        ";
-    attributes[1] = " ( ( (  ";
-    attributes[2] = " ) ) )  ";
-    attributes[3] = "( ( (   ";
+    if(breeze && moo && glitter)
+    {
+      attributes[0] = "(Moo ~~(";
+      attributes[1] = ")~~ * ~)";
+      attributes[2] = "( Moo ~(";
+      attributes[3] = ")~  ** )";
+    }
+    else if(breeze && moo)
+    {
+      attributes[0] = "(Moo ~~(";
+      attributes[1] = ")~~ Moo)";
+      attributes[2] = "( Moo ~(";
+      attributes[3] = ")~  Moo)";
+    }
+    else if(breeze && glitter)
+    {
+      attributes[0] = "~~~) )*)";
+      attributes[1] = " ~( ( (*";
+      attributes[2] = "*) * )~~";
+      attributes[3] = "( *~(  ~";
+    }
+    else if(agent)
+    {
+      attributes[0] = "+====>  ";
+      attributes[1] = "\\ O _  (";
+      attributes[2] = ") |   ) ";
+      attributes[3] = " / \\ (  ";
+    }
+    else if(moo)
+    {
+      attributes[0] = "  ) ) ) ";
+      attributes[1] = " Moo (  ";
+      attributes[2] = " ) ) )  ";
+      attributes[3] = "( ( Moo ";
+    }
+    else if(breeze)
+    {
+      attributes[0] = "~~~) ) )";
+      attributes[1] = " ~( ( ( ";
+      attributes[2] = " ) ) )~~";
+      attributes[3] = "( ~~(  ~";
+    }
+    else if(glitter)
+    {
+      attributes[0] = " *) ) ) ";
+      attributes[1] = " ( (*(  ";
+      attributes[2] = " ) ) )  ";
+      attributes[3] = "(*( (  *";
+    }
+    else
+    {
+      attributes[0] = "        ";
+      attributes[1] = " ( ( (  ";
+      attributes[2] = " ) ) )  ";
+      attributes[3] = "( ( (   ";
+    }
   }
 
   public void setPit()
@@ -93,19 +167,88 @@ public class MapNode
     if(eastNeighbor != null) {eastNeighbor.setBreeze();}
     if(westNeighbor != null) {westNeighbor.setBreeze();}
 
-    attributes[0] = "        ";
-    attributes[1] = "XXXXXXXX";
-    attributes[2] = "XXXXXXXX";
-    attributes[3] = "XXXXXXXX";
+    if(supmuw)
+    {
+      attributes[0] = "        ";
+      attributes[1] = "_      _";
+      attributes[2] = "[\\_/) ]";
+      attributes[3] = "[ •,•) ]";
+    }
+    else
+    {
+      attributes[0] = "__    __";
+      attributes[1] = " [    ] ";
+      attributes[2] = " [    ] ";
+      attributes[3] = "  ^--^  ";
+    }
   }
   public void setBreeze()
   {
     breeze=true;
 
-    attributes[0] = "        ";
-    attributes[1] = "~~~   ~~";
-    attributes[2] = "  ~~~~  ";
-    attributes[3] = "~~  ~~~~";
+    if(stench && moo && glitter)
+    {
+      attributes[0] = "(Moo ~~(";
+      attributes[1] = ")~~ * ~)";
+      attributes[2] = "( Moo ~(";
+      attributes[3] = ")~  ** )";
+    }
+    else if(stench && moo)
+    {
+      attributes[0] = "(Moo ~~(";
+      attributes[1] = ")~~ Moo)";
+      attributes[2] = "( Moo ~(";
+      attributes[3] = ")~  Moo)";
+    }
+    else if(moo && glitter)
+    {
+      attributes[0] = "Moo * ~~";
+      attributes[1] = "*~~  Moo";
+      attributes[2] = "Moo ~~* ";
+      attributes[3] = "**  ~Moo";
+    }
+    else if(stench && glitter)
+    {
+      attributes[0] = "~~~) )*)";
+      attributes[1] = " ~( ( (*";
+      attributes[2] = "*) * )~~";
+      attributes[3] = "( *~(  ~";
+    }
+    else if(agent)
+    {
+      attributes[0] = "+====>~";
+      attributes[1] = "\\ O __ ";
+      attributes[2] = "~~|   ~";
+      attributes[3] = " / \\ ~~";
+    }
+    else if(stench)
+    {
+      attributes[0] = "~~~) ) )";
+      attributes[1] = " ~( ( ( ";
+      attributes[2] = " ) ) )~~";
+      attributes[3] = "( ~~(  ~";
+    }
+    else if(moo)
+    {
+      attributes[0] = "Moo ~ ~~";
+      attributes[1] = "~~~  Moo";
+      attributes[2] = "Moo ~~~ ";
+      attributes[3] = "~~  ~Moo";
+    }
+    else if(glitter)
+    {
+      attributes[0] = "~~~~  * ";
+      attributes[1] = "~~ *  ~~";
+      attributes[2] = "* ~~~~  ";
+      attributes[3] = "~~  ~~*~";
+    }
+    else
+    {
+      attributes[0] = "        ";
+      attributes[1] = "~~~   ~~";
+      attributes[2] = "  ~~~~  ";
+      attributes[3] = "~~  ~~~~";
+    }
   }
 
   public void setGold()
@@ -116,26 +259,88 @@ public class MapNode
     if(eastNeighbor != null) {eastNeighbor.setGlitter();}
     if(westNeighbor != null) {westNeighbor.setGlitter();}
 
-    attributes[0] = "        ";
-    attributes[1] = "  $$$$  ";
-    attributes[2] = " $$$$$$ ";
-    attributes[3] = "|______|";
+    if(agent)
+    {
+      attributes[0] = "+====>  ";
+      attributes[1] = "\\ O _$  ";
+      attributes[2] = "  |     ";
+      attributes[3] = " / \\    ";
+    }
+    else
+    {
+      attributes[0] = "        ";
+      attributes[1] = "  $$$$  ";
+      attributes[2] = " $$$$$$ ";
+      attributes[3] = "|______|";
+    }
   }
   public void setGlitter()
   {
     glitter=true;
 
-    attributes[0] = "        ";
-    attributes[1] = "*       ";
-    attributes[2] = "   *    ";
-    attributes[3] = "*     * ";
-  }
-
-  public void setStart()
-  {
-    start=true;
-
-    //attributes += "Start";
+    if(stench && moo && breeze)
+    {
+      attributes[0] = "(Moo ~~(";
+      attributes[1] = ")~~ * ~)";
+      attributes[2] = "( Moo ~(";
+      attributes[3] = ")~  ** )";
+    }
+    else if(stench && moo)
+    {
+      attributes[0] = "(Moo ~~(";
+      attributes[1] = ")~~ * ~)";
+      attributes[2] = "( Moo ~(";
+      attributes[3] = ")~  ** )";
+    }
+    else if(stench && breeze)
+    {
+      attributes[0] = "~~~) )*)";
+      attributes[1] = " ~( ( (*";
+      attributes[2] = "*) * )~~";
+      attributes[3] = "( *~(  ~";
+    }
+    else if(moo && breeze)
+    {
+      attributes[0] = "Moo * ~~";
+      attributes[1] = "*~~  Moo";
+      attributes[2] = "Moo ~~* ";
+      attributes[3] = "**  ~Moo";
+    }
+    else if(agent)
+    {
+      attributes[0] = "+====>*";
+      attributes[1] = "\\ O __ ";
+      attributes[2] = "* |   *";
+      attributes[3] = " / \\*  ";
+    }
+    else if(stench)
+    {
+      attributes[0] = " *) ) ) ";
+      attributes[1] = " ( (*(  ";
+      attributes[2] = " ) ) )  ";
+      attributes[3] = "(*( (  *";
+    }
+    else if(moo)
+    {
+      attributes[0] = "      * ";
+      attributes[1] = "* Moo   ";
+      attributes[2] = "   *    ";
+      attributes[3] = "*    Moo";
+    }
+    else if(breeze)
+    {
+      attributes[0] = "~~~~  * ";
+      attributes[1] = "~~ *  ~~";
+      attributes[2] = "* ~~~~  ";
+      attributes[3] = "~~  ~~*~";
+    }
+    else
+    {
+      attributes[0] = "     *  ";
+      attributes[1] = "*       ";
+      attributes[2] = "   *    ";
+      attributes[3] = "*     * ";
+    }
   }
 
   public void setSupmuw()
@@ -155,17 +360,79 @@ public class MapNode
   {
     moo=true;
 
-    attributes[0] = "        ";
-    attributes[1] = " ((  )) ";
-    attributes[2] = "((MOO!))";
-    attributes[3] = " ((  )) ";
+    if(stench && breeze && glitter)
+    {
+      attributes[0] = "(Moo ~~(";
+      attributes[1] = ")~~ * ~)";
+      attributes[2] = "( Moo ~(";
+      attributes[3] = ")~  ** )";
+    }
+    else if(stench && breeze)
+    {
+      attributes[0] = "(Moo ~~(";
+      attributes[1] = ")~~ Moo)";
+      attributes[2] = "( Moo ~(";
+      attributes[3] = ")~  Moo)";
+    }
+    else if(stench && glitter)
+    {
+      attributes[0] = "(Moo ~~(";
+      attributes[1] = ")~~ * ~)";
+      attributes[2] = "( Moo ~(";
+      attributes[3] = ")~  ** )";
+    }
+    else if(breeze && glitter)
+    {
+      attributes[0] = "Moo * ~~";
+      attributes[1] = "*~~  Moo";
+      attributes[2] = "Moo ~~* ";
+      attributes[3] = "**  ~Moo";
+    }
+    else if(agent)
+    {
+      attributes[0] = "+====> ";
+      attributes[1] = "\\ O __ ";
+      attributes[2] = "  | Moo";
+      attributes[3] = " / \\   ";
+    }
+    else if(stench)
+    {
+      attributes[0] = "  ) ) ) ";
+      attributes[1] = " Moo (  ";
+      attributes[2] = " ) ) )  ";
+      attributes[3] = "( ( Moo ";
+    }
+    else if(breeze)
+    {
+      attributes[0] = "Moo ~ ~~";
+      attributes[1] = "~~~  Moo";
+      attributes[2] = "Moo ~~~ ";
+      attributes[3] = "~~  ~Moo";
+    }
+    else if(glitter)
+    {
+      attributes[0] = "      * ";
+      attributes[1] = "* Moo   ";
+      attributes[2] = "   *    ";
+      attributes[3] = "*    Moo";
+    }
+    else
+    {
+      attributes[0] = "        ";
+      attributes[1] = " ((  )) ";
+      attributes[2] = "((MOO!))";
+      attributes[3] = " ((  )) ";
+    }
   }
 
   public void setNoTrespassing()
   {
     noTrespassing=true;
 
-    //attributes += "No Trespassing";
+    attributes[0] = " |Stop!|";
+    attributes[1] = " |__ __|";
+    attributes[2] = "    |   ";
+    attributes[3] = "-~--~~~-";
   }
 
   public coordinate getCoordinates() {return location;}
@@ -177,7 +444,6 @@ public class MapNode
   public boolean getBreeze() {return breeze;}
   public boolean getGold() {return gold;}
   public boolean getGlitter() {return glitter;}
-  public boolean getStart() {return start;}
   public boolean getSupmuw() {return supmuw;}
   public boolean getMoo() {return moo;}
   public boolean getNoTrespassing() {return noTrespassing;}
@@ -202,10 +468,18 @@ public class MapNode
     return attributes[3];
   }
 
-  public void removeAttr(){
-    attributes[0].replace("Tarzan", "        ");
-    attributes[1].replace("Tarzan", "        ");
-    attributes[2].replace("Tarzan", "        ");
-    attributes[3].replace("Tarzan", "        ");
+  public void removeAgent()
+  {
+    agent = false;
+
+    attributes[0] = "        ";
+    attributes[1] = "        ";
+    attributes[2] = "        ";
+    attributes[3] = "        ";
+  }
+
+  public void removeStench()
+  {
+    stench = false;
   }
 }

@@ -49,13 +49,11 @@ public class ProbabilisticAgent
     }*/
 
 
-  /*  Supmuw -
+    Supmuw -
     "\n"
     "(\\_/)   \n"
     "( •,•)  \n"
     "(\")_(\") \n"
-
-    "\n(\\_/)   \n( •,•)  \n(\")_(\") \n"
 
     moo -
     "\n"
@@ -63,15 +61,11 @@ public class ProbabilisticAgent
     "((MOO!))\n"
     " ((  )) \n"
 
-    "\n ((  )) \n((MOO!))\n ((  )) \n"
-
     Wumpus -
     "/\\_/\\   \n"
     "(•ㅅ•)   \n"
     "|   \\   \n"
-    "(\")_(\") \n"
-
-    "/\\_/\\   \n(•ㅅ•)   \n|   \\   \n(\")_(\") \n" 　
+    "(\")_(\") \n"　
 
     Dead wumpus -
     "/\\_/\\   \n"
@@ -79,15 +73,11 @@ public class ProbabilisticAgent
     "|   \\   \n"
     "(\")_(\") \n"
 
-    "/\\_/\\   \n(xㅅx)   \n|   \\   \n(\")_(\") \n"
-
     Stench -
     "\n"
     " ( ( (  \n"
     " ) ) )  \n"
     "( ( (   \n"
-
-    "\n ( ( (  \n ) ) )  \n( ( (   \n"
 
 
     Pit -
@@ -96,16 +86,12 @@ public class ProbabilisticAgent
     "XXXXXXXX\n"
     "XXXXXXXX\n"
 
-    "\nXXXXXXXX\nXXXXXXXX\nXXXXXXXX\n"
-
 
     Breeze -
     "\n"
     "~~~   ~~\n"
     "  ~~~~  \n"
     "~~  ~~~~\n"
-
-    "\n~~~   ~~\n  ~~~~  \n~~  ~~~~\n"
 
 
     Glitter -
@@ -114,15 +100,11 @@ public class ProbabilisticAgent
     "   *    \n"
     "*     * \n"
 
-    "\n*       \n   *    \n*     * \n"
-
     Gold -
     "\n"
     "  $$$$  \n"
     " $$$$$$ \n"
     "|______|\n"
-
-    "\n  $$$$  \n $$$$$$ \n|______|\n"
 
 
     Player -
@@ -131,7 +113,118 @@ public class ProbabilisticAgent
     "  |    \n"
     " / \\   \n"
 
-    "+====> \n\\ O __ \n  |    \n / \\   \n"
-*/
+    ***********NEW CHARACTERS***************
+
+    Player with gold
+    "+====> "
+    "\\ O _$ "
+    "  |    "
+    " / \\   "
+
+    Pit
+    "__    __"
+    " [    ] "
+    " [    ] "
+    "  ^--^  "
+
+    Supmuw in pit
+    "        "
+    "_      _"
+    "[\\_/) ]"
+    "[ •,•) ]"
+
+
+    No Trespassing
+    " |Stop!|"
+    " |__ __|"
+    "    |   "
+    "-~--~~~-"
+
+    Player in Breeze
+    "+====>~"
+    "\\ O __ "
+    "~~|   ~"
+    " / \\ ~~"
+
+    Player in stench
+    "+====> "
+    "\\ O _ ("
+    ") |  ) "
+    " / \\(  "
+
+    Player in MOO
+    "+====> "
+    "\\ O __ "
+    "  | Moo"
+    " / \\   "
+
+    Player in glitter
+    "+====>*"
+    "\\ O __ "
+    "* |   *"
+    " / \\*  "
+
+    Stench - moo
+    " ( ( (  "
+    " Moo    "
+    " ) ) )  "
+    "( ( Moo "
+
+    Stench - Glitter
+    " *) ) ) "
+    " ( (*(  "
+    " ) ) )  "
+    "(*( (  *"
+
+    Stench - Breeze
+    "~~~) ) )"
+    " ~( ( ( "
+    " ) ) )~~"
+    "( ~~(  ~"
+
+    Moo - Glitter
+    "      * "
+    "* Moo   "
+    "   *    "
+    "*    Moo"
+
+    Moo - Breeze
+    "Moo ~ ~~"
+    "~~~  Moo"
+    "Moo ~~~ "
+    "~~  ~Moo"
+
+    Breeze - Glitter
+    "~~~~  * "
+    "~~ *  ~~"
+    "* ~~~~  "
+    "~~  ~~*~"
+
+    ************************
+
+    Moo - Breeze - Stench
+    "(Moo ~~("
+    ")~~ Moo)"
+    "( Moo ~("
+    ")~  Moo)"
+
+    Moo - Breeze - Glitter
+    "Moo * ~~"
+    "*~~  Moo"
+    "Moo ~~* "
+    "**  ~Moo"
+
+    Breeze - Stench - Glitter
+    "~~~) )*)"
+    " ~( ( (*"
+    "*) * )~~"
+    "( *~(  ~"
+
+    Moo - Breeze - Stench - Glitter
+    "(Moo ~~("
+    ")~~ * ~)"
+    "( Moo ~("
+    ")~  ** )"
+
   }
 }
