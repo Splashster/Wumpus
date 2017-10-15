@@ -30,8 +30,7 @@ public class WumplusWorld
     m = new Map(w, sup, g, p, ag);
     theWorld = m.getMap();
     //Print map layout
-    int score = 50;
-    m.print(score);
+    m.print(0);
   }
 
   public MapNode move(int x, int y){
@@ -40,13 +39,12 @@ public class WumplusWorld
   }
 
   public void moveAgent(int x, int y){
-    se.scoreEvent(1);
+    int score = se.scoreEvent(1);
     agent.setAgentPosition(x, y);
     ag.setX(x);
     ag.setY(y);
     m = new Map(w, sup, g, p, ag);
     theWorld = m.getMap();
-    int score = 40;
     m.print(score);
   }
 
