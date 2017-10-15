@@ -40,7 +40,7 @@ public class WumplusWorld
   }
 
   public void moveAgent(int x, int y){
-    se.scoreEvent(1)
+    se.scoreEvent(1);
     agent.setAgentPosition(x, y);
     ag.setX(x);
     ag.setY(y);
