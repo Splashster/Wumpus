@@ -3,6 +3,7 @@ public class WumplusWorld
   private Map m;
   private Agent agent;
   private ScoringEngine se;
+  private int score = 0;
   private MapNode[][] theWorld;
   private coordinate s;
   private coordinate w;
@@ -10,6 +11,7 @@ public class WumplusWorld
   private coordinate ag;
   private coordinate[] p;
   private coordinate g;
+  private boolean inPit, ateByWumpus;
 
   public WumplusWorld()
   {
@@ -39,13 +41,19 @@ public class WumplusWorld
   }
 
   public void moveAgent(int x, int y){
-    int score = se.scoreEvent(1);
+    inPit = false;
+    ateByWumpus = false;
     agent.setAgentPosition(x, y);
     ag.setX(x);
     ag.setY(y);
     m = new Map(w, sup, g, p, ag);
     theWorld = m.getMap();
+    isInPit(ag.getX(),ag.getY());
+    wumpusAteHim(ag.getX(),ag.getY());
+    score = se.scoreEvent(1);
     m.print(score);
+    if(inPit){System.out.println("TARZAN FELL INTO THE PIT!!!!!!! GOOD THING HE CAN CLIMB OUT!");}
+    if(ateByWumpus){System.out.println("THE WUMPUS ATE TARZAN!!!!!!! GOOD THING HE HAS EXTRA LIVES!");}
   }
 
   public coordinate getAgentPosition(){
@@ -56,6 +64,20 @@ public class WumplusWorld
   /*public String getPerception(int x, int y){
     return theWorld[x][y].getAttr();
   }*/
+
+  public void isInPit(int x, int y){
+    if(theWorld[x][y].getPit() && !theWorld[x][y].getSupmuw()){
+      se.scoreEvent(3);
+      inPit = true;
+    }
+  }
+
+  public void wumpusAteHim(int x, int y){
+    if(theWorld[x][y].getWumpus()){
+      se.scoreEvent(3);
+      ateByWumpus = true;
+    }
+  }
 
   public void killWumpus()
   {

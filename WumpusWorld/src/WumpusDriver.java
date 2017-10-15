@@ -11,7 +11,7 @@ public class WumpusDriver{
       WumplusWorld ww = new WumplusWorld();
       ww.generateMap();
       ArrayList<coordinate> previousMoves = new ArrayList<coordinate>();
-      int x, y, previousX = 0, previousY = 0, move_count = 10;
+      int x, y, previousX = 0, previousY = 0, move_count = 40;
       coordinate previousMove;
       System.out.println("Tarzan's Current Position: " + ww.getAgentPosition().getY() + "," + ww.getAgentPosition().getX());
 
@@ -19,6 +19,7 @@ public class WumpusDriver{
         previousMove = new coordinate(previousX,previousY);
         previousMoves.add(previousMove);
         moveAgent(previousX, previousY, previousMoves, ww);
+        System.out.println("Move Number: " + i);
         System.out.println("Tarzan's Current Position: " + ww.getAgentPosition().getX() + "," +  ww.getAgentPosition().getY());
         System.out.println("Tarzan's Previous Position: " + previousX + "," + previousY);
         try{TimeUnit.SECONDS.sleep(1);}catch(Exception e){}

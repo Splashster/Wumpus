@@ -23,10 +23,10 @@ public class Map
       for(int y=0; y<10; y++)
       {
         //If position is not on the edge of the graph, set all the nodes neighors
-        if(x != 0) {map[x][y].setWestNeighbor(map[x-1][y]);}
-        if(x != 9) {map[x][y].setEastNeighbor(map[x+1][y]);}
-        if(y != 0) {map[x][y].setSouthNeighbor(map[x][y-1]);}
-        if(y != 9) {map[x][y].setNorthNeighbor(map[x][y+1]);}
+        if(x != 0) {map[x][y].setSouthNeighbor(map[x-1][y]);}
+        if(x != 9) {map[x][y].setNorthNeighbor(map[x+1][y]);}
+        if(y != 0) {map[x][y].setWestNeighbor(map[x][y-1]);}
+        if(y != 9) {map[x][y].setEastNeighbor(map[x][y+1]);}
 
         //Check to see if current node should hold a specified parameter
         if(x == agent.getX() && y == agent.getY()) {map[x][y].setAgent();}
