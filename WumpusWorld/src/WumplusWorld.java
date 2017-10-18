@@ -59,6 +59,13 @@ public class WumplusWorld
     //returns mapnode of current location
     return null;
   }*/
+//  public void addPreviousMove(coordinate move){
+
+  //}
+
+  //public Arraylist getPreviousMoves(){
+
+  //}
 
   public ArrayList<coordinate> getChoices(int x, int y){
       coordinate left, right, up, down, move, previousMove;
@@ -69,48 +76,80 @@ public class WumplusWorld
         right = new coordinate (0,1);
         directions.add(up);
         directions.add(right);
-      }else if(x == 0){
-        up = new coordinate(1,y);
+      }else if(x == 0 && y != 9){
+        up = new coordinate(x+1,y);
         right = new coordinate(0,y+1);
+        left = new coordinate(x,y-1);
         directions.add(up);
         directions.add(right);
-      }else if(y == 0){
-        up = new coordinate(x+1,0);
-        right = new coordinate(x,1);
+        directions.add(left);
+      }else if(y == 0 && x != 9){
+        up = new coordinate(x+1,y);
+        right = new coordinate(x,y+1);
+        down = new coordinate(x-1,y);
         directions.add(up);
         directions.add(right);
+        directions.add(down);
       }else if(x == 9 && y == 9){
         left = new coordinate(x,y-1);
         down = new coordinate(x-1,y);
         directions.add(left);
         directions.add(down);
-      }else if(x == 9){
+      }else if(x == 9 && y == 0){
+        right = new coordinate(x,y+1);
+        down = new coordinate(x-1,y);
+        directions.add(right);
+        directions.add(down);
+      }else if(y == 9 && x == 0){
+        up = new coordinate(x+1,y);
+        left = new coordinate(x,y-1);
+        directions.add(up);
+        directions.add(left);
+      }else if(x == 9 && y != 0){
         left = new coordinate(x,y-1);
         right = new coordinate(x,y+1);
         down = new coordinate(x-1,y);
-        directions.add(left);
         directions.add(right);
         directions.add(down);
-      }else if(y == 9){
+        directions.add(left);
+      }else if(y == 9 && x!= 0){
+        up = new coordinate(x+1,y);
+        left = new coordinate(x,y-1);
+        down = new coordinate(x-1,y);
+        directions.add(up);
+        directions.add(left);
+        directions.add(down);
+      }else{
         up = new coordinate(x+1,y);
         down = new coordinate(x-1,y);
         left = new coordinate(x,y-1);
+        right = new coordinate(x,y+1);
         directions.add(up);
         directions.add(down);
         directions.add(left);
+        directions.add(right);
       }
-      else{
-        up = new coordinate(x+1,y);
-        down = new coordinate(x-1,y);
-        left = new coordinate(x,y-1);
-        right = new coordinate(x,y+1);
-        directions.add(up);
-        directions.add(down);
-        directions.add(left);
-        directions.add(right);
+      for(int i = 0; i < directions.size(); i++){
+        move = directions.get(i);
+        System.out.println("Tarzan's choice: " + i + " " + move.getX() + "," + move.getY());
       }
       return directions;
   }
+
+  public boolean beenThere(ArrayList<coordinate> previousMoves, coordinate move){
+      boolean answer = false;
+      coordinate previousMove;
+
+      for(int i = 0; i < previousMoves.size(); i++){
+         previousMove = previousMoves.get(i);
+         System.out.println("Comparing move with Previous Move: " + previousMove.getX() + " " + previousMove.getY());
+         if(move.getX() == previousMove.getX() && move.getY() == previousMove.getY()){
+           answer = true;
+           break;
+         }
+       }
+       return answer;
+     }
 
   public void getAgentNextMove(int x, int y, ArrayList<coordinate> previousMoves){
       coordinate move, previousMove;
@@ -119,14 +158,14 @@ public class WumplusWorld
 
       directions = getChoices(x,y);
       move = directions.get(random.nextInt(directions.size()));
+    //  if(beenThere(previousMoves,move)){go = false;}
 
-      for(int i = 0; i < previousMoves.size(); i++){
-        previousMove = previousMoves.get(i);
-        while(move.getX() == previousMove.getX() && move.getY() == previousMove.getY()){
+    /*  while(!go){
+            System.out.println("Been there");
             move = directions.get(random.nextInt(directions.size()));
-        }
-      }
-      if(go){moveAgent(move.getX(),move.getY());}
+            if(!beenThere(previousMoves,move)){go = true;}
+        }*/
+      moveAgent(move.getX(),move.getY());
   }
 
 
@@ -178,13 +217,14 @@ public class WumplusWorld
 
   public void inWithSupmuw(int x, int y){
     if(theWorld[x][y].getSupmuw()){
-       if(actsAsWumpus(x,y)){
+       if(actsAsWumpus(x,y) && !theWorld[x][y].getWumpus()){
           se.scoreEvent(3);
           ateBySupmuw = true;
+       }else if(!actsAsWumpus(x,y) && !theWorld[x][y].getWumpus()){
+         fedBySupmuw = true;
+         se.scoreEvent(4);
        }else if(theWorld[x][y].getPit()){
          savedBySupmuw = true;
-       }else{
-         se.scoreEvent(6);
        }
     }
   }
@@ -220,11 +260,24 @@ public class WumplusWorld
       left = new coordinate(x,y-1);
       right = new coordinate(x,y+1);
     }
-    if(up != null){if(theWorld[up.getX()][up.getY()].getStench()){answer = true;}}
-    if(down != null){if(theWorld[down.getX()][down.getY()].getStench()){answer = true;}}
-    if(left != null){if(theWorld[left.getX()][left.getY()].getStench()){answer = true;}}
-    if(right != null){if(theWorld[right.getX()][right.getY()].getStench()){answer = true;}}
 
+    if(up != null){
+      if(theWorld[up.getX()][up.getY()].getStench()){
+        answer = true;
+      }
+    }else if(down != null){
+      if(theWorld[down.getX()][down.getY()].getStench()){
+        answer = true;
+      }
+    }else if(left != null){
+      if(theWorld[left.getX()][left.getY()].getStench()){
+        answer = true;
+      }
+    }else if(right != null){
+      if(theWorld[right.getX()][right.getY()].getStench()){
+        answer = true;
+      }
+    }
     return answer;
   }
 

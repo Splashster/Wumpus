@@ -25,9 +25,9 @@ public class ScoringEngine
     scoreTable[1][1] = -10;
     scoreTable[2][0] = 3; //Ate by Wumpus or Supmuw or Fell in pit
     scoreTable[2][1] = -1000;
-    scoreTable[3][0] = 6; //Got food from Supmuw
+    scoreTable[3][0] = 4; //Got food from Supmuw
     scoreTable[3][1] = 100;
-    scoreTable[4][0] = 7; //Escaped with Gold
+    scoreTable[4][0] = 5; //Escaped with Gold
     scoreTable[4][1] = 1000;
   }
 

@@ -88,7 +88,7 @@ public class MapNode
     if(westNeighbor != null) {westNeighbor.setStench();}
 
     attributes[0] = "/\\_/\\   ";
-    attributes[1] = "(*,*)   ";
+    attributes[1] = "(-,-)   ";
     attributes[2] = "|   \\   ";
     attributes[3] = "(\")_(\") ";
   }
@@ -180,7 +180,7 @@ public class MapNode
       attributes[0] = "        ";
       attributes[1] = "_      _";
       attributes[2] = "[\\_/) ]";
-      attributes[3] = "[ •,•) ]";
+      attributes[3] = "[ ^,^) ]";
     }
     else
     {
@@ -361,7 +361,7 @@ public class MapNode
 
     attributes[0] = "        ";
     attributes[1] = "(\\_/)   ";
-    attributes[2] = "( *,*)  ";
+    attributes[2] = "( ^,^)  ";
     attributes[3] = "(\")_(\") ";
   }
   public void setMoo()
