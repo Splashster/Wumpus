@@ -2,7 +2,7 @@ public class Map
 {
   private MapNode[][] map;
 
-  public Map(coordinate wumpus, coordinate supmuw, coordinate gold, coordinate[] pits, coordinate agent)
+  public Map(coordinate wumpus, coordinate supmuw, coordinate gold, coordinate[] noPassZones, coordinate[] pits, coordinate agent)
   {
     map = new MapNode[10][10];
     coordinate c;
@@ -23,17 +23,18 @@ public class Map
       for(int y=0; y<10; y++)
       {
         //If position is not on the edge of the graph, set all the nodes neighors
-        if(x != 0) {map[x][y].setSouthNeighbor(map[x-1][y]);}
-        if(x != 9) {map[x][y].setNorthNeighbor(map[x+1][y]);}
-        if(y != 0) {map[x][y].setWestNeighbor(map[x][y-1]);}
-        if(y != 9) {map[x][y].setEastNeighbor(map[x][y+1]);}
+        if(x != 0) {map[x][y].setSouthNeighbor(map[x-1][y]);}else{map[x][y].setSouthWall();}
+        if(x != 9) {map[x][y].setNorthNeighbor(map[x+1][y]);}else{map[x][y].setNorthWall();}
+        if(y != 0) {map[x][y].setWestNeighbor(map[x][y-1]);}else{map[x][y].setWestWall();}
+        if(y != 9) {map[x][y].setEastNeighbor(map[x][y+1]);}else{map[x][y].setEastWall();}
 
         //Check to see if current node should hold a specified parameter
         if(x == agent.getX() && y == agent.getY()) {map[x][y].setAgent();}
-        if(x == wumpus.getX() && y == wumpus.getY()) {map[x][y].setWumpus();}
-        if(x == supmuw.getX() && y == supmuw.getY()) {map[x][y].setSupmuw();}
+        if(wumpus != null && (x == wumpus.getX() && y == wumpus.getY())) {map[x][y].setWumpus();}
+        if(supmuw != null && (x == supmuw.getX() && y == supmuw.getY())) {map[x][y].setSupmuw();}
         if(x == gold.getX() && y == gold.getY()) {map[x][y].setGold();}
-        for(coordinate p : pits) {if(x == p.getX() && y == p.getY()) {map[x][y].setPit();}}
+        if(pits != null){for(coordinate p : pits) {if(x == p.getX() && y == p.getY()) {map[x][y].setPit();}}}
+        if(noPassZones != null){for(coordinate noPass : noPassZones) {if(x == noPass.getX() && y == noPass.getY()) {map[x][y].setNoTrespassing();}}}
       }
     }
   }

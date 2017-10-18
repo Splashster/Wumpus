@@ -19,6 +19,10 @@ public class MapNode
   private boolean glitter;
   private boolean supmuw;
   private boolean moo;
+  private boolean northWall;
+  private boolean southWall;
+  private boolean eastWall;
+  private boolean westWall;
   private boolean noTrespassing;
 
   private String attributes[];
@@ -38,6 +42,10 @@ public class MapNode
     supmuw = false;
     moo = false;
     noTrespassing = false;
+    northWall = false;
+    southWall = false;
+    eastWall = false;
+    westWall = false;
 
     attributes = new String[4];
 
@@ -428,12 +436,20 @@ public class MapNode
   public void setNoTrespassing()
   {
     noTrespassing=true;
+    northWall= true;
+    southWall = true;
+    eastWall = true;
+    westWall = true;
 
     attributes[0] = " |Stop!|";
     attributes[1] = " |__ __|";
     attributes[2] = "    |   ";
     attributes[3] = "-~--~~~-";
   }
+  public void setNorthWall(){northWall = true;}
+  public void setSouthWall(){southWall = true;}
+  public void setEastWall(){eastWall = true;}
+  public void setWestWall(){westWall = true;}
 
   public coordinate getCoordinates() {return location;}
 
@@ -446,6 +462,10 @@ public class MapNode
   public boolean getGlitter() {return glitter;}
   public boolean getSupmuw() {return supmuw;}
   public boolean getMoo() {return moo;}
+  public boolean getNorthWall(){return northWall;}
+  public boolean getSouthWall(){return southWall;}
+  public boolean getEastWall(){return eastWall;}
+  public boolean getWestWall(){return westWall;}
   public boolean getNoTrespassing() {return noTrespassing;}
 
   public String getAttr1()
