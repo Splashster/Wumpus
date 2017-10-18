@@ -19,20 +19,16 @@ public class ScoringEngine
     scoreTable = new int[7][2];
     gameScore = 0;
 
-    scoreTable[0][0] = 1;
+    scoreTable[0][0] = 1; //Agent move
     scoreTable[0][1] = -1;
-    scoreTable[1][0] = 2;
+    scoreTable[1][0] = 2; //Shot arrow
     scoreTable[1][1] = -10;
-    scoreTable[2][0] = 3;
+    scoreTable[2][0] = 3; //Ate by Wumpus or Supmuw or Fell in pit
     scoreTable[2][1] = -1000;
-    scoreTable[3][0] = 4;
-    scoreTable[3][1] = -1000;
-    scoreTable[4][0] = 5;
-    scoreTable[4][1] = -1000;
-    scoreTable[5][0] = 6;
-    scoreTable[5][1] = 100;
-    scoreTable[6][0] = 7;
-    scoreTable[6][1] = 1000;
+    scoreTable[3][0] = 4; //Got food from Supmuw
+    scoreTable[3][1] = 100;
+    scoreTable[4][0] = 5; //Escaped with Gold
+    scoreTable[4][1] = 1000;
   }
 
   public int scoreEvent(int e)
@@ -43,5 +39,7 @@ public class ScoringEngine
 
   public int getGameScore() {return gameScore;}
 
+  //TODO We may need to just have a isWumpusDead function or set the wumpus attributes
+  //to false
   public void removeWumpus() {scoreTable[4][1] = 0;}
 }

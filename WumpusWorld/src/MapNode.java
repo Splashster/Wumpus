@@ -19,6 +19,10 @@ public class MapNode
   private boolean glitter;
   private boolean supmuw;
   private boolean moo;
+  private boolean northWall;
+  private boolean southWall;
+  private boolean eastWall;
+  private boolean westWall;
   private boolean noTrespassing;
 
   private String attributes[];
@@ -38,6 +42,10 @@ public class MapNode
     supmuw = false;
     moo = false;
     noTrespassing = false;
+    northWall = false;
+    southWall = false;
+    eastWall = false;
+    westWall = false;
 
     attributes = new String[4];
 
@@ -79,6 +87,7 @@ public class MapNode
     if(eastNeighbor != null) {eastNeighbor.setStench();}
     if(westNeighbor != null) {westNeighbor.setStench();}
 
+<<<<<<< HEAD
     if(agent)
     {
       attributes[0] = " Tarzan ";
@@ -93,6 +102,12 @@ public class MapNode
       attributes[2] = "|   \\   ";
       attributes[3] = "(\")_(\") ";
     }
+=======
+    attributes[0] = "/\\_/\\   ";
+    attributes[1] = "(-,-)   ";
+    attributes[2] = "|   \\   ";
+    attributes[3] = "(\")_(\") ";
+>>>>>>> 82110fbb0aa77b816e74ac0de4c4d2a8bc09ebbb
   }
   public void setDeadWumpus()
   {
@@ -182,7 +197,7 @@ public class MapNode
       attributes[0] = "        ";
       attributes[1] = "_      _";
       attributes[2] = "[\\_/) ]";
-      attributes[3] = "[ •,•) ]";
+      attributes[3] = "[ ^,^) ]";
     }
     else if(agent)
     {
@@ -368,6 +383,7 @@ public class MapNode
     if(eastNeighbor != null) {eastNeighbor.setMoo();}
     if(westNeighbor != null) {westNeighbor.setMoo();}
 
+<<<<<<< HEAD
     if(agent)
     {
       attributes[0] = " Tarzan ";
@@ -382,6 +398,12 @@ public class MapNode
       attributes[2] = "( *,*)  ";
       attributes[3] = "(\")_(\") ";
     }
+=======
+    attributes[0] = "        ";
+    attributes[1] = "(\\_/)   ";
+    attributes[2] = "( ^,^)  ";
+    attributes[3] = "(\")_(\") ";
+>>>>>>> 82110fbb0aa77b816e74ac0de4c4d2a8bc09ebbb
   }
   public void setMoo()
   {
@@ -455,12 +477,20 @@ public class MapNode
   public void setNoTrespassing()
   {
     noTrespassing=true;
+    northWall= true;
+    southWall = true;
+    eastWall = true;
+    westWall = true;
 
     attributes[0] = " |Stop!|";
     attributes[1] = " |__ __|";
     attributes[2] = "    |   ";
     attributes[3] = "-~--~~~-";
   }
+  public void setNorthWall(){northWall = true;}
+  public void setSouthWall(){southWall = true;}
+  public void setEastWall(){eastWall = true;}
+  public void setWestWall(){westWall = true;}
 
   public coordinate getCoordinates() {return location;}
 
@@ -473,6 +503,10 @@ public class MapNode
   public boolean getGlitter() {return glitter;}
   public boolean getSupmuw() {return supmuw;}
   public boolean getMoo() {return moo;}
+  public boolean getNorthWall(){return northWall;}
+  public boolean getSouthWall(){return southWall;}
+  public boolean getEastWall(){return eastWall;}
+  public boolean getWestWall(){return westWall;}
   public boolean getNoTrespassing() {return noTrespassing;}
 
   public String getAttr1()
