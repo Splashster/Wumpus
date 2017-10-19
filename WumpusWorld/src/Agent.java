@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class Agent
 {
@@ -37,6 +38,7 @@ public class Agent
         escaped = true;
       }
       System.out.println("Tarzan's Current Position: " + current_position.getX() + "," + current_position.getY());
+      try{TimeUnit.SECONDS.sleep(1);}catch(Exception e){}
     }
   }
 
