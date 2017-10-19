@@ -16,6 +16,7 @@ public class KnowledgeBase
   private boolean breeze;
   private boolean gold;
   private boolean glitter;
+  private boolean locked;
 
   public KnowledgeBase()
   {
@@ -30,10 +31,11 @@ public class KnowledgeBase
     breeze = false;
     gold = false;
     glitter = false;
+    locked = false;
   }
 
-  public void incHazards() {hazards++;}
-  public void decHazards() {hazards--;}
+  public void incHazards() {if(!locked) {hazards++;}}
+  public void decHazards() {if(!locked) {hazards--;}}
 
   public void incLoot() {loot++;}
   public void decLoot() {loot--;}
@@ -61,6 +63,12 @@ public class KnowledgeBase
   public boolean getBreeze() {return breeze;}
   public boolean getGold() {return gold;}
   public boolean getGlitter() {return glitter;}
+
+  public void resetHazards()
+  {
+    hazards = 0;
+    locked = true;
+  }
 
 
 }

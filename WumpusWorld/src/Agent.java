@@ -153,8 +153,18 @@ public class Agent
 
     public coordinate getAgentNextMove()
     {
-      System.out.println("wumpus: " + wumpus);
-      System.out.println("stench: " + stench);
+      kb[current_position.getX()][current_position.getY()].resetHazards();
+      //Add incentive for exploring new regions
+      for(coordinate c: directions)
+      {
+        int x = c.getX();
+        int y = c.getY();
+
+        if(!kb[x][y].visited())
+        {
+          kb[x][y].decHazards();
+        }
+      }
       //Calculate Wumpus location
       if(!stench)
       {
@@ -163,23 +173,21 @@ public class Agent
           int x = c.getX();
           int y = c.getY();
 
-          if(kb[x][y].visited())
-          {
-            if(!kb[x][y].getStench())
-            {
-              kb[x][y].decHazards();
-            }
-            else
-            {
+          //if(kb[x][y].visited())
+          //{
+          //  if(!kb[x][y].getStench())
+          //  {
+          //    kb[x][y].decHazards();
+          //  }
+          //  else
+          //  {
+          //    kb[x][y].incHazards();
+          //  }
+        //  }
+        //  else
+        //  {
               kb[x][y].incHazards();
-            }
-          }
-          else
-          {
-              kb[x][y].decHazards();
-              kb[x][y].decHazards();
-              kb[x][y].decHazards();
-          }
+        //  }
         }
       }
       else
@@ -189,122 +197,56 @@ public class Agent
           int x = current_position.getX();
           int y = current_position.getY();
 
-          if(kb[x][y].visited())
-          {
-            if(!kb[x][y].getStench() || !kb[x][y].getWumpus())
-            {
-              kb[x][y].incHazards();
-            }
-            else
-            {
+        //  if(kb[x][y].visited())
+        //  {
+          //  if(!kb[x][y].getStench() || !kb[x][y].getWumpus())
+          //  {
+        //    kb[x][y].decHazards();
+        //    }
+        //    else
+        //    {
+        //      kb[x][y].incHazards();
+        //    }
+        //  }
+        //  else
+        //  {
               kb[x][y].decHazards();
-            }
-          }
-          else
-          {
-              kb[x][y].incHazards();
-              kb[x][y].incHazards();
-              kb[x][y].incHazards();
-          }
+        //  }
         }
       }
 
 
       //Calculate Supmuw location
-      if(wumpus_alive)
+      if(!moo)
       {
-        if(!moo)
+        /*for(coordinate c: directions)
         {
-          for(coordinate c: directions)
-          {
-            int x = c.getX();
-            int y = c.getY();
+          int x = c.getX();
+          int y = c.getY();
 
-            if(kb[x][y].visited())
+          if(kb[x][y].visited())
+          {
+            if(kb[x][y].getMoo())
             {
-              if(!kb[x][y].getMoo())
-              {
-                kb[x][y].decHazards();
-              }
-              else
-              {
-                kb[x][y].incHazards();
-              }
-            }
-            else
-            {
-                kb[x][y].decHazards();
-                kb[x][y].decHazards();
-                kb[x][y].decHazards();
+              kb[x][y].decHazards();
             }
           }
-        }
-        else
-        {
-          for(coordinate c: directions)
-          {
-            int x = c.getX();
-            int y = c.getY();
-
-            if(kb[x][y].visited())
-            {
-              if(!kb[x][y].getMoo())
-              {
-                kb[x][y].incHazards();
-              }
-              else
-              {
-                kb[x][y].decHazards();
-              }
-            }
-            else
-            {
-                kb[x][y].incHazards();
-                kb[x][y].incHazards();
-                kb[x][y].incHazards();
-            }
-          }
-        }
+        }*/
       }
       else
       {
-        if(!moo)
+        for(coordinate c: directions)
         {
-          for(coordinate c: directions)
-          {
-            int x = c.getX();
-            int y = c.getY();
+          int x = c.getX();
+          int y = c.getY();
 
-            if(kb[x][y].visited())
-            {
-              if(kb[x][y].getMoo())
-              {
-                kb[x][y].decHazards();
-              }
-            }
-          }
-        }
-        else
-        {
-          for(coordinate c: directions)
-          {
-            int x = c.getX();
-            int y = c.getY();
-
-            if(kb[x][y].visited())
-            {
-              if(!kb[x][y].getMoo())
-              {
-                kb[x][y].decHazards();
-              }
-            }
-            else
-            {
-                kb[x][y].decHazards();
-                kb[x][y].decHazards();
-                kb[x][y].decHazards();
-            }
-          }
+          //if(kb[x][y].visited())
+          //{
+          //  if(kb[x][y].getMoo())
+          //  {
+              kb[x][y].decHazards();
+          //  }
+        //  }
         }
       }
 
@@ -317,23 +259,21 @@ public class Agent
           int x = c.getX();
           int y = c.getY();
 
-          if(kb[x][y].visited())
-          {
-            if(!kb[x][y].getBreeze())
-            {
+          //if(kb[x][y].visited())
+          //{
+          //  if(!kb[x][y].getBreeze())
+          //  {
+          //    kb[x][y].decHazards();
+          //  }
+          //  else
+          //  {
+          //    kb[x][y].incHazards();
+          //  }
+          //}
+        //  else
+          //{
               kb[x][y].decHazards();
-            }
-            else
-            {
-              kb[x][y].incHazards();
-            }
-          }
-          else
-          {
-              kb[x][y].decHazards();
-              kb[x][y].decHazards();
-              kb[x][y].decHazards();
-          }
+        //  }
         }
       }
       else
@@ -343,23 +283,21 @@ public class Agent
           int x = c.getX();
           int y = c.getY();
 
-          if(kb[x][y].visited())
-          {
-            if(!kb[x][y].getBreeze())
-            {
+          //if(kb[x][y].visited())
+          //{
+            //if(kb[x][y].getBreeze())
+            //{
+            //  kb[x][y].incHazards();
+            //}
+            //else
+            //{
+              //kb[x][y].decHazards();
+            //}
+          //}
+          //else
+        //  {
               kb[x][y].incHazards();
-            }
-            else
-            {
-              kb[x][y].decHazards();
-            }
-          }
-          else
-          {
-              kb[x][y].incHazards();
-              kb[x][y].incHazards();
-              kb[x][y].incHazards();
-          }
+          //}
         }
       }
 
@@ -447,7 +385,7 @@ public class Agent
 
       int hazards = kb[x][y].getHazards();
 
-      System.out.println("Position " + pos + ": " + hazards + " - " + x + "," + y);
+      System.out.println("Position " + x + ": " + hazards + " - " + x + "," + y);
 
       return hazards;
     }
