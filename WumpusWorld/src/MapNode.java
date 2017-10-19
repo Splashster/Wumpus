@@ -23,6 +23,7 @@ public class MapNode
   private boolean southWall;
   private boolean eastWall;
   private boolean westWall;
+  private boolean hasGold;
   private boolean noTrespassing;
 
   private String attributes[];
@@ -46,6 +47,7 @@ public class MapNode
     southWall = false;
     eastWall = false;
     westWall = false;
+    hasGold = false;
 
     attributes = new String[4];
 
@@ -64,13 +66,19 @@ public class MapNode
   //Set specified attributes, sense attributes are automatically set in all neighboring nodes
   public void setAgent(){
     //agent = true;
-
-    attributes[0] = " +====> ";
-    attributes[1] = " \\ O __ ";
-    attributes[2] = "   |    ";
-    attributes[3] = "  / \\   ";
+    if(hasGold){
+      attributes[0] = "+====>  ";
+      attributes[1] = "\\ O _$  ";
+      attributes[2] = "  |     ";
+      attributes[3] = " / \\    ";
+    }else{
+      attributes[0] = " +====> ";
+      attributes[1] = " \\ O __ ";
+      attributes[2] = "   |    ";
+      attributes[3] = "  / \\   ";
+    }
   }
-  public void setAgentGold()
+  /*public void setAgentGold()
   {
     //agent = true;
 
@@ -78,7 +86,7 @@ public class MapNode
     attributes[1] = "\\ O _$  ";
     attributes[2] = "  |     ";
     attributes[3] = " / \\    ";
-  }
+  }*/
   public void setWumpus()
   {
     wumpus=true;
@@ -450,6 +458,7 @@ public class MapNode
   public void setSouthWall(){southWall = true;}
   public void setEastWall(){eastWall = true;}
   public void setWestWall(){westWall = true;}
+  public void setHasGold(){hasGold = true;}
 
   public coordinate getCoordinates() {return location;}
 

@@ -17,4 +17,24 @@ public class coordinate
   public void setX(int x) {xValue = x;}
 
   public void setY(int y) {yValue = y;}
+
+  public boolean canPlaceObject(coordinate[] objs, coordinate obj){
+      boolean answer = true;
+      coordinate objsPosition, objPosition;
+
+      if(objs != null){
+          for(int i = 0; i < objs.length; i++){
+              objsPosition = objs[i];
+              if(xValue == objsPosition.getX() && yValue == objsPosition.getY()){
+                 answer = false;
+                 break;
+              }
+          }
+      }else if(obj != null){
+            if(xValue == obj.getX() && yValue == obj.getY()){
+               answer = false;
+            }
+      }
+      return answer;
+  }
 }

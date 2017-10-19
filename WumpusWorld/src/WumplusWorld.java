@@ -17,28 +17,30 @@ public class WumplusWorld
   private coordinate[] p;
   private coordinate[] noPass;
   private coordinate g;
-  private boolean inPit, ateByWumpus, ateBySupmuw, fedBySupmuw, savedBySupmuw;
+  private boolean hasGold;
+  private boolean inPit, ateByWumpus, ateBySupmuw, fedBySupmuw, savedBySupmuw, gotTheGold;
   Random random = new Random();
 
   public WumplusWorld()
   {
-    agent = new Agent(false, false, false, false);
+    agent = new Agent();
     se = new ScoringEngine();
+    hasGold = false;
   }
 
-  public void generateMap(coordinate w, coordinate sup, coordinate[] noPass, coordinate[] pit, coordinate gold)
+  public void generateMap(coordinate wumpus, coordinate supmuw, coordinate[] noPassing, coordinate[] pit, coordinate gold)
   {
     //Set coordinates for User-specified attributes
     //System.out.println("Inside genreate");
-    this.w = w;
+    w = wumpus;
     //System.out.println("wum done");
-    this.sup = sup;
+    sup = supmuw;
     //System.out.println("sup done");
     ag = new coordinate(0,0);
   //  System.out.println("ag done");
     p = pit;
     //System.out.println("pit done");
-    this.noPass = noPass;
+    noPass = noPassing;
     //System.out.println("pass done");
     g = gold;
     //System.out.println("gold done");
@@ -49,7 +51,7 @@ public class WumplusWorld
     //System.out.println("Get Pit " + pit[0].getX() + " " + pit[0].getY());
     //System.out.println("Get Pass " + noPass[0].getX() + " " + noPass[0].getY());
     //Create map with given attributes
-    m = new Map(this.w, this.sup, g, this.noPass, p, ag);
+    m = new Map(w, sup, g, noPass, p, ag, hasGold);
     theWorld = m.getMap();
     //Print map layout
     m.print(0);
@@ -67,7 +69,7 @@ public class WumplusWorld
 
   //}
 
-  public ArrayList<coordinate> getChoices(int x, int y){
+/*  public ArrayList<coordinate> getChoices(int x, int y){
       coordinate left, right, up, down, move, previousMove;
       ArrayList<coordinate> directions = new ArrayList<coordinate>();
 
@@ -134,9 +136,9 @@ public class WumplusWorld
         System.out.println("Tarzan's choice: " + i + " " + move.getX() + "," + move.getY());
       }
       return directions;
-  }
+  }*/
 
-  public boolean beenThere(ArrayList<coordinate> previousMoves, coordinate move){
+/*  public boolean beenThere(ArrayList<coordinate> previousMoves, coordinate move){
       boolean answer = false;
       coordinate previousMove;
 
@@ -149,9 +151,9 @@ public class WumplusWorld
          }
        }
        return answer;
-     }
+     }*/
 
-  public void getAgentNextMove(int x, int y, ArrayList<coordinate> previousMoves){
+/*  public void getAgentNextMove(int x, int y, ArrayList<coordinate> previousMoves){
       coordinate move, previousMove;
       ArrayList<coordinate> directions = new ArrayList<coordinate>();
       boolean go = true;
@@ -160,13 +162,13 @@ public class WumplusWorld
       move = directions.get(random.nextInt(directions.size()));
     //  if(beenThere(previousMoves,move)){go = false;}
 
-    /*  while(!go){
+      while(!go){
             System.out.println("Been there");
             move = directions.get(random.nextInt(directions.size()));
             if(!beenThere(previousMoves,move)){go = true;}
-        }*/
+        }
       moveAgent(move.getX(),move.getY());
-  }
+  }*/
 
 
   public void moveAgent(int x, int y){
@@ -175,14 +177,16 @@ public class WumplusWorld
     ateBySupmuw = false;
     savedBySupmuw = false;
     fedBySupmuw = false;
-    agent.setAgentPosition(x, y);
-    ag.setX(x);
-    ag.setY(y);
-    m = new Map(w, sup, g, noPass, p, ag);
+    gotTheGold = false;
+    //agent.setAgentPosition(x, y);
+    //ag.setX(x);
+    //ag.setY(y);
+    m = new Map(w, sup, g, noPass, p, ag, hasGold);
     theWorld = m.getMap();
-    isInPit(ag.getX(),ag.getY());
-    wumpusAteHim(ag.getX(),ag.getY());
-    inWithSupmuw(ag.getX(),ag.getY());
+    isInPit(x,y);
+    wumpusAteHim(x,y);
+    inWithSupmuw(x,y);
+    panForGold(x,y);
     score = se.scoreEvent(1);
     m.print(score);
     if(inPit){System.out.println("TARZAN FELL INTO THE PIT!!!!!!! GOOD THING HE CAN CLIMB OUT!");}
@@ -190,16 +194,17 @@ public class WumplusWorld
     if(ateBySupmuw){System.out.println("THE SUPMUW BETRAYED TARZAN AND ATE HIM!!!!!!! GET BACK OUT THERE TARZAN!");}
     if(savedBySupmuw){System.out.println("THE SUPMUW SAVED TARZAN FROM A FATAL FALL INTO THE PIT OF DEATH!!!!!");}
     if(fedBySupmuw){System.out.println("THE SUPMUW FED TARZAN CANDIES!!!!!!");}
+    if(gotTheGold){System.out.println("TARZAN GOT THE GOLD!!! TIME TO GET OUT OF HERE!!!!!!");}
   }
 
-  public coordinate getAgentPosition(){
+  /*public coordinate getAgentPosition(){
     return agent.getAgentPosition();
-  }
+  }*/
 
   //Gets the attributes for the node the Agent is currently in
-  /*public String getPerception(int x, int y){
-    return theWorld[x][y].getAttr();
-  }*/
+  public MapNode getPerception(int x, int y){
+      return theWorld[x][y];
+  }
 
   public void isInPit(int x, int y){
     if(theWorld[x][y].getPit() && !theWorld[x][y].getSupmuw()){
@@ -282,6 +287,17 @@ public class WumplusWorld
   }
 
 
+  public boolean panForGold(int x, int y){
+      boolean answer = false;
+      if(theWorld[x][y].getGold()){
+        answer = true;
+        gotTheGold = true;
+        agent.setHasGold();
+        hasGold = true;
+      }
+      return answer;
+  }
+
   public void killWumpus()
   {
     se.removeWumpus();
@@ -301,7 +317,8 @@ public class WumplusWorld
     }
 
     System.out.println("The Wumpus Says COME TO MEEEEEE");
-    ArrayList<coordinate> previousMoves = new ArrayList<coordinate>();
+    agent.goGoAgent();
+    /*ArrayList<coordinate> previousMoves = new ArrayList<coordinate>();
     int x, y, previousX = 0, previousY = 0, move_count = 40;
     coordinate previousMove;
     System.out.println("Tarzan's Current Position: " + getAgentPosition().getY() + "," + getAgentPosition().getX());
@@ -316,7 +333,7 @@ public class WumplusWorld
       try{TimeUnit.SECONDS.sleep(1);}catch(Exception e){}
       previousX = getAgentPosition().getX();
       previousY = getAgentPosition().getY();
-    }
+    }*/
     Menu menu = new Menu();
     menu.mainMenu();
   }
