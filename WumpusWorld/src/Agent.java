@@ -27,6 +27,8 @@ public class Agent
         kb[i][j] = new KnowledgeBase();
       }
     }
+
+    kb[0][0].visit();
   }
 
   public void goGoAgent(){
@@ -38,6 +40,7 @@ public class Agent
       if((current_position.getX() == 0 && current_position.getY() == 0) && (gotGold)){
         escaped = true;
       }
+      kb[current_position.getX()][current_position.getY()].visit();
       System.out.println("Tarzan's Current Position: " + current_position.getX() + "," + current_position.getY());
       try{TimeUnit.SECONDS.sleep(1);}catch(Exception e){}
     }
@@ -145,16 +148,16 @@ public class Agent
       System.out.println("wumpus: " + wumpus);
       System.out.println("stench: " + stench);
       //Calculate Wumpus location
-      if(!stench || !wumpus)
+      if(!stench)
       {
         for(coordinate c: directions)
         {
           int x = c.getX();
           int y = c.getY();
 
-          if(kb[x][y].visited())
+          if(!kb[x][y].visited())
           {
-            if(!stench || !wumpus)
+            if(!stench)
             {
               kb[x][y].decHazards();
             }
@@ -173,10 +176,10 @@ public class Agent
       {
         for(coordinate c: directions)
         {
-          int x = c.getX();
-          int y = c.getY();
+          int x = current_position.getX();
+          int y = current_position.getY();
 
-          if(kb[x][y].visited())
+          if(!kb[x][y].visited())
           {
             if(!stench || !wumpus)
             {
@@ -193,20 +196,21 @@ public class Agent
           }
         }
       }
+
 
       //Calculate Supmuw location
       if(wumpus_alive)
       {
-        if(!moo || !supmuw)
+        if(!moo)
         {
           for(coordinate c: directions)
           {
             int x = c.getX();
             int y = c.getY();
 
-            if(kb[x][y].visited())
+            if(!kb[x][y].visited())
             {
-              if(!moo || !supmuw)
+              if(!moo)
               {
                 kb[x][y].decHazards();
               }
@@ -228,9 +232,9 @@ public class Agent
             int x = c.getX();
             int y = c.getY();
 
-            if(kb[x][y].visited())
+            if(!kb[x][y].visited())
             {
-              if(!moo || !supmuw)
+              if(!moo)
               {
                 kb[x][y].incHazards();
               }
@@ -248,16 +252,16 @@ public class Agent
       }
       else
       {
-        if(!moo || !supmuw)
+        if(!moo)
         {
           for(coordinate c: directions)
           {
             int x = c.getX();
             int y = c.getY();
 
-            if(kb[x][y].visited())
+            if(!kb[x][y].visited())
             {
-              if(moo || supmuw)
+              if(moo)
               {
                 kb[x][y].decHazards();
               }
@@ -271,9 +275,9 @@ public class Agent
             int x = c.getX();
             int y = c.getY();
 
-            if(kb[x][y].visited())
+            if(!kb[x][y].visited())
             {
-              if(!moo || !supmuw)
+              if(!moo)
               {
                 kb[x][y].decHazards();
               }
@@ -286,17 +290,18 @@ public class Agent
         }
       }
 
+
       //Calculate Pit location
-      if(!breeze || !pit)
+      if(!breeze)
       {
         for(coordinate c: directions)
         {
           int x = c.getX();
           int y = c.getY();
 
-          if(kb[x][y].visited())
+          if(!kb[x][y].visited())
           {
-            if(!breeze || !pit)
+            if(!breeze)
             {
               kb[x][y].decHazards();
             }
@@ -318,9 +323,9 @@ public class Agent
           int x = c.getX();
           int y = c.getY();
 
-          if(kb[x][y].visited())
+          if(!kb[x][y].visited())
           {
-            if(!breeze || !pit)
+            if(!breeze)
             {
               kb[x][y].incHazards();
             }
@@ -399,8 +404,11 @@ public class Agent
                 min = Math.min(tempMin1, tempMin2);
       }
 
+      System.out.println("min - " + min);
+
       for(int x=0; x<elements; x++)
       {
+        System.out.println(x + "     " + (min == convertHazards(elements-1)) + convertHazards(elements-1));
         if(min == convertHazards(elements-1)) {minIndex=x;}
       }
       System.out.println("X: " + directions.get(minIndex).getX());
