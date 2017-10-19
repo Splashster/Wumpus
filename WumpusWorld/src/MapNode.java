@@ -87,7 +87,7 @@ public class MapNode
     if(eastNeighbor != null) {eastNeighbor.setStench();}
     if(westNeighbor != null) {westNeighbor.setStench();}
 
-<<<<<<< HEAD
+
     if(agent)
     {
       attributes[0] = " Tarzan ";
@@ -98,16 +98,10 @@ public class MapNode
     else
     {
       attributes[0] = "/\\_/\\   ";
-      attributes[1] = "(*,*)   ";
+      attributes[1] = "(-,-)   ";
       attributes[2] = "|   \\   ";
       attributes[3] = "(\")_(\") ";
     }
-=======
-    attributes[0] = "/\\_/\\   ";
-    attributes[1] = "(-,-)   ";
-    attributes[2] = "|   \\   ";
-    attributes[3] = "(\")_(\") ";
->>>>>>> 82110fbb0aa77b816e74ac0de4c4d2a8bc09ebbb
   }
   public void setDeadWumpus()
   {
@@ -175,7 +169,7 @@ public class MapNode
       attributes[2] = " ) ) )  ";
       attributes[3] = "(*( (  *";
     }
-    else
+    else if(!wumpus && !supmuw && !pit && !gold)
     {
       attributes[0] = "        ";
       attributes[1] = " ( ( (  ";
@@ -274,7 +268,7 @@ public class MapNode
       attributes[2] = "* ~~~~  ";
       attributes[3] = "~~  ~~*~";
     }
-    else
+    else if(!wumpus && !supmuw && !pit && !gold)
     {
       attributes[0] = "        ";
       attributes[1] = "~~~   ~~";
@@ -366,7 +360,7 @@ public class MapNode
       attributes[2] = "* ~~~~  ";
       attributes[3] = "~~  ~~*~";
     }
-    else
+    else if(!wumpus && !supmuw && !pit && !gold)
     {
       attributes[0] = "     *  ";
       attributes[1] = "*       ";
@@ -383,7 +377,6 @@ public class MapNode
     if(eastNeighbor != null) {eastNeighbor.setMoo();}
     if(westNeighbor != null) {westNeighbor.setMoo();}
 
-<<<<<<< HEAD
     if(agent)
     {
       attributes[0] = " Tarzan ";
@@ -395,15 +388,9 @@ public class MapNode
     {
       attributes[0] = "        ";
       attributes[1] = "(\\_/)   ";
-      attributes[2] = "( *,*)  ";
+      attributes[2] = "( ^,^)  ";
       attributes[3] = "(\")_(\") ";
     }
-=======
-    attributes[0] = "        ";
-    attributes[1] = "(\\_/)   ";
-    attributes[2] = "( ^,^)  ";
-    attributes[3] = "(\")_(\") ";
->>>>>>> 82110fbb0aa77b816e74ac0de4c4d2a8bc09ebbb
   }
   public void setMoo()
   {
@@ -465,7 +452,7 @@ public class MapNode
       attributes[2] = "   *    ";
       attributes[3] = "*    Moo";
     }
-    else
+    else if(!wumpus && !supmuw && !pit && !gold)
     {
       attributes[0] = "        ";
       attributes[1] = " ((  )) ";
@@ -482,10 +469,10 @@ public class MapNode
     eastWall = true;
     westWall = true;
 
-    attributes[0] = " |Stop!|";
-    attributes[1] = " |__ __|";
-    attributes[2] = "    |   ";
-    attributes[3] = "-~--~~~-";
+    attributes[0] = "  _____ ";
+    attributes[1] = " |Stop!|";
+    attributes[2] = " |__ __|";
+    attributes[3] = "    |   ";
   }
   public void setNorthWall(){northWall = true;}
   public void setSouthWall(){southWall = true;}

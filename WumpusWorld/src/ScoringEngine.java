@@ -17,7 +17,7 @@ public class ScoringEngine
   public ScoringEngine()
   {
     scoreTable = new int[7][2];
-    gameScore = 0;
+    gameScore = 1;
 
     scoreTable[0][0] = 1; //Agent move
     scoreTable[0][1] = -1;

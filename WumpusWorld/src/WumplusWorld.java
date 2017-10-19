@@ -8,6 +8,7 @@ public class WumplusWorld
   private Map m;
   private Agent agent;
   private ScoringEngine se;
+  private int score;
   private MapNode[][] theWorld;
   private coordinate s;
   private coordinate w;
@@ -16,15 +17,13 @@ public class WumplusWorld
   private coordinate[] p;
   private coordinate[] noPass;
   private coordinate g;
-<<<<<<< HEAD
-=======
   private boolean inPit, ateByWumpus, ateBySupmuw, fedBySupmuw, savedBySupmuw;
   Random random = new Random();
->>>>>>> 82110fbb0aa77b816e74ac0de4c4d2a8bc09ebbb
 
   public WumplusWorld()
   {
     agent = new Agent(false, false, false, false);
+    score = 0;
     se = new ScoringEngine();
   }
 
@@ -57,21 +56,7 @@ public class WumplusWorld
     m.print(0);
   }
 
-<<<<<<< HEAD
-  public void moveAgent(int x, int y){
-    int score = se.scoreEvent(1);
-=======
-/*  public MapNode move(int x, int y){
-    //returns mapnode of current location
-    return null;
-  }*/
-//  public void addPreviousMove(coordinate move){
 
-  //}
-
-  //public Arraylist getPreviousMoves(){
-
-  //}
 
   public ArrayList<coordinate> getChoices(int x, int y){
       coordinate left, right, up, down, move, previousMove;
@@ -181,15 +166,12 @@ public class WumplusWorld
     ateBySupmuw = false;
     savedBySupmuw = false;
     fedBySupmuw = false;
->>>>>>> 82110fbb0aa77b816e74ac0de4c4d2a8bc09ebbb
     agent.setAgentPosition(x, y);
     ag.setX(x);
     ag.setY(y);
     m = new Map(w, sup, g, noPass, p, ag);
     theWorld = m.getMap();
-<<<<<<< HEAD
     m.print(score);
-=======
     isInPit(ag.getX(),ag.getY());
     wumpusAteHim(ag.getX(),ag.getY());
     inWithSupmuw(ag.getX(),ag.getY());
@@ -200,7 +182,6 @@ public class WumplusWorld
     if(ateBySupmuw){System.out.println("THE SUPMUW BETRAYED TARZAN AND ATE HIM!!!!!!! GET BACK OUT THERE TARZAN!");}
     if(savedBySupmuw){System.out.println("THE SUPMUW SAVED TARZAN FROM A FATAL FALL INTO THE PIT OF DEATH!!!!!");}
     if(fedBySupmuw){System.out.println("THE SUPMUW FED TARZAN CANDIES!!!!!!");}
->>>>>>> 82110fbb0aa77b816e74ac0de4c4d2a8bc09ebbb
   }
 
   public coordinate getAgentPosition(){
@@ -212,8 +193,7 @@ public class WumplusWorld
     return theWorld[x][y].getAttr();
   }*/
 
-<<<<<<< HEAD
-=======
+
   public void isInPit(int x, int y){
     if(theWorld[x][y].getPit() && !theWorld[x][y].getSupmuw()){
       se.scoreEvent(3);
@@ -295,7 +275,6 @@ public class WumplusWorld
   }
 
 
->>>>>>> 82110fbb0aa77b816e74ac0de4c4d2a8bc09ebbb
   public void killWumpus()
   {
     se.removeWumpus();

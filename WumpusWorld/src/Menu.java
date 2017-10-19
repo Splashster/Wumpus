@@ -18,6 +18,7 @@ public class Menu{
   public static void mainMenu(){
       int choice = 0;
 
+
       WumplusTitle title = new WumplusTitle();
       title.print();
 
@@ -185,4 +186,5 @@ public class Menu{
     }
     setPieces();
   }
+
 }

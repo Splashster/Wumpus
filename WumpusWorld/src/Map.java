@@ -1,3 +1,5 @@
+import java.lang.Math;
+
 public class Map
 {
   private MapNode[][] map;
@@ -63,8 +65,36 @@ public class Map
     System.out.println("       +-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+");
     System.out.println("              0             1             2             3             4             5             6             7             8             9");
 
-    System.out.println("                                                                                                                                  +----------------+");
-    System.out.println("                                                                                                                                  |   Score: " + score + "    |");
-    System.out.println("                                                                                                                                  +----------------+");
+    int scoreDigits = String.valueOf(score).length();
+    switch (scoreDigits) {
+      case 1: System.out.println("                                                                                                                               +-------------------+");
+              System.out.println("                                                                                                                               |   Score: " + score + "        |");
+              System.out.println("                                                                                                                               +-------------------+");
+              break;
+
+      case 2: System.out.println("                                                                                                                               +-------------------+");
+              System.out.println("                                                                                                                               |   Score: " + score + "       |");
+              System.out.println("                                                                                                                               +-------------------+");
+              break;
+
+      case 3: System.out.println("                                                                                                                               +-------------------+");
+              System.out.println("                                                                                                                               |   Score: " + score + "      |");
+              System.out.println("                                                                                                                               +-------------------+");
+              break;
+
+      case 4: System.out.println("                                                                                                                               +-------------------+");
+              System.out.println("                                                                                                                               |   Score: " + score + "     |");
+              System.out.println("                                                                                                                               +-------------------+");
+              break;
+
+      case 5: System.out.println("                                                                                                                               +-------------------+");
+              System.out.println("                                                                                                                               |   Score: " + score + "    |");
+              System.out.println("                                                                                                                               +-------------------+");
+              break;
+
+      default:System.out.println("                                                                                                                               +-------------------+");
+              System.out.println("                                                                                                                               |   Score: MAX      |");
+              System.out.println("                                                                                                                               +-------------------+");
+    }
   }
 }
