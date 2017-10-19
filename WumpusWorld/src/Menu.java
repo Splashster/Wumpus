@@ -104,6 +104,24 @@ public class Menu{
           y = reader.nextInt();
         }
         w = new coordinate(x,y);
+        while(!w.canPlaceObject(p, null)){
+          System.out.println("The wumpus cannot be placed at position " + x + " " + y + " because there is a pit already there!");
+          System.out.print("Please choose an x coordinate value between 0 and 9 for the Wumpus: ");
+          x = reader.nextInt();
+          while(x > 10){
+            System.out.println("x coordinate must be betwen 0 and 9!");
+            System.out.print("Please choose an x coordinate value between 0 and 9 for the Wumpus: ");
+            x = reader.nextInt();
+          }
+          System.out.print("Please choose an y coordinate value between 0 and 9 for the Wumpus: ");
+          y = reader.nextInt();
+          while(y > 10){
+            System.out.println("y coordinate must be betwen 0 and 9!");
+            System.out.print("Please choose an y coordinate value between 0 and 9 for the Wumpus: ");
+            y = reader.nextInt();
+          }
+          w = new coordinate(x,y);
+        }
     }else if (choice == 2){
         System.out.print("Please choose an x coordinate value between 0 and 9 for the Supmuw: ");
         x = reader.nextInt();
@@ -136,6 +154,24 @@ public class Menu{
           y = reader.nextInt();
         }
         g = new coordinate(x,y);
+        while(!g.canPlaceObject(p,null) || !g.canPlaceObject(noPass,null) ){
+          System.out.println("The gold cannot be placed at position " + x + " " + y + " because there is a pit or no trespassing zone already there!");
+          System.out.print("Please choose an x coordinate value between 0 and 9 for the Gold: ");
+          x = reader.nextInt();
+          while(x > 10){
+            System.out.println("x coordinate must be betwen 0 and 9!");
+            System.out.print("Please choose an x coordinate value between 0 and 9 for the Gold: ");
+            x = reader.nextInt();
+          }
+          System.out.print("Please choose an y coordinate value between 0 and 9 for the Gold: ");
+          y = reader.nextInt();
+          while(y > 10){
+            System.out.println("y coordinate must be betwen 0 and 9!");
+            System.out.print("Please choose an y coordinate value between 0 and 9 for the Gold: ");
+            y = reader.nextInt();
+          }
+          g = new coordinate(x,y);
+        }
     }else if(choice == 4){
         System.out.print("Please enter number of Pits: ");
         pitCount = reader.nextInt();
@@ -156,6 +192,24 @@ public class Menu{
             y = reader.nextInt();
           }
           p[i] = new coordinate(x,y);
+          while(!p[i].canPlaceObject(null,w) || !p[i].canPlaceObject(null,g)){
+            System.out.println("The pit cannot be placed at position " + x + " " + y + " because the wumpus or gold is already there!");
+            System.out.print("Please choose an x coordinate value between 0 and 9 for Pit " + i + " : ");
+            x = reader.nextInt();
+            while(x > 10){
+              System.out.println("x coordinate must be betwen 0 and 9!");
+              System.out.print("Please choose an x coordinate value between 0 and 9 for Pit " + i + " : ");
+              x = reader.nextInt();
+            }
+            System.out.print("Please choose an y coordinate value between 0 and 9 for Pit " + i + " : ");
+            y = reader.nextInt();
+            while(y > 10){
+              System.out.println("y coordinate must be betwen 0 and 9!");
+              System.out.print("Please choose an y coordinate value between 0 and 9 for Pit " + i + " : ");
+              y = reader.nextInt();
+            }
+            p[i] = new coordinate(x,y);
+          }
         }
     }else if(choice == 5){
         System.out.print("Please enter number of NoTrespass Zones: ");
@@ -177,6 +231,24 @@ public class Menu{
             y = reader.nextInt();
           }
           noPass[i] = new coordinate(x,y);
+          while(!noPass[i].canPlaceObject(null,g)){
+            System.out.println("The no trepass zone cannot be placed at position " + x + " " + y + " because the gold is already there!");
+            System.out.print("Please choose an x coordinate value between 0 and 9 for NoTrespass Zone " + i + " : ");
+            x = reader.nextInt();
+            while(x > 10){
+              System.out.println("x coordinate must be betwen 0 and 9!");
+              System.out.print("Please choose an x coordinate value between 0 and 9 for NoTrespass Zone " + i + " : ");
+              x = reader.nextInt();
+            }
+            System.out.print("Please choose an y coordinate value between 0 and 9 for NoTrespass Zone " + i + " : ");
+            y = reader.nextInt();
+            while(y > 10){
+              System.out.println("y coordinate must be betwen 0 and 9!");
+              System.out.print("Please choose an y coordinate value between 0 and 9 for NoTrespass Zone " + i + " : ");
+              y = reader.nextInt();
+            }
+            noPass[i] = new coordinate(x,y);
+          }
         }
     }else if(choice == 6){
         mainMenu();

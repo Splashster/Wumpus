@@ -18,7 +18,7 @@ public class KnowledgeBase
 
   public void incHazards() {hazards++;}
   public void decHazards() {hazards--;}
-
+ 
   public void incLoot() {loot++;}
   public void decLoot() {loot--;}
 

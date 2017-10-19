@@ -4,7 +4,7 @@ public class Map
 {
   private MapNode[][] map;
 
-  public Map(coordinate wumpus, coordinate supmuw, coordinate gold, coordinate[] noPassZones, coordinate[] pits, coordinate agent)
+  public Map(coordinate wumpus, coordinate supmuw, coordinate gold, coordinate[] noPassZones, coordinate[] pits, coordinate agent, boolean hasGold)
   {
     map = new MapNode[10][10];
     coordinate c;
@@ -31,7 +31,8 @@ public class Map
         if(y != 9) {map[x][y].setEastNeighbor(map[x][y+1]);}else{map[x][y].setEastWall();}
 
         //Check to see if current node should hold a specified parameter
-        if(x == agent.getX() && y == agent.getY()) {map[x][y].setAgent();}
+        if((x == agent.getX() && y == agent.getY()) && hasGold){map[x][y].setHasGold(); map[x][y].setAgent();}
+        if(x == agent.getX() && y == agent.getY()){map[x][y].setAgent();}
         if(wumpus != null && (x == wumpus.getX() && y == wumpus.getY())) {map[x][y].setWumpus();}
         if(supmuw != null && (x == supmuw.getX() && y == supmuw.getY())) {map[x][y].setSupmuw();}
         if(x == gold.getX() && y == gold.getY()) {map[x][y].setGold();}
