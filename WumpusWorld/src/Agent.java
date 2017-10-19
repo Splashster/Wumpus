@@ -72,8 +72,8 @@ public class Agent
         right = new coordinate(0,y+1);
         left = new coordinate(x,y-1);
         choices.add(up);
-        choices.add(left);
         choices.add(right);
+        choices.add(left);
       }else if(y == 0 && x != 9){
         up = new coordinate(x+1,y);
         right = new coordinate(x,y+1);
@@ -130,13 +130,21 @@ public class Agent
     public void setPerceptions(int x, int y){
         MapNode percept = theWorld.getPerception(x,y);
         stench = percept.getStench();
+        kb[current_position.getX()][current_position.getY()].setStench(stench);
         breeze = percept.getBreeze();
+        kb[current_position.getX()][current_position.getY()].setStench(breeze);
         glitter = percept.getGlitter();
+        kb[current_position.getX()][current_position.getY()].setStench(glitter);
         moo = percept.getMoo();
+        kb[current_position.getX()][current_position.getY()].setStench(moo);
         wumpus = percept.getWumpus();
+        kb[current_position.getX()][current_position.getY()].setStench(wumpus);
         supmuw = percept.getSupmuw();
+        kb[current_position.getX()][current_position.getY()].setStench(supmuw);
         gold = percept.getGold();
+        kb[current_position.getX()][current_position.getY()].setStench(gold);
         pit = percept.getPit();
+        kb[current_position.getX()][current_position.getY()].setStench(pit);
         nWall = percept.getNorthWall();
         sWall = percept.getSouthWall();
         eWall = percept.getEastWall();
@@ -155,9 +163,9 @@ public class Agent
           int x = c.getX();
           int y = c.getY();
 
-          if(!kb[x][y].visited())
+          if(kb[x][y].visited())
           {
-            if(!stench)
+            if(!kb[x][y].getStench())
             {
               kb[x][y].decHazards();
             }
@@ -168,6 +176,8 @@ public class Agent
           }
           else
           {
+              kb[x][y].decHazards();
+              kb[x][y].decHazards();
               kb[x][y].decHazards();
           }
         }
@@ -179,9 +189,9 @@ public class Agent
           int x = current_position.getX();
           int y = current_position.getY();
 
-          if(!kb[x][y].visited())
+          if(kb[x][y].visited())
           {
-            if(!stench || !wumpus)
+            if(!kb[x][y].getStench() || !kb[x][y].getWumpus())
             {
               kb[x][y].incHazards();
             }
@@ -192,6 +202,8 @@ public class Agent
           }
           else
           {
+              kb[x][y].incHazards();
+              kb[x][y].incHazards();
               kb[x][y].incHazards();
           }
         }
@@ -208,9 +220,9 @@ public class Agent
             int x = c.getX();
             int y = c.getY();
 
-            if(!kb[x][y].visited())
+            if(kb[x][y].visited())
             {
-              if(!moo)
+              if(!kb[x][y].getMoo())
               {
                 kb[x][y].decHazards();
               }
@@ -221,6 +233,8 @@ public class Agent
             }
             else
             {
+                kb[x][y].decHazards();
+                kb[x][y].decHazards();
                 kb[x][y].decHazards();
             }
           }
@@ -232,9 +246,9 @@ public class Agent
             int x = c.getX();
             int y = c.getY();
 
-            if(!kb[x][y].visited())
+            if(kb[x][y].visited())
             {
-              if(!moo)
+              if(!kb[x][y].getMoo())
               {
                 kb[x][y].incHazards();
               }
@@ -245,6 +259,8 @@ public class Agent
             }
             else
             {
+                kb[x][y].incHazards();
+                kb[x][y].incHazards();
                 kb[x][y].incHazards();
             }
           }
@@ -259,9 +275,9 @@ public class Agent
             int x = c.getX();
             int y = c.getY();
 
-            if(!kb[x][y].visited())
+            if(kb[x][y].visited())
             {
-              if(moo)
+              if(kb[x][y].getMoo())
               {
                 kb[x][y].decHazards();
               }
@@ -275,15 +291,17 @@ public class Agent
             int x = c.getX();
             int y = c.getY();
 
-            if(!kb[x][y].visited())
+            if(kb[x][y].visited())
             {
-              if(!moo)
+              if(!kb[x][y].getMoo())
               {
                 kb[x][y].decHazards();
               }
             }
             else
             {
+                kb[x][y].decHazards();
+                kb[x][y].decHazards();
                 kb[x][y].decHazards();
             }
           }
@@ -299,9 +317,9 @@ public class Agent
           int x = c.getX();
           int y = c.getY();
 
-          if(!kb[x][y].visited())
+          if(kb[x][y].visited())
           {
-            if(!breeze)
+            if(!kb[x][y].getBreeze())
             {
               kb[x][y].decHazards();
             }
@@ -312,6 +330,8 @@ public class Agent
           }
           else
           {
+              kb[x][y].decHazards();
+              kb[x][y].decHazards();
               kb[x][y].decHazards();
           }
         }
@@ -323,9 +343,9 @@ public class Agent
           int x = c.getX();
           int y = c.getY();
 
-          if(!kb[x][y].visited())
+          if(kb[x][y].visited())
           {
-            if(!breeze)
+            if(!kb[x][y].getBreeze())
             {
               kb[x][y].incHazards();
             }
@@ -336,6 +356,8 @@ public class Agent
           }
           else
           {
+              kb[x][y].incHazards();
+              kb[x][y].incHazards();
               kb[x][y].incHazards();
           }
         }
@@ -408,8 +430,8 @@ public class Agent
 
       for(int x=0; x<elements; x++)
       {
-        System.out.println(x + "     " + (min == convertHazards(elements-1)) + convertHazards(elements-1));
-        if(min == convertHazards(elements-1)) {minIndex=x;}
+        System.out.println(x + "     " + (min == convertHazards(x)) + convertHazards(x));
+        if(min == convertHazards(x)) {minIndex=x;}
       }
       System.out.println("X: " + directions.get(minIndex).getX());
       System.out.println("Y: " + directions.get(minIndex).getY());

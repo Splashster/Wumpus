@@ -8,12 +8,28 @@ public class KnowledgeBase
   private int loot;
   private int hazards;
   private boolean visited;
+  private boolean wumpus;
+  private boolean stench;
+  private boolean supmuw;
+  private boolean moo;
+  private boolean pit;
+  private boolean breeze;
+  private boolean gold;
+  private boolean glitter;
 
   public KnowledgeBase()
   {
     loot = 0;
     hazards = 0;
     visited = false;
+    wumpus = false;
+    stench = false;
+    supmuw = false;
+    moo = false;
+    pit = false;
+    breeze = false;
+    gold = false;
+    glitter = false;
   }
 
   public void incHazards() {hazards++;}
@@ -27,5 +43,24 @@ public class KnowledgeBase
 
   public int getHazards() {return hazards;}
   public int getLoot() {return loot;}
+
+  public void setWumpus(boolean b) {wumpus=b;}
+  public void setStench(boolean b) {stench=b;}
+  public void setSupmuw(boolean b) {supmuw=b;}
+  public void setMoo(boolean b) {moo=b;}
+  public void setPit(boolean b) {pit=b;}
+  public void setBreeze(boolean b) {breeze=b;}
+  public void setGold(boolean b) {gold=b;}
+  public void setGlitter(boolean b) {glitter=b;}
+
+  public boolean getWumpus() {return wumpus;}
+  public boolean getStench() {return stench;}
+  public boolean getSupmuw() {return supmuw;}
+  public boolean getMoo() {return moo;}
+  public boolean getPit() {return pit;}
+  public boolean getBreeze() {return breeze;}
+  public boolean getGold() {return gold;}
+  public boolean getGlitter() {return glitter;}
+
 
 }
