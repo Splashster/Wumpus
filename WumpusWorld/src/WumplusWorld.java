@@ -23,7 +23,6 @@ public class WumplusWorld
 
   public WumplusWorld()
   {
-    agent = new Agent();
     se = new ScoringEngine();
     hasGold = false;
   }
@@ -305,9 +304,11 @@ public class WumplusWorld
       generateMap(w, sup, noPass, pit, gold);
     }catch(Exception e){
         //System.out.println("Please set objects on the map!");
+
     }
 
     System.out.println("The Wumpus Says COME TO MEEEEEE");
+    agent = new Agent();
     agent.goGoAgent();
     /*ArrayList<coordinate> previousMoves = new ArrayList<coordinate>();
     int x, y, previousX = 0, previousY = 0, move_count = 40;

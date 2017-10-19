@@ -5,7 +5,7 @@ public class Agent
 
   boolean stench, breeze, glitter, moo, wumpus, supmuw, gold, pit;
   boolean nWall, sWall, eWall, wWall;
-  boolean hasArrow, wumpusAlive, gotGold;
+  boolean hasArrow, wumpus_alive, gotGold;
   ArrayList<coordinate> directions;
   coordinate current_position;
   KnowledgeBase[][] kb;
@@ -15,7 +15,7 @@ public class Agent
     kb = new KnowledgeBase[10][10];
     current_position = new coordinate (0,0);
     hasArrow = true;
-    wumpusAlive = true;
+    wumpus_alive = true;
     gotGold = false;
     setPerceptions(0,0);
 
@@ -127,5 +127,267 @@ public class Agent
         wWall = percept.getNorthWall();
     }
 
+    public coordinate getAgentNextMove()
+    {
+      //Calculate Wumpus location
+      if(!stench || !wumpus)
+      {
+        for(coordinate c: directions)
+        {
+          int x = c.getX();
+          int y = c.getY();
+
+          if(kb[x][y].visited())
+          {
+            if(!stench || !wumpus)
+            {
+              kb[x][y].decHazards();
+            }
+            else
+            {
+              kb[x][y].incHazards();
+            }
+          }
+          else
+          {
+              kb[x][y].decHazards();
+          }
+        }
+      }
+      else
+      {
+        for(coordinate c: directions)
+        {
+          int x = c.getX();
+          int y = c.getY();
+
+          if(kb[x][y].visited())
+          {
+            if(!stench || !wumpus)
+            {
+              kb[x][y].incHazards();
+            }
+            else
+            {
+              kb[x][y].decHazards();
+            }
+          }
+          else
+          {
+              kb[x][y].incHazards();
+          }
+        }
+      }
+
+      //Calculate Supmuw location
+      if(wumpus_alive)
+      {
+        if(!moo || !supmuw)
+        {
+          for(coordinate c: directions)
+          {
+            int x = c.getX();
+            int y = c.getY();
+
+            if(kb[x][y].visited())
+            {
+              if(!moo || !supmuw)
+              {
+                kb[x][y].decHazards();
+              }
+              else
+              {
+                kb[x][y].incHazards();
+              }
+            }
+            else
+            {
+                kb[x][y].decHazards();
+            }
+          }
+        }
+        else
+        {
+          for(coordinate c: directions)
+          {
+            int x = c.getX();
+            int y = c.getY();
+
+            if(kb[x][y].visited())
+            {
+              if(!moo || !supmuw)
+              {
+                kb[x][y].incHazards();
+              }
+              else
+              {
+                kb[x][y].decHazards();
+              }
+            }
+            else
+            {
+                kb[x][y].incHazards();
+            }
+          }
+        }
+      }
+      else
+      {
+        if(!moo || !supmuw)
+        {
+          for(coordinate c: directions)
+          {
+            int x = c.getX();
+            int y = c.getY();
+
+            if(kb[x][y].visited())
+            {
+              if(moo || supmuw)
+              {
+                kb[x][y].decHazards();
+              }
+            }
+          }
+        }
+        else
+        {
+          for(coordinate c: directions)
+          {
+            int x = c.getX();
+            int y = c.getY();
+
+            if(kb[x][y].visited())
+            {
+              if(!moo || !supmuw)
+              {
+                kb[x][y].decHazards();
+              }
+            }
+            else
+            {
+                kb[x][y].decHazards();
+            }
+          }
+        }
+      }
+
+      //Calculate Pit location
+      if(!breeze || !pit)
+      {
+        for(coordinate c: directions)
+        {
+          int x = c.getX();
+          int y = c.getY();
+
+          if(kb[x][y].visited())
+          {
+            if(!breeze || !pit)
+            {
+              kb[x][y].decHazards();
+            }
+            else
+            {
+              kb[x][y].incHazards();
+            }
+          }
+          else
+          {
+              kb[x][y].decHazards();
+          }
+        }
+      }
+      else
+      {
+        for(coordinate c: directions)
+        {
+          int x = c.getX();
+          int y = c.getY();
+
+          if(kb[x][y].visited())
+          {
+            if(!breeze || !pit)
+            {
+              kb[x][y].incHazards();
+            }
+            else
+            {
+              kb[x][y].decHazards();
+            }
+          }
+          else
+          {
+              kb[x][y].incHazards();
+          }
+        }
+      }
+
+      return bestMove();
+    }
+
+    public coordinate bestMove()
+    {
+      int elements = directions.size();
+      int min = -1;
+
+      //convert directions.get(0) to kb[x][y].getHazards();
+
+      switch(elements)
+      {
+        case 2: if(convertHazards(directions.get(0)) < convertHazards(directions.get(1))) {min=0;}
+                else {min=1;}
+                break;
+
+        case 3: if(convertHazards(directions.get(0)) < convertHazards(directions.get(1)))
+                {
+                  if(convertHazards(directions.get(0)) < convertHazards(directions.get(2))) {min=0;}
+                  else {min=2;}
+                }
+                else
+                {
+                  if(convertHazards(directions.get(1)) < convertHazards(directions.get(2))) {min=1;}
+                  else {min=2;}
+                }
+                break;
+
+        case 4: if(convertHazards(directions.get(0)) < convertHazards(directions.get(1)))
+                {
+                  if(convertHazards(directions.get(0)) < convertHazards(directions.get(2)))
+                  {
+                    if(convertHazards(directions.get(0)) < convertHazards(directions.get(3))) {min=0;}
+                    else {min=3;}
+                  }
+                  else
+                  {
+                    if(convertHazards(directions.get(2)) < convertHazards(directions.get(3))) {min=2;}
+                    else {min=3;}
+                  }
+                }
+                else
+                {
+                  if(convertHazards(directions.get(1)) < convertHazards(directions.get(2)))
+                  {
+                    if(convertHazards(directions.get(1)) < convertHazards(directions.get(3))) {min=1;}
+                    else {min=3;}
+                  }
+                  else
+                  {
+                    if(convertHazards(directions.get(2)) < convertHazards(directions.get(3))) {min=2;}
+                    else {min=3;}
+                  }
+                }
+      }
+
+      return directions.get(min);
+    }
+
+    public int convertHazards(coordinate c)
+    {
+      int x = c.getX();
+      int y = c.getY();
+
+      int hazards = kb[x][y].getHazards();
+
+      return hazards;
+    }
 
 }
