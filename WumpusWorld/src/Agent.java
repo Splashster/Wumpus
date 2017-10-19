@@ -5,19 +5,20 @@ public class Agent
 
   boolean stench, breeze, glitter, moo, wumpus, supmuw, gold, pit;
   boolean nWall, sWall, eWall, wWall;
-  boolean hasArrow, wumpus_alive, gotGold;
+  boolean hasArrow, wumpus_alive, gotGold, escaped;
   ArrayList<coordinate> directions;
   coordinate current_position;
   KnowledgeBase[][] kb;
   WumplusWorld theWorld;
 
-  public Agent(){
+  public Agent(WumplusWorld ww){
     kb = new KnowledgeBase[10][10];
     current_position = new coordinate (0,0);
     hasArrow = true;
     wumpus_alive = true;
     gotGold = false;
-    setPerceptions(0,0);
+    theWorld = ww;
+    escaped = false;
 
     for(int i = 0; i < 10; i++){
       for(int j = 0; j < 10; j++){
@@ -27,20 +28,29 @@ public class Agent
   }
 
   public void goGoAgent(){
-    directions = getChoices(current_position.getX(),current_position.getY());
-    setPerceptions(current_position.getX(),current_position.getY());
+    while(!gotGold && !escaped){
+      setPerceptions(current_position.getX(),current_position.getY());
+      directions = getChoices(current_position.getX(),current_position.getY());
+      current_position = getAgentNextMove();
+      theWorld.moveAgent(current_position.getX(),current_position.getY());
+      if((current_position.getX() == 0 && current_position.getY() == 0) && (gotGold)){
+        escaped = true;
+      }
+      System.out.println("Tarzan's Current Position: " + current_position.getX() + "," + current_position.getY());
+    }
   }
 
 
-/*  public void setAgentPosition(int 0, int 0){
-     previous_position = current_position;
-     current_position = new coordinate (0,0);
-  }*/
+  public coordinate getAgentPosition(){
+     return current_position;
+  }
 
   public void setHasGold(){gotGold=true;}
 
   public boolean hasGold(){return gotGold;}
 
+  //TODO Need set finished when agent gets to escape
+  public boolean hasEscaped(){return escaped;}
 
   public ArrayList<coordinate> getChoices(int x, int y){
       coordinate left, right, up, down, move, previousMove;

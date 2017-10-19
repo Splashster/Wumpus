@@ -167,9 +167,7 @@ public class WumplusWorld
     savedBySupmuw = false;
     fedBySupmuw = false;
     gotTheGold = false;
-    //agent.setAgentPosition(x, y);
-    //ag.setX(x);
-    //ag.setY(y);
+    ag = agent.getAgentPosition();
     m = new Map(w, sup, g, noPass, p, ag, hasGold);
     theWorld = m.getMap();
     isInPit(x,y);
@@ -293,6 +291,10 @@ public class WumplusWorld
     se.removeWumpus();
   }
 
+  public void setAgent(Agent ag){
+    agent = ag;
+  }
+
   public void startGame(coordinate w, coordinate sup, coordinate[] noPass, coordinate[] pit, coordinate gold){
     try{
       //System.out.println("CAlling genreate");
@@ -308,8 +310,8 @@ public class WumplusWorld
     }
 
     System.out.println("The Wumpus Says COME TO MEEEEEE");
-    agent = new Agent();
     agent.goGoAgent();
+    while(!agent.hasEscaped()){}
     /*ArrayList<coordinate> previousMoves = new ArrayList<coordinate>();
     int x, y, previousX = 0, previousY = 0, move_count = 40;
     coordinate previousMove;

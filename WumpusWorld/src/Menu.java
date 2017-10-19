@@ -51,6 +51,8 @@ public class Menu{
           //System.out.println("Get Pass " + noPass[0].getX() + " " + noPass[0].getY());
 
            WumplusWorld ww = new WumplusWorld();
+           Agent agent = new Agent(ww);
+           ww.setAgent(agent);
            ww.startGame(w, sup, noPass, p, g);
          }
       }else if(choice == 2){
