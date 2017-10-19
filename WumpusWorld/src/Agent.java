@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
+import java.lang.Math;
 
 public class Agent
 {
@@ -68,8 +69,8 @@ public class Agent
         right = new coordinate(0,y+1);
         left = new coordinate(x,y-1);
         choices.add(up);
-        choices.add(right);
         choices.add(left);
+        choices.add(right);
       }else if(y == 0 && x != 9){
         up = new coordinate(x+1,y);
         right = new coordinate(x,y+1);
@@ -141,6 +142,8 @@ public class Agent
 
     public coordinate getAgentNextMove()
     {
+      System.out.println("wumpus: " + wumpus);
+      System.out.println("stench: " + stench);
       //Calculate Wumpus location
       if(!stench || !wumpus)
       {
@@ -339,17 +342,18 @@ public class Agent
     public coordinate bestMove()
     {
       int elements = directions.size();
-      int min = -1;
-
-      //convert directions.get(0) to kb[x][y].getHazards();
+      int min = 0;
+      int minIndex = 0;
 
       switch(elements)
       {
-        case 2: if(convertHazards(directions.get(0)) < convertHazards(directions.get(1))) {min=0;}
+        case 2: /*if(convertHazards(directions.get(0)) < convertHazards(directions.get(1))) {min=0;}
                 else {min=1;}
+                break;*/
+                min = Math.min(convertHazards(0), convertHazards(1));
                 break;
 
-        case 3: if(convertHazards(directions.get(0)) < convertHazards(directions.get(1)))
+        case 3: /*if(convertHazards(directions.get(0)) < convertHazards(directions.get(1)))
                 {
                   if(convertHazards(directions.get(0)) < convertHazards(directions.get(2))) {min=0;}
                   else {min=2;}
@@ -359,9 +363,12 @@ public class Agent
                   if(convertHazards(directions.get(1)) < convertHazards(directions.get(2))) {min=1;}
                   else {min=2;}
                 }
+                break;*/
+                int tempMin = Math.min(convertHazards(0), convertHazards(1));
+                min = Math.min(tempMin, convertHazards(2));
                 break;
 
-        case 4: if(convertHazards(directions.get(0)) < convertHazards(directions.get(1)))
+        case 4: /*if(convertHazards(directions.get(0)) < convertHazards(directions.get(1)))
                 {
                   if(convertHazards(directions.get(0)) < convertHazards(directions.get(2)))
                   {
@@ -386,18 +393,31 @@ public class Agent
                     if(convertHazards(directions.get(2)) < convertHazards(directions.get(3))) {min=2;}
                     else {min=3;}
                   }
-                }
+                }*/
+                int tempMin1 = Math.min(convertHazards(0), convertHazards(1));
+                int tempMin2 = Math.min(convertHazards(2), convertHazards(3));
+                min = Math.min(tempMin1, tempMin2);
       }
 
-      return directions.get(min);
+      for(int x=0; x<elements; x++)
+      {
+        if(min == convertHazards(elements-1)) {minIndex=x;}
+      }
+      System.out.println("X: " + directions.get(minIndex).getX());
+      System.out.println("Y: " + directions.get(minIndex).getY());
+
+      return directions.get(minIndex);
     }
 
-    public int convertHazards(coordinate c)
+    public int convertHazards(int pos)
     {
+      coordinate c = directions.get(pos);
       int x = c.getX();
       int y = c.getY();
 
       int hazards = kb[x][y].getHazards();
+
+      System.out.println("Position " + pos + ": " + hazards + " - " + x + "," + y);
 
       return hazards;
     }
