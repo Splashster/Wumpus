@@ -48,54 +48,54 @@ public class Map
   //Function to display map will all elements visible
   public void print(int score)
   {
-    System.out.println("                                       __    __                       _             __    __           _     _ ");
-    System.out.println("                                      / / /\\ \\ \\_   _ _ __ ___  _ __ | |_   _ ___  / / /\\ \\ \\___  _ __| | __| |");
-    System.out.println("                                      \\ \\/  \\/ / | | | '_ ` _ \\| '_ \\| | | | / __| \\ \\/  \\/ / _ \\| '__| |/ _` |");
-    System.out.println("                                       \\  /\\  /| |_| | | | | | | |_) | | |_| \\__ \\  \\  /\\  / (_) | |  | | (_| |");
-    System.out.println("                                        \\/  \\/  \\__,_|_| |_| |_| .__/|_|\\__,_|___/   \\/  \\/ \\___/|_|  |_|\\__,_|");
-    System.out.println("                                                               |_|                                             ");
+    System.out.println("\t\t                                          __    __                       _             __    __           _     _ ");
+    System.out.println("\t\t                                         / / /\\ \\ \\_   _ _ __ ___  _ __ | |_   _ ___  / / /\\ \\ \\___  _ __| | __| |");
+    System.out.println("\t\t                                         \\ \\/  \\/ / | | | '_ ` _ \\| '_ \\| | | | / __| \\ \\/  \\/ / _ \\| '__| |/ _` |");
+    System.out.println("\t\t                                          \\  /\\  /| |_| | | | | | | |_) | | |_| \\__ \\  \\  /\\  / (_) | |  | | (_| |");
+    System.out.println("\t\t                                           \\/  \\/  \\__,_|_| |_| |_| .__/|_|\\__,_|___/   \\/  \\/ \\___/|_|  |_|\\__,_|");
+    System.out.println("\t\t                                                                  |_|                                             ");
 
     for(int x=9; x>=0; x--)
     {
-      System.out.println("       +-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+");
-      System.out.println("       |  " +   map[x][0].getAttr1() + "   |  " +   map[x][1].getAttr1() + "   |  " +   map[x][2].getAttr1() + "   |  " +   map[x][3].getAttr1() + "   |  " +   map[x][4].getAttr1() + "   |  " +   map[x][5].getAttr1() + "   |  " +   map[x][6].getAttr1() + "   |  " +   map[x][7].getAttr1() + "   |  " +   map[x][8].getAttr1() + "   |  " +   map[x][9].getAttr1() + "   |");
-      System.out.println("     " + x + " |  " +   map[x][0].getAttr2() + "   |  " +   map[x][1].getAttr2() + "   |  " +   map[x][2].getAttr2() + "   |  " +   map[x][3].getAttr2() + "   |  " +   map[x][4].getAttr2() + "   |  " +   map[x][5].getAttr2() + "   |  " +   map[x][6].getAttr2() + "   |  " +   map[x][7].getAttr2() + "   |  " +   map[x][8].getAttr2() + "   |  " +   map[x][9].getAttr2() + "   |");
-      System.out.println("       |  " +   map[x][0].getAttr3() + "   |  " +   map[x][1].getAttr3() + "   |  " +   map[x][2].getAttr3() + "   |  " +   map[x][3].getAttr3() + "   |  " +   map[x][4].getAttr3() + "   |  " +   map[x][5].getAttr3() + "   |  " +   map[x][6].getAttr3() + "   |  " +   map[x][7].getAttr3() + "   |  " +   map[x][8].getAttr3() + "   |  " +   map[x][9].getAttr3() + "   |");
-      System.out.println("       |  " +   map[x][0].getAttr4() + "   |  " +   map[x][1].getAttr4() + "   |  " +   map[x][2].getAttr4() + "   |  " +   map[x][3].getAttr4() + "   |  " +   map[x][4].getAttr4() + "   |  " +   map[x][5].getAttr4() + "   |  " +   map[x][6].getAttr4() + "   |  " +   map[x][7].getAttr4() + "   |  " +   map[x][8].getAttr4() + "   |  " +   map[x][9].getAttr4() + "   |");
+      System.out.println("\t\t          +-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+");
+      System.out.println("\t\t          |  " +   map[x][0].getAttr1() + "   |  " +   map[x][1].getAttr1() + "   |  " +   map[x][2].getAttr1() + "   |  " +   map[x][3].getAttr1() + "   |  " +   map[x][4].getAttr1() + "   |  " +   map[x][5].getAttr1() + "   |  " +   map[x][6].getAttr1() + "   |  " +   map[x][7].getAttr1() + "   |  " +   map[x][8].getAttr1() + "   |  " +   map[x][9].getAttr1() + "   |");
+      System.out.println("\t\t        " + x + " |  " +   map[x][0].getAttr2() + "   |  " +   map[x][1].getAttr2() + "   |  " +   map[x][2].getAttr2() + "   |  " +   map[x][3].getAttr2() + "   |  " +   map[x][4].getAttr2() + "   |  " +   map[x][5].getAttr2() + "   |  " +   map[x][6].getAttr2() + "   |  " +   map[x][7].getAttr2() + "   |  " +   map[x][8].getAttr2() + "   |  " +   map[x][9].getAttr2() + "   |");
+      System.out.println("\t\t          |  " +   map[x][0].getAttr3() + "   |  " +   map[x][1].getAttr3() + "   |  " +   map[x][2].getAttr3() + "   |  " +   map[x][3].getAttr3() + "   |  " +   map[x][4].getAttr3() + "   |  " +   map[x][5].getAttr3() + "   |  " +   map[x][6].getAttr3() + "   |  " +   map[x][7].getAttr3() + "   |  " +   map[x][8].getAttr3() + "   |  " +   map[x][9].getAttr3() + "   |");
+      System.out.println("\t\t          |  " +   map[x][0].getAttr4() + "   |  " +   map[x][1].getAttr4() + "   |  " +   map[x][2].getAttr4() + "   |  " +   map[x][3].getAttr4() + "   |  " +   map[x][4].getAttr4() + "   |  " +   map[x][5].getAttr4() + "   |  " +   map[x][6].getAttr4() + "   |  " +   map[x][7].getAttr4() + "   |  " +   map[x][8].getAttr4() + "   |  " +   map[x][9].getAttr4() + "   |");
     }
-    System.out.println("       +-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+");
-    System.out.println("              0             1             2             3             4             5             6             7             8             9");
+    System.out.println("\t\t          +-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+-------------+");
+    System.out.println("\t\t                 0             1             2             3             4             5             6             7             8             9");
 
     int scoreDigits = String.valueOf(score).length();
     switch (scoreDigits) {
-      case 1: System.out.println("                                                                                                                               +-------------------+");
-              System.out.println("                                                                                                                               |   Score: " + score + "        |");
-              System.out.println("                                                                                                                               +-------------------+");
+      case 1: System.out.println("\t\t                                                                                                                                  +-------------------+");
+              System.out.println("\t\t                                                                                                                                  |   Score: " + score + "        |");
+              System.out.println("\t\t                                                                                                                                  +-------------------+");
               break;
 
-      case 2: System.out.println("                                                                                                                               +-------------------+");
-              System.out.println("                                                                                                                               |   Score: " + score + "       |");
-              System.out.println("                                                                                                                               +-------------------+");
+      case 2: System.out.println("\t\t                                                                                                                                  +-------------------+");
+              System.out.println("\t\t                                                                                                                                  |   Score: " + score + "       |");
+              System.out.println("\t\t                                                                                                                                  +-------------------+");
               break;
 
-      case 3: System.out.println("                                                                                                                               +-------------------+");
-              System.out.println("                                                                                                                               |   Score: " + score + "      |");
-              System.out.println("                                                                                                                               +-------------------+");
+      case 3: System.out.println("\t\t                                                                                                                                  +-------------------+");
+              System.out.println("\t\t                                                                                                                                  |   Score: " + score + "      |");
+              System.out.println("\t\t                                                                                                                                  +-------------------+");
               break;
 
-      case 4: System.out.println("                                                                                                                               +-------------------+");
-              System.out.println("                                                                                                                               |   Score: " + score + "     |");
-              System.out.println("                                                                                                                               +-------------------+");
+      case 4: System.out.println("\t\t                                                                                                                                  +-------------------+");
+              System.out.println("\t\t                                                                                                                                  |   Score: " + score + "     |");
+              System.out.println("\t\t                                                                                                                                  +-------------------+");
               break;
 
-      case 5: System.out.println("                                                                                                                               +-------------------+");
-              System.out.println("                                                                                                                               |   Score: " + score + "    |");
-              System.out.println("                                                                                                                               +-------------------+");
+      case 5: System.out.println("\t\t                                                                                                                                  +-------------------+");
+              System.out.println("\t\t                                                                                                                                  |   Score: " + score + "    |");
+              System.out.println("\t\t                                                                                                                                  +-------------------+");
               break;
 
-      default:System.out.println("                                                                                                                               +-------------------+");
-              System.out.println("                                                                                                                               |   Score: MAX      |");
-              System.out.println("                                                                                                                               +-------------------+");
+      default:System.out.println("\t\t                                                                                                                                  +-------------------+");
+              System.out.println("\t\t                                                                                                                                  |   Score: MAX      |");
+              System.out.println("\t\t                                                                                                                                  +-------------------+");
     }
   }
 }

@@ -15,7 +15,7 @@ public class KnowledgeBase
   //private boolean pit;
   private boolean breeze;
   //private boolean gold;
-  private boolean glitter;
+  //private boolean glitter;
   private boolean locked;
   //********************
   private int wumpusHazard;
@@ -34,7 +34,7 @@ public class KnowledgeBase
     //pit = false;
     breeze = false;
     //gold = false;
-    glitter = false;
+    //glitter = false;
     locked = false;
 
     //********************
@@ -75,7 +75,7 @@ public class KnowledgeBase
   //public void setPit(boolean b) {pit=b;}
   public void setBreeze(boolean b) {breeze=b;}
   //public void setGold(boolean b) {gold=b;}
-  public void setGlitter(boolean b) {glitter=b;}
+  //public void setGlitter(boolean b) {glitter=b;}
 
   //public boolean getWumpus() {return wumpus;}
   public boolean getStench() {return stench;}
@@ -84,7 +84,7 @@ public class KnowledgeBase
   //public boolean getPit() {return pit;}
   public boolean getBreeze() {return breeze;}
 //  public boolean getGold() {return gold;}
-  public boolean getGlitter() {return glitter;}
+//  public boolean getGlitter() {return glitter;}
 
   public void resetHazards()
   {

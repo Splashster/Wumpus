@@ -41,7 +41,7 @@ public class Agent
         escaped = true;
       }
       kb[current_position.getX()][current_position.getY()].visit();
-      System.out.println("Tarzan's Current Position: " + current_position.getX() + "," + current_position.getY());
+      //System.out.println("Tarzan's Current Position: " + current_position.getX() + "," + current_position.getY());
       try{TimeUnit.SECONDS.sleep(1);}catch(Exception e){}
     }
   }
@@ -107,9 +107,10 @@ public class Agent
         up = new coordinate(x+1,y);
         left = new coordinate(x,y-1);
         down = new coordinate(x-1,y);
+        choices.add(down);
         choices.add(up);
         choices.add(left);
-        choices.add(down);
+        //up, left, down
       }else{
         up = new coordinate(x+1,y);
         down = new coordinate(x-1,y);
@@ -301,6 +302,8 @@ public class Agent
 
       switch(elements)
       {
+        case 1: min = convertHazards(0);
+                break;
         case 2: /*if(convertHazards(directions.get(0)) < convertHazards(directions.get(1))) {min=0;}
                 else {min=1;}
                 break;*/
