@@ -230,83 +230,14 @@ public class Agent
           kb[x][y].decHazards();
         }
       }
-
-      return bestMove();
-    }
-
-
-    /*BACKUP
-    public coordinate getAgentNextMove()
-    {
-      kb[current_position.getX()][current_position.getY()].resetHazards();
-
-      //Add incentive for exploring new regions
-      for(coordinate c: directions)
-      {
-        int x = c.getX();
-        int y = c.getY();
-
-<<<<<<< HEAD
-=======
->>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
-        if(!kb[x][y].visited())
-        {
-          kb[x][y].decHazards();
-        }
-      }
-
-      //Calculate Wumpus location
-      for(coordinate c: directions)
-      {
-        int x = c.getX();
-        int y = c.getY();
-
-        if(stench)
-        {
-          kb[x][y].decHazards();
-        }
-        else
-        {
-          kb[x][y].incHazards();
-        }
-      }
-
-
-      //Calculate Supmuw location
-      if(moo)
-      {
-        for(coordinate c: directions)
-        {
-          int x = c.getX();
-          int y = c.getY();
-
-          kb[x][y].decHazards();
-        }
-      }
-
-
-      //Calculate Pit location
-      for(coordinate c: directions)
-      {
-        int x = c.getX();
-        int y = c.getY();
-
-        if(breeze)
-        {
-          kb[x][y].incHazards();
-        }
-        else
-        {
-          kb[x][y].decHazards();
-        }
-      }
-=======
       //see if its the Wumpus's time to go.
       huntWumpus();
->>>>>>> dfc25fe33bfac86abfcfdf2c8681dbc629c1fca8
 
       return bestMove();
     }
+
+
+    
 
     public coordinate bestMove()
     {
