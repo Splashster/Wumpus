@@ -17,6 +17,7 @@ Index...........................................................................
     1. How to Compile & Run the Program
     2. How to Use the Program
     3. How the Agent Works
+    4. Game Assumptions
 
 
 How to Compile & Run the Program................................................
@@ -166,3 +167,13 @@ How the Agent Works.............................................................
 
     While the gold may remain elusive unless stumbled upon, Tarzan truly excels
     in finding the safest path around a cave lurking with danger.
+
+Game Assumptions.............................................................
+  Provided below are the assumptions made in order to develop the Wumpus World
+  and logic for the agent.
+    1. If a Supmuw acts as a Wumpus, then it has a stench and can no longer moo.
+    2. If a Supmuw acts as a Wumpus and the agent kills the Wumpus, then the
+       Supmuw is allowed to go back to its normal nature. Which includes mooing
+       and feeding the agent.
+    3. If a Supmuw is inside of a pit, it cannot smell the Wumpus and therefore
+       cannot act like a Wumpus.
