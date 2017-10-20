@@ -323,7 +323,6 @@ public class WumplusWorld
     if(shoot.getX() == w.getX() && shoot.getY() == w.getY())
     {
       wumpus_alive = false;
-      se.removeWumpus();
     }
   }
 

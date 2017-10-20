@@ -1,5 +1,9 @@
+/***********************************************************************
+Class to print game title and game over screen
+************************************************************************/
 public class WumplusTitle{
   public void print(){
+    //print game title
     System.out.println("\t\t                                              __    __                       _             __    __           _     _ ");
     System.out.println("\t\t                                             / / /\\ \\ \\_   _ _ __ ___  _ __ | |_   _ ___  / / /\\ \\ \\___  _ __| | __| |");
     System.out.println("\t\t                                             \\ \\/  \\/ / | | | '_ ` _ \\| '_ \\| | | | / __| \\ \\/  \\/ / _ \\| '__| |/ _` |");
@@ -10,6 +14,7 @@ public class WumplusTitle{
   }
 
   public void printClose(){
+    //print game over screen
     System.out.print("\033[H\033[2J");
     System.out.println("\t\t                                              __    __                       _             __    __           _     _ ");
     System.out.println("\t\t                                             / / /\\ \\ \\_   _ _ __ ___  _ __ | |_   _ ___  / / /\\ \\ \\___  _ __| | __| |");

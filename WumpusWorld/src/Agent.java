@@ -85,9 +85,10 @@ public class Agent
         up = new coordinate(x+1,y);
         right = new coordinate(x,y+1);
         down = new coordinate(x-1,y);
-        if(!nWall){choices.add(up);}
-        if(!eWall){choices.add(right);}
         if(!sWall){choices.add(down);}
+        if(!eWall){choices.add(right);}
+
+        if(!nWall){choices.add(up);}
       }else if(x == 9 && y == 9){
         left = new coordinate(x,y-1);
         down = new coordinate(x-1,y);
@@ -237,7 +238,7 @@ public class Agent
     }
 
 
-    
+
 
     public coordinate bestMove()
     {
