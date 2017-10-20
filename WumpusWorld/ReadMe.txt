@@ -75,7 +75,7 @@ How to Compile & Run the Program................................................
          display properly, THE WINDOW MUST BE IN FULL SCREEN.
 
       4. Enter the following command to execute the jar file:
-                'java -jar WumpusWorld.jar'
+                'java -jar WumplusWorld.jar'
 
       *  Refer to 'How to Use the Program' for information on how to interact
          with the game.
@@ -184,4 +184,4 @@ How the Agent Works.............................................................
     Wumpus with no missed attempts.
 
     While the gold may remain elusive unless stumbled upon, Tarzan truly excels
-    in finding the safest path around a cave lurking with danger. 
+    in finding the safest path around a cave lurking with danger.
