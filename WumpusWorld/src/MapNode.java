@@ -379,6 +379,11 @@ public class MapNode
     eastWall = true;
     westWall = true;
 
+    if(northNeighbor != null) {northNeighbor.setSouthWall();}
+    if(southNeighbor != null) {southNeighbor.setNorthWall();}
+    if(eastNeighbor != null) {eastNeighbor.setWestWall();}
+    if(westNeighbor != null) {westNeighbor.setEastWall();}
+
     attributes[0] = "  _____ ";
     attributes[1] = " |Stop!|";
     attributes[2] = " |__ __|";
@@ -408,6 +413,7 @@ public class MapNode
   public boolean getEastWall(){return eastWall;}
   public boolean getWestWall(){return westWall;}
   public boolean getActAsWumpus(){return actAsWumpus;}
+  public boolean getHasFood(){return hasFood;}
   public boolean getNoTrespassing() {return noTrespassing;}
 
   public String getAttr1()

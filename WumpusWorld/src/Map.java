@@ -4,7 +4,11 @@ public class Map
 {
   private MapNode[][] map;
 
+<<<<<<< HEAD
+  public Map(coordinate wumpus, coordinate supmuw, coordinate gold, coordinate[] noPassZones, coordinate[] pits, coordinate agent, boolean hasGold, boolean actAsWumpus, boolean hasFood)
+=======
   public Map(coordinate wumpus, coordinate supmuw, coordinate gold, coordinate[] noPassZones, coordinate[] pits, coordinate agent, boolean hasGold, boolean actAsWumpus, boolean wumpus_alive)
+>>>>>>> dfc25fe33bfac86abfcfdf2c8681dbc629c1fca8
   {
     map = new MapNode[10][10];
     coordinate c;
@@ -42,6 +46,7 @@ public class Map
           if(actsAsWumpus(x,y)){
             map[x][y].setActAsWumpus();
           }
+          if(hasFood){map[x][y].setHasFood();}
           map[x][y].setSupmuw();
         }
       }
