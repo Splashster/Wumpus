@@ -198,7 +198,7 @@ public class MapNode
     {
       attributes[0] = "        ";
       attributes[1] = "_      _";
-      attributes[2] = "[\\_/) ]";
+      attributes[2] = "[\\_/)  ]";
       attributes[3] = "[ ^,^) ]";
     }
     else if(agent)
