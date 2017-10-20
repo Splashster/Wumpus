@@ -1,10 +1,17 @@
+/******************************************************************
+The Map class houses the logic for generating the map and
+for setting the attributes for each node.
+*******************************************************************/
+
 import java.lang.Math;
 
 public class Map
 {
   private MapNode[][] map;
 
-  public Map(coordinate wumpus, coordinate supmuw, coordinate gold, coordinate[] noPassZones, coordinate[] pits, coordinate agent, boolean hasGold, boolean actAsWumpus, boolean hasFood, boolean wumpus_alive)
+
+  public Map(coordinate wumpus, coordinate supmuw, coordinate gold, coordinate[] noPassZones, coordinate[] pits, coordinate agent, boolean hasGold, boolean actAsWumpus, boolean hasFood, boolean wumpus_alive, boolean nothingSafe, boolean goingToEscape)
+
   {
     map = new MapNode[10][10];
     coordinate c;
@@ -31,8 +38,16 @@ public class Map
         if(y != 9) {map[x][y].setEastNeighbor(map[x][y+1]);}else{map[x][y].setEastWall();}
 
         //Check to see if current node should hold a specified parameter
-        if((x == agent.getX() && y == agent.getY()) && hasGold){map[x][y].setHasGold(); map[x][y].setAgent();}
-        if(x == agent.getX() && y == agent.getY()){map[x][y].setAgent();}
+        if((x != 0 && y != 0) && (x == agent.getX() && y == agent.getY()) && hasGold){
+          map[x][y].setHasGold(); map[x][y].setAgent();
+        }else if((x == 0 && y == 0) && (x == agent.getX() && y == agent.getY()) && hasGold && goingToEscape){
+          map[x][y].setHasGold();
+          map[x][y].setEscaped();
+        }else if((x == 0 && y == 0) && (x == agent.getX() && y == agent.getY()) && !hasGold && nothingSafe && goingToEscape){
+          map[x][y].setEscaped();
+        }else if(x == agent.getX() && y == agent.getY()){
+          map[x][y].setAgent();
+        }
         if(wumpus != null && !wumpus_alive) {map[wumpus.getX()][wumpus.getY()].setDeadWumpus();}
         else if(wumpus != null && (x == wumpus.getX() && y == wumpus.getY())) {map[x][y].setWumpus();}
         if(x == gold.getX() && y == gold.getY()) {map[x][y].setGold();}
@@ -49,8 +64,8 @@ public class Map
     }
   }
 
+  //Check to see if the supmuw should act like a wumpus.
   public boolean actsAsWumpus(int x, int y){
-    System.out.println("XY" + x + " " + y);
     coordinate left = null, right = null, up = null, down = null;
     boolean answer = false;
 
@@ -83,39 +98,32 @@ public class Map
     }
 
     if(up != null){
-      //System.out.println("UP" + up.getX() + "," + down.getY());
       if(!map[up.getX()][up.getY()].getPit() && (map[up.getX()][up.getY()].getStench() || map[up.getX()][up.getY()].getWumpus())){
         answer = true;
       }
     }
     if(down != null){
-    //  System.out.println("Down" + down.getX() + "," + down.getY());
       if(!map[down.getX()][down.getY()].getPit() && map[down.getX()][down.getY()].getStench() || map[down.getX()][down.getY()].getWumpus()){
         answer = true;
       }
     }
     if(left != null){
-    //  System.out.println("Left" + left.getX() + "," + left.getY());
       if(!map[left.getX()][left.getY()].getPit() && map[left.getX()][left.getY()].getStench() || map[left.getX()][left.getY()].getWumpus()){
         answer = true;
       }
     }
     if(right != null){
-    //  System.out.println("Right" + right.getX() + "," + right.getY());
       if(!map[right.getX()][right.getY()].getPit() && map[right.getX()][right.getY()].getStench() || map[right.getX()][right.getY()].getWumpus()){
         answer = true;
       }
     }
 
-
-  //  System.out.println("ACT as wumpus: " + map[down.getX()][down.getY()].getWumpus());
     System.out.println(answer);
     return answer;
 
   }
 
  public MapNode[][] getMap(){return map;}
- //public String getNodeInformation(int x, int y){return map[x][y].getAttr();}
 
   //Function to display map will all elements visible
   public void print(int score)

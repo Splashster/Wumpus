@@ -251,6 +251,21 @@ public class MapNode
     }
   }
 
+  public void setEscaped(){
+    if(hasGold){
+      attributes[0] = " Tarzan ";
+      attributes[1] = "Escaped!";
+      attributes[2] = "        ";
+      attributes[3] = " +1000  ";
+    }else{
+      attributes[0] = " Tarzan ";
+      attributes[1] = "Escaped!";
+      attributes[2] = "        ";
+      attributes[3] = "        ";
+    }
+
+  }
+
   public void setGold()
   {
     gold=true;
