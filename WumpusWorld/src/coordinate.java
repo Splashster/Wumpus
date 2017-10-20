@@ -1,4 +1,6 @@
-//Simple class to store X-Y coordinate pairs
+/*********************************************
+Coordinate class to store X,Y value pairs
+**********************************************/
 public class coordinate
 {
   private int xValue;
@@ -10,14 +12,16 @@ public class coordinate
     yValue = y;
   }
 
+  //Getter functions
   public int getX() {return xValue;}
-
   public int getY() {return yValue;}
 
+  //Setter functions
   public void setX(int x) {xValue = x;}
-
   public void setY(int y) {yValue = y;}
 
+  //Checks to see if user can place object on the board, or if
+  //that space has alredy been occupied
   public boolean canPlaceObject(coordinate[] objs, coordinate obj){
       boolean answer = true;
       coordinate objsPosition, objPosition;

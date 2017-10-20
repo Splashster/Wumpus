@@ -1,6 +1,10 @@
+/***********************************************************************
+Menu controls the prompt for user input to place all game objects
+************************************************************************/
 import java.util.Scanner;
 
 public class Menu{
+  //cooredinates of all game objects
   private static coordinate s;
   private static coordinate w;
   private static coordinate sup;
@@ -11,17 +15,19 @@ public class Menu{
   private static int y;
   private static Scanner reader;
 
-  public Menu(){
-      reader = new Scanner(System.in);
-  }
+  //Initialize Scanner for user input
+  public Menu() {reader = new Scanner(System.in);}
 
+  //Function to display the Main Menu
   public static void mainMenu(){
       int choice = 0;
 
       //Clear the screen
       System.out.print("\033[H\033[2J");
+      //Show Game title
       WumplusTitle title = new WumplusTitle();
       title.print();
+      //Print options
       System.out.println("\n\n\t\t\t\t\t\t\t   Please select from one of the following options.");
       System.out.println("\t\t\t\t\t\t\t   1) Start Game");
       System.out.println("\t\t\t\t\t\t\t   2) Set Objects");
@@ -29,6 +35,7 @@ public class Menu{
       System.out.println("\t\t\t\t\t\t\t   4) Help");
       System.out.println("\t\t\t\t\t\t\t   5) Quit");
       System.out.print("\t\t\t\t\t\t\t   Selection Choice: ");
+      //Check user input
       if(reader.hasNextInt()){
           choice = reader.nextInt();
       }else{
@@ -37,27 +44,27 @@ public class Menu{
           mainMenu();
       }
 
-
-
+      //Access sub-menus
       if(choice == 1){
-         if(g == null){
+         if(g == null)
+         {
+           //Check that the gold has been set on the board
            System.out.println("\t\t\t\t\t\t\t   You must set gold on the map!");
            mainMenu();
-         }else{
-          //System.out.println("Wumpus " + w.getX() + " " + w.getY());
-          //System.out.println("Sup " + sup.getX() + " " + sup.getY());
-          //System.out.println("Gold location " + g.getX() + " " + g.getY());
-          //System.out.println("Get Pit " + p[0].getX() + " " + p[0].getY());
-          //System.out.println("Get Pass " + noPass[0].getX() + " " + noPass[0].getY());
-
+         }
+         else
+         {
+           //Start the Game
            WumplusWorld ww = new WumplusWorld();
            Agent agent = new Agent(ww);
            ww.setAgent(agent);
            ww.startGame(w, sup, noPass, p, g);
          }
       }else if(choice == 2){
+          //Access sub-menu to choose object locations
           setPieces();
       }else if(choice == 3){
+          //print game rules
           System.out.println("\n\n\t\t\t\t\t\t\t   -------------------------------- RULES ---------------------------------");
           System.out.println("\n\t\t\t\t\t\t\t     1. Stay away from the Wumpus.");
           System.out.println("\n\t\t\t\t\t\t\t     2. Don't fall in a pit.");
@@ -72,6 +79,7 @@ public class Menu{
           reader.next();
           mainMenu();
       }else if(choice == 4){
+          //print game help
           System.out.println("\n\n\t\t\t\t\t\t\t   --------------------------------- HELP ---------------------------------");
           System.out.println("\n\t\t\t\t\t\t\t   - Select option '2' from the main menu to place obstacles on the board. ");
           System.out.println("\n\t\t\t\t\t\t\t   - The agent will play the game for you, so just sit back and enjoy the ");
@@ -80,27 +88,32 @@ public class Menu{
           reader.next();
           mainMenu();
       }else if(choice == 5){
+          //print game exit screen
           System.out.println("\n\n\t\t\t\t\t\t\t   ---------------------------------- FIN ---------------------------------");
           System.out.println("\n\t\t\t\t\t\t\t    Caves are not for the light-hearted...perhaps our next adventurer will ");
           System.out.println("\n\t\t\t\t\t\t\t                          conquer the WUMPLUS WORLD.                       ");
           System.out.println("\n\n\t\t\t\t\t\t\t\t\t       ~ Press ANY KEY + ENTER to quit. ~");
           reader.next();
-          title.printClose();
+          title.printClose(0);
           System.exit(0);
       }else{
+          //if this point reached, input was invalid - reprompt
           System.out.println("\t\t\t\t\t\t\t   Invalid selection!");
           mainMenu();
       }
   }
 
+  //Function to set locations of all game objects
   public static void setPieces(){
     int choice = 0;
     int x = 0, y = 0, pitCount = 0, noPassCount = 0;
 
+    //Print new page and title info
     System.out.print("\033[H\033[2J");
     WumplusTitle title = new WumplusTitle();
     title.print();
 
+    //Show sub-menu options
     System.out.println("\n\n\t\t\t\t\t\t\t   Please select from one of the following options.");
     System.out.println("\t\t\t\t\t\t\t   1) Place Wumpus");
     System.out.println("\t\t\t\t\t\t\t   2) Place Supmuw");
@@ -109,11 +122,13 @@ public class Menu{
     System.out.println("\t\t\t\t\t\t\t   5) Place No Trespassing Zones");
     System.out.println("\t\t\t\t\t\t\t   6) Return to Main Menu");
     System.out.print("\n\t\t\t\t\t\t\t   Selection Choice: ");
+    //Check user input
     try{choice = reader.nextInt();}catch(Exception e){
       System.out.println("\t\t\t\t\t\t\t   Invalid Selection!");
       setPieces();
     }
 
+    //Add user specified coordinates to appropriate objects, validating all input
     if(choice == 1){
         System.out.print("\n\n\t\t\t\t\t\t\t   Please choose an x coordinate value between 0 and 9 for the Wumpus: ");
         x = reader.nextInt();
@@ -277,11 +292,14 @@ public class Menu{
           }
         }
     }else if(choice == 6){
+        //Return to main menu
         mainMenu();
     }else{
+        //If this statement is reached, input must have been invalid - reprompt.
         System.out.println("\t\t\t\t\t\t\t   Invalid selection!");
         setPieces();
     }
+    //Call recursively to set the remaining game objects
     setPieces();
   }
 

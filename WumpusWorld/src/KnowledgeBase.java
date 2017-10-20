@@ -1,101 +1,60 @@
-/*
-A lower hazard count represents a safe square to travel
-to whereas a high hazard count represents a dangerous
-square.
-*/
+/***********************************************************************
+KnowledgeBase stores information about each square that the agent knows.
+As the agent learns more about the board, its knowledgeBase expands
+************************************************************************/
 public class KnowledgeBase
 {
-  private int loot;
+  //Hazard counter
   private int hazards;
+
+  //Shows whether or not object is in particular node
   private boolean visited;
-  //private boolean wumpus;
   private boolean stench;
-  //private boolean supmuw;
   private boolean moo;
-  //private boolean pit;
   private boolean breeze;
-  //private boolean gold;
-  //private boolean glitter;
   private boolean locked;
-  //********************
-  //private int wumpusHazard;
-  //private int pitHazard;
-  //********************
 
   public KnowledgeBase()
   {
-    loot = 0;
     hazards = 0;
     visited = false;
-    //wumpus = false;
     stench = false;
-    //supmuw = false;
     moo = false;
-    //pit = false;
     breeze = false;
-    //gold = false;
-    //glitter = false;
     locked = false;
-
-    //********************
-    //wumpusHazard = 0;
-    //pitHazard = 0;
   }
 
+  //Increase and decrease hazard counter
   public void incHazards() {if(!locked) {hazards++;}}
   public void decHazards() {if(!locked) {hazards--;}}
 
-  //********************
-  //public void incWumpusHazards() {if(!locked) {hazards++;}}
-  //public void decWumpusHazards() {if(!locked) {hazards--;}}
-
-  //public void incPitHazards() {if(!locked) {hazards++;}}
-  //public void decPitHazards() {if(!locked) {hazards--;}}
-
-  //********************
-
-  public void incLoot() {loot++;}
-  public void decLoot() {loot--;}
-
+  //mark knowledgeBase node as visited
   public void visit() {visited=true;}
+  //Check if node has been visited
   public boolean visited() {return visited;}
 
+  //return hazard counter
   public int getHazards() {return hazards;}
-  public int getLoot() {return loot;}
 
-  //********************
-  //public int getWumpusHazards() {return wumpusHazard;}
-  //public int getPitHazards() {return pitHazard;}
-  //********************
-
-  //public void setWumpus(boolean b) {wumpus=b;}
+  //Setter functions
   public void setStench(boolean b) {stench=b;}
-  //public void setSupmuw(boolean b) {supmuw=b;}
   public void setMoo(boolean b) {moo=b;}
-  //public void setPit(boolean b) {pit=b;}
   public void setBreeze(boolean b) {breeze=b;}
-  //public void setGold(boolean b) {gold=b;}
-  //public void setGlitter(boolean b) {glitter=b;}
 
-  //public boolean getWumpus() {return wumpus;}
+  //Getter functions
   public boolean getStench() {return stench;}
-  //public boolean getSupmuw() {return supmuw;}
   public boolean getMoo() {return moo;}
-  //public boolean getPit() {return pit;}
   public boolean getBreeze() {return breeze;}
-//  public boolean getGold() {return gold;}
-//  public boolean getGlitter() {return glitter;}
 
+  //Set hazard counter to zero (visited) and lock counter
   public void resetHazards()
   {
     hazards = 0;
     locked = true;
   }
 
-  public void wumpusDied()
-  {
-    hazards = 0;
-  }
+  //Refactor hazard counter upon death of the Wumpus
+  public void wumpusDied() {hazards = 0;}
 
 
 }

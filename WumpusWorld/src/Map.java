@@ -38,7 +38,7 @@ public class Map
         if(y != 9) {map[x][y].setEastNeighbor(map[x][y+1]);}else{map[x][y].setEastWall();}
 
         //Check to see if current node should hold a specified parameter
-        if((x != 0 && y != 0) && (x == agent.getX() && y == agent.getY()) && hasGold){
+        if((x != 0 || y != 0) && (x == agent.getX() && y == agent.getY()) && hasGold){
           map[x][y].setHasGold(); map[x][y].setAgent();
         }else if((x == 0 && y == 0) && (x == agent.getX() && y == agent.getY()) && hasGold && goingToEscape){
           map[x][y].setHasGold();
@@ -120,7 +120,6 @@ public class Map
       }
     }
 
-    System.out.println(answer);
     return answer;
 
   }
@@ -130,7 +129,7 @@ public class Map
   //Function to display map will all elements visible
   public void print(int score)
   {
-    System.out.println("\t\t                                          __    __                       _             __    __           _     _ ");
+    System.out.println("\n\t\t                                          __    __                       _             __    __           _     _ ");
     System.out.println("\t\t                                         / / /\\ \\ \\_   _ _ __ ___  _ __ | |_   _ ___  / / /\\ \\ \\___  _ __| | __| |");
     System.out.println("\t\t                                         \\ \\/  \\/ / | | | '_ ` _ \\| '_ \\| | | | / __| \\ \\/  \\/ / _ \\| '__| |/ _` |");
     System.out.println("\t\t                                          \\  /\\  /| |_| | | | | | | |_) | | |_| \\__ \\  \\  /\\  / (_) | |  | | (_| |");

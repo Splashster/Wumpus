@@ -1,3 +1,7 @@
+/***********************************************************************
+MapNode stores all information about a particular location on the board
+such as objects in the node and neighbors of the node
+************************************************************************/
 public class MapNode
 {
   //Location of MapNode
@@ -29,6 +33,7 @@ public class MapNode
   private boolean actAsWumpus;
   private boolean noTrespassing;
 
+  //Used to print ASCII text on game board
   private String attributes[];
 
   public MapNode(coordinate c)
@@ -55,6 +60,7 @@ public class MapNode
     escaping = false;
     actAsWumpus = false;
 
+    //Initialize attributes to a fixed height, fixed width square of blank space
     attributes = new String[4];
 
     for(int i=0; i<4; i++)
@@ -435,26 +441,13 @@ public class MapNode
   public boolean getEscaping(){return escaping;}
   public boolean getNoTrespassing() {return noTrespassing;}
 
-  public String getAttr1()
-  {
-    return attributes[0];
-  }
+  //Functions to obtain parts of attribute array for printing on the game board
+  public String getAttr1() {return attributes[0];}
+  public String getAttr2() {return attributes[1];}
+  public String getAttr3() {return attributes[2];}
+  public String getAttr4() {return attributes[3];}
 
-  public String getAttr2()
-  {
-    return attributes[1];
-  }
-
-  public String getAttr3()
-  {
-    return attributes[2];
-  }
-
-  public String getAttr4()
-  {
-    return attributes[3];
-  }
-
+  //Remove identification attributes upon death of the Wumpus
   public void removeStench()
   {
     stench = false;
