@@ -243,8 +243,9 @@ public class WumplusWorld
     }
 
     //Print closing title screen and quit game
+    int finalScore = se.getGameScore();
     WumplusTitle wumpTitle = new WumplusTitle();
-    wumpTitle.printClose();
+    wumpTitle.printClose(finalScore);
     System.exit(0);
   }
 }

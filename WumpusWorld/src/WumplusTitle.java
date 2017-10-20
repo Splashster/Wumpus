@@ -13,7 +13,7 @@ public class WumplusTitle{
     System.out.println("\n\t\t                                                                   Welcome to the Wumplus World Game!");
   }
 
-  public void printClose(){
+  public void printClose(int score){
     //print game over screen
     System.out.print("\033[H\033[2J");
     System.out.println("\t\t                                              __    __                       _             __    __           _     _ ");
@@ -31,6 +31,7 @@ public class WumplusTitle{
     System.out.println("\t\t                                       |  | .-, \\ '-'|_.' ||  |'.'|  |(|  '--.     ( _) | |  | \\   /   / (|  '--. |  |_.' |    ");
     System.out.println("\t\t                                       |  | '.(_/(|  .-.  ||  |   |  | |  .--'      \\|  |)|  |_ \\     /_) |  .--' |  .   .'    ");
     System.out.println("\t\t                                       |  '-'  |  |  | |  ||  |   |  | |  `---.      '  '-'  '\\-'\\   /    |  `---.|  |\\  \\     ");
-    System.out.println("\t\t                                        `-----'   `--' `--'`--'   `--' `------'       `-----'     `-'     `------'`--' '--'    \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    System.out.println("\t\t                                        `-----'   `--' `--'`--'   `--' `------'       `-----'     `-'     `------'`--' '--'    \n\n\n\n");
+    System.out.println("\t\t                                                                         High Score: " + score + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
   }
 }

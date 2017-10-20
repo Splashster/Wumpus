@@ -94,7 +94,7 @@ public class Menu{
           System.out.println("\n\t\t\t\t\t\t\t                          conquer the WUMPLUS WORLD.                       ");
           System.out.println("\n\n\t\t\t\t\t\t\t\t\t       ~ Press ANY KEY + ENTER to quit. ~");
           reader.next();
-          title.printClose();
+          title.printClose(0);
           System.exit(0);
       }else{
           //if this point reached, input was invalid - reprompt
