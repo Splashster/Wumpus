@@ -41,5 +41,5 @@ public class ScoringEngine
 
   //TODO We may need to just have a isWumpusDead function or set the wumpus attributes
   //to false
-  public void removeWumpus() {scoreTable[4][1] = 0;}
+  public void removeWumpus() {scoreTable[2][1] = 0;}
 }

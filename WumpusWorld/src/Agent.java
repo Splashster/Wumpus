@@ -248,20 +248,6 @@ public class Agent
 
 <<<<<<< HEAD
 =======
-
-    /*BACKUP
-    public coordinate getAgentNextMove()
-    {
-      kb[current_position.getX()][current_position.getY()].resetHazards();
-
-      //Add incentive for exploring new regions
-      for(coordinate c: directions)
-      {
-        int x = c.getX();
-        int y = c.getY();
-
->>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
-=======
 >>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
         if(!kb[x][y].visited())
         {
@@ -314,10 +300,13 @@ public class Agent
           kb[x][y].decHazards();
         }
       }
+=======
+      //see if its the Wumpus's time to go.
+      huntWumpus();
+>>>>>>> dfc25fe33bfac86abfcfdf2c8681dbc629c1fca8
 
       return bestMove();
     }
-    */
 
     public coordinate bestMove()
     {
@@ -400,11 +389,37 @@ public class Agent
       int x = c.getX();
       int y = c.getY();
 
-      int hazards = kb[x][y].getHazards() + kb[x][y].getWumpusHazards() + kb[x][y].getPitHazards();
+      int hazards = kb[x][y].getHazards();// + kb[x][y].getWumpusHazards() + kb[x][y].getPitHazards();
 
       System.out.println("Position " + x + ": " + hazards + " - " + x + "," + y);
 
       return hazards;
+    }
+
+    public void huntWumpus()
+    {
+      if(hasArrow)
+      {
+        for(coordinate c: directions)
+        {
+          int x = c.getX();
+          int y = c.getY();
+
+          if(kb[x][y].getHazards() >= 5 && stench)
+          {
+            theWorld.killWumpus(c);
+            hasArrow = false;
+
+            for(coordinate a: directions)
+            {
+              int i = a.getX();
+              int j = a.getY();
+
+              kb[i][j].wumpusDied();
+            }
+          }
+        }
+      }
     }
 
 }
