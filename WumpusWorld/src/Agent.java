@@ -115,14 +115,20 @@ public class Agent
         left = new coordinate(x,y-1);
         down = new coordinate(x-1,y);
 <<<<<<< HEAD
+<<<<<<< HEAD
         if(!nWall){choices.add(up);}
         if(!wWall){choices.add(left);}
         if(!sWall){choices.add(down);}
 =======
+=======
+>>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
         choices.add(down);
         choices.add(up);
         choices.add(left);
         //up, left, down
+<<<<<<< HEAD
+>>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
+=======
 >>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
       }else{
         up = new coordinate(x+1,y);
@@ -240,6 +246,7 @@ public class Agent
 
       return bestMove();
     }
+<<<<<<< HEAD
 
     /*BACKUP
     public coordinate getAgentNextMove()
@@ -252,6 +259,20 @@ public class Agent
         int x = c.getX();
         int y = c.getY();
 
+=======
+
+    /*BACKUP
+    public coordinate getAgentNextMove()
+    {
+      kb[current_position.getX()][current_position.getY()].resetHazards();
+
+      //Add incentive for exploring new regions
+      for(coordinate c: directions)
+      {
+        int x = c.getX();
+        int y = c.getY();
+
+>>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
         if(!kb[x][y].visited())
         {
           kb[x][y].decHazards();

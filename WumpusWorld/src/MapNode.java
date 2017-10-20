@@ -466,8 +466,11 @@ public class MapNode
   {
     moo=true;
 <<<<<<< HEAD
+<<<<<<< HEAD
     if(agent)
 =======
+=======
+>>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
 
     if(agent && hasGold)
     {
@@ -477,6 +480,9 @@ public class MapNode
       attributes[3] = " / \\    ";
     }
     else if(agent)
+<<<<<<< HEAD
+>>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
+=======
 >>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
     {
       attributes[0] = "+====>  ";
@@ -610,6 +616,7 @@ public class MapNode
     attributes[2] = "        ";
     attributes[3] = "        ";
   }*/
+<<<<<<< HEAD
 
   public void removeSupmuw()
   {
@@ -620,6 +627,8 @@ public class MapNode
     attributes[2] = "        ";
     attributes[3] = "        ";
   }
+=======
+>>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
 
   public void removeStench()
   {
