@@ -202,6 +202,9 @@ public class WumplusWorld
         gotTheGold = true;
         agent.setHasGold();
         hasGold = true;
+        System.out.println("Agent says he has gold " + agent.hasGold());
+        System.out.println(hasGold);
+        System.out.println("Im in");
       }
       return answer;
   }
@@ -239,6 +242,7 @@ public class WumplusWorld
 
     //Check to see if the agent left with the gold.
     //If so add 1000 points to agent score.
+    System.out.println("Has gold: " + agent.hasGold());
     if(agent.hasGold()){
       se.scoreEvent(5);
     }

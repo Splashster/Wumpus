@@ -64,7 +64,7 @@ public class Agent
       }else{
         current_position = getAgentNextMove();
         stuckCounter = getStuckCount();
-        if((current_position.getX() == 0 && current_position.getY() == 0 && !gotGold && moveCount >= 150) || (stuckCounter >= 5 && moveCount >= 150)){
+        if((current_position.getX() == 0 && current_position.getY() == 0 && !gotGold && moveCount >= 150) || (stuckCounter >= 5 && moveCount >= 50)){
           if(newMoves.isEmpty()){
             noMoreSafeMoves();
             if(!nothingSafe){
@@ -89,7 +89,6 @@ public class Agent
 
     }
   }
-
 
   //Returns the current position of the agent
   public coordinate getAgentPosition(){
