@@ -116,10 +116,13 @@ public class Agent
         down = new coordinate(x-1,y);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         if(!nWall){choices.add(up);}
         if(!wWall){choices.add(left);}
         if(!sWall){choices.add(down);}
 =======
+=======
+>>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
 =======
 >>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
         choices.add(down);
@@ -127,6 +130,9 @@ public class Agent
         choices.add(left);
         //up, left, down
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
+=======
 >>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
 =======
 >>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
@@ -247,6 +253,9 @@ public class Agent
       return bestMove();
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
 
     /*BACKUP
     public coordinate getAgentNextMove()
@@ -259,6 +268,7 @@ public class Agent
         int x = c.getX();
         int y = c.getY();
 
+<<<<<<< HEAD
 =======
 
     /*BACKUP
@@ -272,6 +282,8 @@ public class Agent
         int x = c.getX();
         int y = c.getY();
 
+>>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
+=======
 >>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
         if(!kb[x][y].visited())
         {
