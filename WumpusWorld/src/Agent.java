@@ -311,10 +311,14 @@ public class Agent
           kb[x][y].decHazards();
         }
       }
+      //see if its the Wumpus's time to go.
+      huntWumpus();
 
       return bestMove();
+    }
 
-}
+
+
 
     public coordinate bestMove()
     {
