@@ -59,6 +59,7 @@ public class Agent
       setPerceptions(current_position.getX(),current_position.getY());
       directions = getChoices(current_position.getX(),current_position.getY());
       if(directions.isEmpty() && newMoves.isEmpty()){
+        if((current_position.getX() != 9 && current_position.getY() != 9) && (current_position.getX() != 9 && current_position.getY() != 0) && (current_position.getX() != 0 && current_position.getY() != 9) && (current_position.getX() != 0 && current_position.getY() != 0))
         nothingSafe = true;
         escape();
       }else{

@@ -75,7 +75,7 @@ How to Compile & Run the Program................................................
          display properly, THE WINDOW MUST BE IN FULL SCREEN.
 
       4. Enter the following command to execute the jar file:
-                'java -jar WumpusWorld.jar'
+                'java -jar WumpusDriver.jar'
 
       *  Refer to 'How to Use the Program' for information on how to interact
          with the game.
