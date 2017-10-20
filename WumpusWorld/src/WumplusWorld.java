@@ -18,7 +18,7 @@ public class WumplusWorld
   private coordinate[] noPass;
   private coordinate g;
   private boolean hasGold;
-  private boolean inPit, ateByWumpus, ateBySupmuw, fedBySupmuw, savedBySupmuw, gotTheGold;
+  private boolean inPit, ateByWumpus, ateBySupmuw, fedBySupmuw, savedBySupmuw, gotTheGold, wumpus_alive, displayWumpusDeath;
   Random random = new Random();
 
   public WumplusWorld()
@@ -42,6 +42,9 @@ public class WumplusWorld
     noPass = noPassing;
     //System.out.println("pass done");
     g = gold;
+    if(w != null) {wumpus_alive=true;}
+    else {wumpus_alive=false;}
+    displayWumpusDeath = true;
     //System.out.println("gold done");
     //System.out.println("Print Inside genreate");
     //System.out.println("Wumpus " + wum.getX() + " " + wum.getY());
@@ -50,7 +53,7 @@ public class WumplusWorld
     //System.out.println("Get Pit " + pit[0].getX() + " " + pit[0].getY());
     //System.out.println("Get Pass " + noPass[0].getX() + " " + noPass[0].getY());
     //Create map with given attributes
-    m = new Map(w, sup, g, noPass, p, ag, hasGold);
+    m = new Map(w, sup, g, noPass, p, ag, hasGold, wumpus_alive);
     theWorld = m.getMap();
     //Print map layout
     m.print(0);
@@ -168,7 +171,7 @@ public class WumplusWorld
     fedBySupmuw = false;
     gotTheGold = false;
     ag = agent.getAgentPosition();
-    m = new Map(w, sup, g, noPass, p, ag, hasGold);
+    m = new Map(w, sup, g, noPass, p, ag, hasGold, wumpus_alive);
     theWorld = m.getMap();
     isInPit(x,y);
     wumpusAteHim(x,y);
@@ -177,6 +180,11 @@ public class WumplusWorld
     score = se.scoreEvent(1);
     m.print(score);
     System.out.print("\n\t\t\t   Tarzan's Current Position: " + ag.getX() + "," + ag.getY() + "\t\t\t");
+    if(!wumpus_alive && displayWumpusDeath)
+    {
+      System.out.print("DING DONG THE WUMPUS IS DEAD!!!!");
+      displayWumpusDeath = false;
+    }
     if(inPit){System.out.print("TARZAN FELL INTO THE PIT!!!!!!! GOOD THING HE CAN CLIMB OUT!");}
     if(ateByWumpus){System.out.print("THE WUMPUS ATE TARZAN!!!!!!! GOOD THING HE HAS EXTRA LIVES!");}
     if(ateBySupmuw){System.out.print("THE SUPMUW BETRAYED TARZAN AND ATE HIM!!!!!!! GET BACK OUT THERE TARZAN!");}
@@ -287,9 +295,14 @@ public class WumplusWorld
       return answer;
   }
 
-  public void killWumpus()
+  public void killWumpus(coordinate shoot)
   {
-    se.removeWumpus();
+    se.scoreEvent(2);
+    if(shoot.getX() == w.getX() && shoot.getY() == w.getY())
+    {
+      wumpus_alive = false;
+      se.removeWumpus();
+    }
   }
 
   public void setAgent(Agent ag){

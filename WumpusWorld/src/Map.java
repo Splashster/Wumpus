@@ -4,7 +4,7 @@ public class Map
 {
   private MapNode[][] map;
 
-  public Map(coordinate wumpus, coordinate supmuw, coordinate gold, coordinate[] noPassZones, coordinate[] pits, coordinate agent, boolean hasGold)
+  public Map(coordinate wumpus, coordinate supmuw, coordinate gold, coordinate[] noPassZones, coordinate[] pits, coordinate agent, boolean hasGold, boolean wumpus_alive)
   {
     map = new MapNode[10][10];
     coordinate c;
@@ -33,7 +33,8 @@ public class Map
         //Check to see if current node should hold a specified parameter
         if((x == agent.getX() && y == agent.getY()) && hasGold){map[x][y].setHasGold(); map[x][y].setAgent();}
         if(x == agent.getX() && y == agent.getY()){map[x][y].setAgent();}
-        if(wumpus != null && (x == wumpus.getX() && y == wumpus.getY())) {map[x][y].setWumpus();}
+        if(wumpus != null && !wumpus_alive) {map[wumpus.getX()][wumpus.getY()].setDeadWumpus();}
+        else if(wumpus != null && (x == wumpus.getX() && y == wumpus.getY())) {map[x][y].setWumpus();}
         if(supmuw != null && (x == supmuw.getX() && y == supmuw.getY())) {map[x][y].setSupmuw();}
         if(x == gold.getX() && y == gold.getY()) {map[x][y].setGold();}
         if(pits != null){for(coordinate p : pits) {if(x == p.getX() && y == p.getY()) {map[x][y].setPit();}}}

@@ -224,6 +224,9 @@ public class Agent
         }
       }
 
+      //see if its the Wumpus's time to go.
+      huntWumpus();
+
       return bestMove();
     }
 
@@ -375,11 +378,37 @@ public class Agent
       int x = c.getX();
       int y = c.getY();
 
-      int hazards = kb[x][y].getHazards() + kb[x][y].getWumpusHazards() + kb[x][y].getPitHazards();
+      int hazards = kb[x][y].getHazards();// + kb[x][y].getWumpusHazards() + kb[x][y].getPitHazards();
 
       System.out.println("Position " + x + ": " + hazards + " - " + x + "," + y);
 
       return hazards;
+    }
+
+    public void huntWumpus()
+    {
+      if(hasArrow)
+      {
+        for(coordinate c: directions)
+        {
+          int x = c.getX();
+          int y = c.getY();
+
+          if(kb[x][y].getHazards() >= 5 && stench)
+          {
+            theWorld.killWumpus(c);
+            hasArrow = false;
+
+            for(coordinate a: directions)
+            {
+              int i = a.getX();
+              int j = a.getY();
+
+              kb[i][j].wumpusDied();
+            }
+          }
+        }
+      }
     }
 
 }

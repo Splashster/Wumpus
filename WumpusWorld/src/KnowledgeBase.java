@@ -18,8 +18,8 @@ public class KnowledgeBase
   //private boolean glitter;
   private boolean locked;
   //********************
-  private int wumpusHazard;
-  private int pitHazard;
+  //private int wumpusHazard;
+  //private int pitHazard;
   //********************
 
   public KnowledgeBase()
@@ -38,19 +38,19 @@ public class KnowledgeBase
     locked = false;
 
     //********************
-    wumpusHazard = 0;
-    pitHazard = 0;
+    //wumpusHazard = 0;
+    //pitHazard = 0;
   }
 
   public void incHazards() {if(!locked) {hazards++;}}
   public void decHazards() {if(!locked) {hazards--;}}
 
   //********************
-  public void incWumpusHazards() {if(!locked) {hazards++;}}
-  public void decWumpusHazards() {if(!locked) {hazards--;}}
+  //public void incWumpusHazards() {if(!locked) {hazards++;}}
+  //public void decWumpusHazards() {if(!locked) {hazards--;}}
 
-  public void incPitHazards() {if(!locked) {hazards++;}}
-  public void decPitHazards() {if(!locked) {hazards--;}}
+  //public void incPitHazards() {if(!locked) {hazards++;}}
+  //public void decPitHazards() {if(!locked) {hazards--;}}
 
   //********************
 
@@ -64,8 +64,8 @@ public class KnowledgeBase
   public int getLoot() {return loot;}
 
   //********************
-  public int getWumpusHazards() {return wumpusHazard;}
-  public int getPitHazards() {return pitHazard;}
+  //public int getWumpusHazards() {return wumpusHazard;}
+  //public int getPitHazards() {return pitHazard;}
   //********************
 
   //public void setWumpus(boolean b) {wumpus=b;}
@@ -90,6 +90,11 @@ public class KnowledgeBase
   {
     hazards = 0;
     locked = true;
+  }
+
+  public void wumpusDied()
+  {
+    hazards = 0;
   }
 
 
