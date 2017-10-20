@@ -212,8 +212,8 @@ public int getStuckCount(){
       }else if(x == 9 && y == 0){
         right = new coordinate(x,y+1);
         down = new coordinate(x-1,y);
-        if(!eWall){choices.add(right);}
         if(!sWall){choices.add(down);}
+        if(!eWall){choices.add(right);}
       }else if(y == 9 && x == 0){
         up = new coordinate(x+1,y);
         left = new coordinate(x,y-1);
