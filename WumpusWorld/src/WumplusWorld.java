@@ -178,12 +178,13 @@ public class WumplusWorld
     panForGold(x,y);
     score = se.scoreEvent(1);
     m.print(score);
-    if(inPit){System.out.println("TARZAN FELL INTO THE PIT!!!!!!! GOOD THING HE CAN CLIMB OUT!");}
-    if(ateByWumpus){System.out.println("THE WUMPUS ATE TARZAN!!!!!!! GOOD THING HE HAS EXTRA LIVES!");}
-    if(ateBySupmuw){System.out.println("THE SUPMUW BETRAYED TARZAN AND ATE HIM!!!!!!! GET BACK OUT THERE TARZAN!");}
-    if(savedBySupmuw){System.out.println("THE SUPMUW SAVED TARZAN FROM A FATAL FALL INTO THE PIT OF DEATH!!!!!");}
-    if(fedBySupmuw){System.out.println("THE SUPMUW FED TARZAN CANDIES!!!!!!");}
-    if(gotTheGold){System.out.println("TARZAN GOT THE GOLD!!! TIME TO GET OUT OF HERE!!!!!!");}
+    System.out.print("\n\t\t\t   Tarzan's Current Position: " + ag.getX() + "," + ag.getY() + "\t\t\t");
+    if(inPit){System.out.print("TARZAN FELL INTO THE PIT!!!!!!! GOOD THING HE CAN CLIMB OUT!");}
+    if(ateByWumpus){System.out.print("THE WUMPUS ATE TARZAN!!!!!!! GOOD THING HE HAS EXTRA LIVES!");}
+    if(ateBySupmuw){System.out.print("THE SUPMUW BETRAYED TARZAN AND ATE HIM!!!!!!! GET BACK OUT THERE TARZAN!");}
+    if(savedBySupmuw){System.out.print("THE SUPMUW SAVED TARZAN FROM A FATAL FALL INTO THE PIT OF DEATH!!!!!");}
+    if(fedBySupmuw){System.out.print("THE SUPMUW FED TARZAN CANDIES!!!!!!");}
+    if(gotTheGold){System.out.print("TARZAN GOT THE GOLD!!! TIME TO GET OUT OF HERE!!!!!!");}
   }
 
   /*public coordinate getAgentPosition(){
