@@ -10,7 +10,7 @@
    \ \/  \/ / | | | '_ ` _ \| '_ \| | | | / __| \ \/  \/ / _ \| '__| |/ _` |
     \  /\  /| |_| | | | | | | |_) | | |_| \__ \  \  /\  / (_) | |  | | (_| |
      \/  \/  \__,_|_| |_| |_| .__/|_|\__,_|___/   \/  \/ \___/|_|  |_|\__,_|
-  		                      |_|
+                                |_|
 
 Index...........................................................................
 
@@ -23,7 +23,7 @@ How to Compile & Run the Program................................................
 
     PREREQUISITES:
 
-        In order for this program to run properly, the host machine must have
+        For this program to run properly, the host machine must have
         JDK version 9 installed. Please install the latest version of the Java
         Development Kit before proceeding.
 
@@ -35,47 +35,28 @@ How to Compile & Run the Program................................................
              WumpusDriver.jar
              *.java
 
-   This program can be run in two different ways: either by running the included
-   compile script, or by double-clicking on the included jar file. Details for
-   both methods are listed below. Please note that due to the unreliability of
-   displaying UNICODE I/O on Windows command prompt, it is recommended to run
-   this program on a UNIX terminal for the best viewing experience.
+   This program can be run by running the included compile script. Please note
+   that due to the unreliability of displaying UNICODE I/O on Windows command
+   prompt, it is recommended to run this program on a UNIX terminal for the
+   best viewing experience.
 
 
-   METHOD 1 - THE SCRIPT
+   COMPILING METHOD - THE SCRIPT
 
       1. Open a bash terminal on your operating system of choice. On MacOS and
          Linux, this can be done natively in the terminal. On Windows, a program
          such as 'git bash' is needed to run the bash script. Alternatively,
          all commands can be run on shell.csc.tntech.edu.
 
-      2. Maximize the terminal window. In order for the game to display
-         properly, THE WINDOW MUST BE IN FULL SCREEN.
+      2. Navigate to the 'WumpusWorld/src' directory and maximize the terminal
+         window. For the game to display properly, THE WINDOW MUST BE IN FULL
+         SCREEN.
 
       3. Enter the following command to run the script without the '':
                 './compile.sh'
          This script will clean all previous class files from the project,
          recompile all java files, and start the program. After running the
          script you should see the main menu of the game.
-
-      *  Refer to 'How to Use the Program' for information on how to interact
-         with the game.
-
-
-   METHOD 2 - THE JAR FILE
-
-      1. Open a new CMD or Terminal window, once again it is recommended to use
-         a UNIX terminal in order for the Unicode characters to display properly
-         although this will have no effect on gameplay.
-
-      2. Navigate to the 'WumpusWorld/src' directory using your terminal of
-         choice.
-
-      3. Make sure to maximize the terminal window. In order for the game to
-         display properly, THE WINDOW MUST BE IN FULL SCREEN.
-
-      4. Enter the following command to execute the jar file:
-                'java -jar WumplusWorld.jar'
 
       *  Refer to 'How to Use the Program' for information on how to interact
          with the game.
@@ -112,7 +93,7 @@ How to Use the Program..........................................................
           SUPMUW: The Supmuw is a more docile creature that loves to share
                   snacks. He will also help you out if you run into a pit and
                   can be found by his gentle 'moo'ing. But don't be too
-                  trusting because if the Supmuw can smell the Wumpus it will
+                  trusting because if the Supmuw can smell the Wumpus, it will
                   start to behave like the Wumpus, adding just another hazard
                   to the deadly cave.
 

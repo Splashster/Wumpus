@@ -42,8 +42,10 @@ public class Map
           map[x][y].setHasGold(); map[x][y].setAgent();
         }else if((x == 0 && y == 0) && (x == agent.getX() && y == agent.getY()) && hasGold && goingToEscape){
           map[x][y].setHasGold();
+          map[x][y].setEscaping();
           map[x][y].setEscaped();
         }else if((x == 0 && y == 0) && (x == agent.getX() && y == agent.getY()) && !hasGold && nothingSafe && goingToEscape){
+          map[x][y].setEscaping();
           map[x][y].setEscaped();
         }else if(x == agent.getX() && y == agent.getY()){
           map[x][y].setAgent();

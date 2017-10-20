@@ -59,12 +59,13 @@ public class Agent
       setPerceptions(current_position.getX(),current_position.getY());
       directions = getChoices(current_position.getX(),current_position.getY());
       if(directions.isEmpty() && newMoves.isEmpty()){
+        if((current_position.getX() != 9 && current_position.getY() != 9) && (current_position.getX() != 9 && current_position.getY() != 0) && (current_position.getX() != 0 && current_position.getY() != 9) && (current_position.getX() != 0 && current_position.getY() != 0))
         nothingSafe = true;
         escape();
       }else{
         current_position = getAgentNextMove();
         stuckCounter = getStuckCount();
-        if((current_position.getX() == 0 && current_position.getY() == 0 && !gotGold && moveCount >= 150) || (stuckCounter >= 5 && moveCount >= 150)){
+        if((current_position.getX() == 0 && current_position.getY() == 0 && !gotGold && moveCount >= 150) || (stuckCounter >= 5 && moveCount >= 50)){
           if(newMoves.isEmpty()){
             noMoreSafeMoves();
             if(!nothingSafe){
@@ -89,7 +90,6 @@ public class Agent
 
     }
   }
-
 
   //Returns the current position of the agent
   public coordinate getAgentPosition(){
@@ -213,8 +213,8 @@ public int getStuckCount(){
       }else if(x == 9 && y == 0){
         right = new coordinate(x,y+1);
         down = new coordinate(x-1,y);
-        if(!eWall){choices.add(right);}
         if(!sWall){choices.add(down);}
+        if(!eWall){choices.add(right);}
       }else if(y == 9 && x == 0){
         up = new coordinate(x+1,y);
         left = new coordinate(x,y-1);
