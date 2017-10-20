@@ -55,8 +55,15 @@ public class Agent
 
   public boolean hasGold(){return gotGold;}
 
-  //TODO Need set finished when agent gets to escape
   public boolean hasEscaped(){return escaped;}
+
+  //TODO Need set finished when agent gets to escape
+    /*public void escape(){
+    escaped = true;
+    for(int i = 0; i < kb.size(); i++){
+      if(kb)
+    }
+  }*/
 
   public ArrayList<coordinate> getChoices(int x, int y){
       coordinate left, right, up, down, move, previousMove;
@@ -65,60 +72,60 @@ public class Agent
       if(x == 0 && y == 0){
         up = new coordinate(1,0);
         right = new coordinate (0,1);
-        choices.add(up);
-        choices.add(right);
+        if(!nWall){choices.add(up);}
+        if(!eWall){choices.add(right);}
       }else if(x == 0 && y != 9){
         up = new coordinate(x+1,y);
         right = new coordinate(0,y+1);
         left = new coordinate(x,y-1);
-        choices.add(up);
-        choices.add(right);
-        choices.add(left);
+        if(!nWall){choices.add(up);}
+        if(!eWall){choices.add(right);}
+        if(!wWall){choices.add(left);}
       }else if(y == 0 && x != 9){
         up = new coordinate(x+1,y);
         right = new coordinate(x,y+1);
         down = new coordinate(x-1,y);
-        choices.add(up);
-        choices.add(right);
-        choices.add(down);
+        if(!nWall){choices.add(up);}
+        if(!eWall){choices.add(right);}
+        if(!sWall){choices.add(down);}
       }else if(x == 9 && y == 9){
         left = new coordinate(x,y-1);
         down = new coordinate(x-1,y);
-        choices.add(left);
-        choices.add(down);
+        if(!wWall){choices.add(left);}
+        if(!sWall){choices.add(down);}
       }else if(x == 9 && y == 0){
         right = new coordinate(x,y+1);
         down = new coordinate(x-1,y);
-        choices.add(right);
-        choices.add(down);
+        if(!eWall){choices.add(right);}
+        if(!sWall){choices.add(down);}
       }else if(y == 9 && x == 0){
         up = new coordinate(x+1,y);
         left = new coordinate(x,y-1);
-        choices.add(up);
-        choices.add(left);
+        if(!nWall){choices.add(up);}
+        if(!wWall){choices.add(left);}
       }else if(x == 9 && y != 0){
         left = new coordinate(x,y-1);
         right = new coordinate(x,y+1);
         down = new coordinate(x-1,y);
-        choices.add(right);
-        choices.add(down);
-        choices.add(left);
+        if(!eWall){choices.add(right);}
+        if(!sWall){choices.add(down);}
+        if(!wWall){choices.add(left);}
       }else if(y == 9 && x!= 0){
         up = new coordinate(x+1,y);
         left = new coordinate(x,y-1);
         down = new coordinate(x-1,y);
-        choices.add(up);
-        choices.add(left);
-        choices.add(down);
+        if(!nWall){choices.add(up);}
+        if(!wWall){choices.add(left);}
+        if(!sWall){choices.add(down);}
       }else{
         up = new coordinate(x+1,y);
         down = new coordinate(x-1,y);
         left = new coordinate(x,y-1);
         right = new coordinate(x,y+1);
-        choices.add(up);
-        choices.add(down);
-        choices.add(left);
-        choices.add(right);
+        if(!nWall){choices.add(up);}
+        if(!sWall){choices.add(down);}
+        if(!wWall){choices.add(left);}
+        if(!eWall){choices.add(right);}
       }
       for(int i = 0; i < choices.size(); i++){
         move = choices.get(i);
@@ -149,6 +156,7 @@ public class Agent
         sWall = percept.getSouthWall();
         eWall = percept.getEastWall();
         wWall = percept.getNorthWall();
+
     }
 
     public coordinate getAgentNextMove()

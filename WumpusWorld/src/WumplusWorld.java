@@ -17,7 +17,7 @@ public class WumplusWorld
   private coordinate[] p;
   private coordinate[] noPass;
   private coordinate g;
-  private boolean hasGold;
+  private boolean hasGold, actAsWumpus;
   private boolean inPit, ateByWumpus, ateBySupmuw, fedBySupmuw, savedBySupmuw, gotTheGold;
   Random random = new Random();
 
@@ -25,6 +25,7 @@ public class WumplusWorld
   {
     se = new ScoringEngine();
     hasGold = false;
+    actAsWumpus = false;
   }
 
   public void generateMap(coordinate wumpus, coordinate supmuw, coordinate[] noPassing, coordinate[] pit, coordinate gold)
@@ -50,8 +51,9 @@ public class WumplusWorld
     //System.out.println("Get Pit " + pit[0].getX() + " " + pit[0].getY());
     //System.out.println("Get Pass " + noPass[0].getX() + " " + noPass[0].getY());
     //Create map with given attributes
-    m = new Map(w, sup, g, noPass, p, ag, hasGold);
+    m = new Map(w, sup, g, noPass, p, ag, hasGold, actAsWumpus);
     theWorld = m.getMap();
+
     //Print map layout
     m.print(0);
   }
@@ -168,7 +170,7 @@ public class WumplusWorld
     fedBySupmuw = false;
     gotTheGold = false;
     ag = agent.getAgentPosition();
-    m = new Map(w, sup, g, noPass, p, ag, hasGold);
+    m = new Map(w, sup, g, noPass, p, ag, hasGold, actAsWumpus);
     theWorld = m.getMap();
     isInPit(x,y);
     wumpusAteHim(x,y);
@@ -210,11 +212,12 @@ public class WumplusWorld
 
   public void inWithSupmuw(int x, int y){
     if(theWorld[x][y].getSupmuw()){
-       if(actsAsWumpus(x,y) && !theWorld[x][y].getWumpus()){
+       if(theWorld[x][y].getActAsWumpus() && !theWorld[x][y].getWumpus()){
           se.scoreEvent(3);
           ateBySupmuw = true;
-       }else if(!actsAsWumpus(x,y) && !theWorld[x][y].getWumpus()){
+       }else if(!theWorld[x][y].getActAsWumpus() && !theWorld[x][y].getWumpus() && !theWorld[x][y].getPit()){
          fedBySupmuw = true;
+         theWorld[x][y].setHasFood();
          se.scoreEvent(4);
        }else if(theWorld[x][y].getPit()){
          savedBySupmuw = true;
@@ -255,23 +258,31 @@ public class WumplusWorld
     }
 
     if(up != null){
-      if(theWorld[up.getX()][up.getY()].getStench()){
+      //System.out.println("UP" + up.getX() + "," + down.getY());
+      if(!theWorld[up.getX()][up.getY()].getPit() && (theWorld[up.getX()][up.getY()].getStench() || theWorld[up.getX()][up.getY()].getWumpus())){
         answer = true;
       }
-    }else if(down != null){
-      if(theWorld[down.getX()][down.getY()].getStench()){
+    }
+    if(down != null){
+    //  System.out.println("Down" + down.getX() + "," + down.getY());
+      if(!theWorld[down.getX()][down.getY()].getPit() && theWorld[down.getX()][down.getY()].getStench() || theWorld[down.getX()][down.getY()].getWumpus()){
         answer = true;
       }
-    }else if(left != null){
-      if(theWorld[left.getX()][left.getY()].getStench()){
+    }
+    if(left != null){
+    //  System.out.println("Left" + left.getX() + "," + left.getY());
+      if(!theWorld[left.getX()][left.getY()].getPit() && theWorld[left.getX()][left.getY()].getStench() || theWorld[left.getX()][left.getY()].getWumpus()){
         answer = true;
       }
-    }else if(right != null){
-      if(theWorld[right.getX()][right.getY()].getStench()){
+    }
+    if(right != null){
+    //  System.out.println("Right" + right.getX() + "," + right.getY());
+      if(!theWorld[right.getX()][right.getY()].getPit() && theWorld[right.getX()][right.getY()].getStench() || theWorld[right.getX()][right.getY()].getWumpus()){
         answer = true;
       }
     }
     return answer;
+
   }
 
 
@@ -304,11 +315,11 @@ public class WumplusWorld
     //  System.out.println("Get Pit " + pit[0].getX() + " " + pit[0].getY());
     //  System.out.println("Get Pass " + noPassing[0].getX() + " " + noPassing[0].getY());
       generateMap(w, sup, noPass, pit, gold);
+      if(actsAsWumpus(sup.getX(), sup.getY())){generateMap(w, sup, noPass, pit, gold);}
     }catch(Exception e){
         //System.out.println("Please set objects on the map!");
 
     }
-
     System.out.println("The Wumpus Says COME TO MEEEEEE");
     agent.goGoAgent();
     while(!agent.hasEscaped()){}
