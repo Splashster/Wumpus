@@ -7,20 +7,25 @@ public class Agent
 
   boolean stench, breeze, glitter, moo, wumpus, supmuw, gold, pit;
   boolean nWall, sWall, eWall, wWall;
-  boolean hasArrow, wumpus_alive, gotGold, escaped;
+  boolean hasArrow, wumpus_alive, gotGold, escaped, nothingSafe, goingToEscape;
   ArrayList<coordinate> directions;
-  coordinate current_position;
+  ArrayList<coordinate> previousMoves;
+  coordinate current_position, previousMove, newSpot;
   KnowledgeBase[][] kb;
   WumplusWorld theWorld;
 
   public Agent(WumplusWorld ww){
     kb = new KnowledgeBase[10][10];
     current_position = new coordinate (0,0);
+    previousMove = null;
+    newSpot = null;
     hasArrow = true;
     wumpus_alive = true;
     gotGold = false;
     theWorld = ww;
     escaped = false;
+    goingToEscape = false;
+    previousMoves = new ArrayList<coordinate>();
 
     for(int i = 0; i < 10; i++){
       for(int j = 0; j < 10; j++){
@@ -32,17 +37,27 @@ public class Agent
   }
 
   public void goGoAgent(){
+    previousMoves.add(current_position);
     while(!gotGold && !escaped){
       setPerceptions(current_position.getX(),current_position.getY());
       directions = getChoices(current_position.getX(),current_position.getY());
-      current_position = getAgentNextMove();
-      theWorld.moveAgent(current_position.getX(),current_position.getY());
-      if((current_position.getX() == 0 && current_position.getY() == 0) && (gotGold)){
-        escaped = true;
+      if(directions.isEmpty()){
+        escape();
+      }else{
+        current_position = getAgentNextMove();
+        if(current_position.getX() == 0 && current_position.getY() == 0 && !gotGold){
+          noMoreSafeMoves();
+        }
+        theWorld.moveAgent(current_position.getX(),current_position.getY());
+        previousMoves.add(current_position);
+        if(gotGold || nothingSafe){
+          escape();
+        }
+        kb[current_position.getX()][current_position.getY()].visit();
+        //System.out.println("Tarzan's Current Position: " + current_position.getX() + "," + current_position.getY());
+        try{TimeUnit.SECONDS.sleep(1);}catch(Exception e){}
       }
-      kb[current_position.getX()][current_position.getY()].visit();
-      //System.out.println("Tarzan's Current Position: " + current_position.getX() + "," + current_position.getY());
-      try{TimeUnit.SECONDS.sleep(1);}catch(Exception e){}
+
     }
   }
 
@@ -57,13 +72,79 @@ public class Agent
 
   public boolean hasEscaped(){return escaped;}
 
+  public boolean shallEscape(){return goingToEscape;}
+
+  public boolean noMoreMoves(){return nothingSafe;}
+
   //TODO Need set finished when agent gets to escape
-    /*public void escape(){
-    escaped = true;
-    for(int i = 0; i < kb.size(); i++){
-      if(kb)
+    public void escape(){
+
+      //if(previousMoves.size() > 1){
+        for(int i = previousMoves.size()-1; i >= 0; i--){
+          current_position = previousMoves.get(i);
+          System.out.println("Previous Move X: " + current_position.getX() + "Previous Move Y " + current_position.getY());
+          theWorld.moveAgent(current_position.getX(),current_position.getY());
+          try{TimeUnit.SECONDS.sleep(1);}catch(Exception e){}
+        }
+        if(current_position.getX() == 0 && current_position.getY() == 0 && gotGold){
+          System.out.println("PHEWWW TIME TO GO GET JANE SOMETHING NICE!");
+          escaped = true;
+        }else{
+          System.out.println("TARZAN DECIDED TO GO HOME!");
+          escaped = true;
+        }
+      }/*else{
+        goingToEscape = true;
+        for(int i = previousMoves.size()-1; i >= 0; i--){
+          current_position = previousMoves.get(i);
+          System.out.println("Previous Move X: " + current_position.getX() + "Previous Move Y " + current_position.getY());
+          theWorld.moveAgent(current_position.getX(),current_position.getY());
+          try{TimeUnit.SECONDS.sleep(1);}catch(Exception e){}
+        }
+        if(current_position.getX() == 0 && current_position.getY() == 0 && !hasGold){
+          System.out.println("SHOULD HAVE CHOSEN THE JUNGLE!");
+          escaped = true;
+        }*/
+    //  }
+
+  //}
+
+  public void noMoreSafeMoves(){
+    nothingSafe = true;
+    for(int i = 0; i > 10; i++){
+      for(int j = 0; j > 10; j++){
+        if(kb[i][j].getHazards() > 0){
+          newSpot = new coordinate(i,j);
+          nothingSafe = false;
+        }
+      }
     }
-  }*/
+  }
+
+  public void goToNewMove(){
+    coordinate direction = null;
+    boolean noMatch;
+
+    for(int i = 0; i < previousMoves.size(); i++){
+       noMatch = true;
+       previousMove = previousMoves.get(i);
+       directions = getChoices(previousMove.getX(),previousMove.getY());
+       for(int j = 0; j < directions.size(); j++){
+          direction = directions.get(i);
+          if(direction.getX() == newSpot.getX() && direction.getY() == newSpot.getY()){
+            current_position = newSpot;
+            noMatch = false;
+            break;
+          }
+       }
+       if(noMatch){
+         theWorld.moveAgent(previousMove.getX(),previousMove.getY());
+         try{TimeUnit.SECONDS.sleep(1);}catch(Exception e){}
+       }else{
+         break;
+       }
+      }
+    }
 
   public ArrayList<coordinate> getChoices(int x, int y){
       coordinate left, right, up, down, move, previousMove;
@@ -232,81 +313,8 @@ public class Agent
       }
 
       return bestMove();
-    }
 
-
-    /*BACKUP
-    public coordinate getAgentNextMove()
-    {
-      kb[current_position.getX()][current_position.getY()].resetHazards();
-
-      //Add incentive for exploring new regions
-      for(coordinate c: directions)
-      {
-        int x = c.getX();
-        int y = c.getY();
-
-<<<<<<< HEAD
-=======
->>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
-        if(!kb[x][y].visited())
-        {
-          kb[x][y].decHazards();
-        }
-      }
-
-      //Calculate Wumpus location
-      for(coordinate c: directions)
-      {
-        int x = c.getX();
-        int y = c.getY();
-
-        if(stench)
-        {
-          kb[x][y].decHazards();
-        }
-        else
-        {
-          kb[x][y].incHazards();
-        }
-      }
-
-
-      //Calculate Supmuw location
-      if(moo)
-      {
-        for(coordinate c: directions)
-        {
-          int x = c.getX();
-          int y = c.getY();
-
-          kb[x][y].decHazards();
-        }
-      }
-
-
-      //Calculate Pit location
-      for(coordinate c: directions)
-      {
-        int x = c.getX();
-        int y = c.getY();
-
-        if(breeze)
-        {
-          kb[x][y].incHazards();
-        }
-        else
-        {
-          kb[x][y].decHazards();
-        }
-      }
-=======
-      //see if its the Wumpus's time to go.
-      huntWumpus();
->>>>>>> dfc25fe33bfac86abfcfdf2c8681dbc629c1fca8
-
-      return bestMove();
-    }
+}
 
     public coordinate bestMove()
     {
@@ -318,58 +326,21 @@ public class Agent
       {
         case 1: min = convertHazards(0);
                 break;
-        case 2: /*if(convertHazards(directions.get(0)) < convertHazards(directions.get(1))) {min=0;}
-                else {min=1;}
-                break;*/
+        case 2:
                 min = Math.min(convertHazards(0), convertHazards(1));
                 break;
 
-        case 3: /*if(convertHazards(directions.get(0)) < convertHazards(directions.get(1)))
-                {
-                  if(convertHazards(directions.get(0)) < convertHazards(directions.get(2))) {min=0;}
-                  else {min=2;}
-                }
-                else
-                {
-                  if(convertHazards(directions.get(1)) < convertHazards(directions.get(2))) {min=1;}
-                  else {min=2;}
-                }
-                break;*/
+        case 3:
                 int tempMin = Math.min(convertHazards(0), convertHazards(1));
                 min = Math.min(tempMin, convertHazards(2));
                 break;
 
-        case 4: /*if(convertHazards(directions.get(0)) < convertHazards(directions.get(1)))
-                {
-                  if(convertHazards(directions.get(0)) < convertHazards(directions.get(2)))
-                  {
-                    if(convertHazards(directions.get(0)) < convertHazards(directions.get(3))) {min=0;}
-                    else {min=3;}
-                  }
-                  else
-                  {
-                    if(convertHazards(directions.get(2)) < convertHazards(directions.get(3))) {min=2;}
-                    else {min=3;}
-                  }
-                }
-                else
-                {
-                  if(convertHazards(directions.get(1)) < convertHazards(directions.get(2)))
-                  {
-                    if(convertHazards(directions.get(1)) < convertHazards(directions.get(3))) {min=1;}
-                    else {min=3;}
-                  }
-                  else
-                  {
-                    if(convertHazards(directions.get(2)) < convertHazards(directions.get(3))) {min=2;}
-                    else {min=3;}
-                  }
-                }*/
+        case 4:
                 int tempMin1 = Math.min(convertHazards(0), convertHazards(1));
                 int tempMin2 = Math.min(convertHazards(2), convertHazards(3));
                 min = Math.min(tempMin1, tempMin2);
-      }
 
+      }
       System.out.println("min - " + min);
 
       for(int x=0; x<elements; x++)
@@ -377,11 +348,15 @@ public class Agent
         System.out.println(x + "     " + (min == convertHazards(x)) + convertHazards(x));
         if(min == convertHazards(x)) {minIndex=x;}
       }
-      System.out.println("X: " + directions.get(minIndex).getX());
-      System.out.println("Y: " + directions.get(minIndex).getY());
-
+    //  System.out.println("X: " + directions.get(minIndex).getX());
+    //  System.out.println("Y: " + directions.get(minIndex).getY());
+    if(directions.isEmpty()){
+      return null;
+    }else{
       return directions.get(minIndex);
     }
+
+  }
 
     public int convertHazards(int pos)
     {

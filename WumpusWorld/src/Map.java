@@ -4,11 +4,9 @@ public class Map
 {
   private MapNode[][] map;
 
-<<<<<<< HEAD
-  public Map(coordinate wumpus, coordinate supmuw, coordinate gold, coordinate[] noPassZones, coordinate[] pits, coordinate agent, boolean hasGold, boolean actAsWumpus, boolean hasFood)
-=======
-  public Map(coordinate wumpus, coordinate supmuw, coordinate gold, coordinate[] noPassZones, coordinate[] pits, coordinate agent, boolean hasGold, boolean actAsWumpus, boolean wumpus_alive)
->>>>>>> dfc25fe33bfac86abfcfdf2c8681dbc629c1fca8
+
+  public Map(coordinate wumpus, coordinate supmuw, coordinate gold, coordinate[] noPassZones, coordinate[] pits, coordinate agent, boolean hasGold, boolean actAsWumpus, boolean hasFood, boolean wumpus_alive)
+
   {
     map = new MapNode[10][10];
     coordinate c;
@@ -35,8 +33,16 @@ public class Map
         if(y != 9) {map[x][y].setEastNeighbor(map[x][y+1]);}else{map[x][y].setEastWall();}
 
         //Check to see if current node should hold a specified parameter
-        if((x == agent.getX() && y == agent.getY()) && hasGold){map[x][y].setHasGold(); map[x][y].setAgent();}
-        if(x == agent.getX() && y == agent.getY()){map[x][y].setAgent();}
+        if((x != 0 && y != 0) && (x == agent.getX() && y == agent.getY()) && hasGold){
+          map[x][y].setHasGold(); map[x][y].setAgent();
+        }else if((x == 0 && y == 0) && (x == agent.getX() && y == agent.getY()) && hasGold){
+          map[x][y].setHasGold();
+          map[x][y].setEscaped();
+        }else if((x == 0 && y == 0) && (x == agent.getX() && y == agent.getY()) && !hasGold){
+          map[x][y].setEscaped();
+        }else if(x == agent.getX() && y == agent.getY()){
+          map[x][y].setAgent();
+        }
         if(wumpus != null && !wumpus_alive) {map[wumpus.getX()][wumpus.getY()].setDeadWumpus();}
         else if(wumpus != null && (x == wumpus.getX() && y == wumpus.getY())) {map[x][y].setWumpus();}
         if(x == gold.getX() && y == gold.getY()) {map[x][y].setGold();}
