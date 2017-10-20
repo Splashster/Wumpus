@@ -24,6 +24,8 @@ public class MapNode
   private boolean eastWall;
   private boolean westWall;
   private boolean hasGold;
+  private boolean hasFood;
+  private boolean actAsWumpus;
   private boolean noTrespassing;
 
   private String attributes[];
@@ -48,6 +50,8 @@ public class MapNode
     eastWall = false;
     westWall = false;
     hasGold = false;
+    hasFood = false;
+    actAsWumpus = false;
 
     attributes = new String[4];
 
@@ -202,14 +206,7 @@ public class MapNode
     if(eastNeighbor != null) {eastNeighbor.setBreeze();}
     if(westNeighbor != null) {westNeighbor.setBreeze();}
 
-    if(supmuw)
-    {
-      attributes[0] = "        ";
-      attributes[1] = "_      _";
-      attributes[2] = "[\\_/)  ]";
-      attributes[3] = "[ ^,^) ]";
-    }
-    else if(agent)
+    if(agent)
     {
       attributes[0] = " Tarzan ";
       attributes[1] = "Pit Fall";
@@ -402,25 +399,57 @@ public class MapNode
   public void setSupmuw()
   {
     supmuw=true;
-    if(northNeighbor != null) {northNeighbor.setMoo();}
-    if(southNeighbor != null) {southNeighbor.setMoo();}
-    if(eastNeighbor != null) {eastNeighbor.setMoo();}
-    if(westNeighbor != null) {westNeighbor.setMoo();}
+    if(!actAsWumpus && !pit){
+      if(northNeighbor != null) {northNeighbor.setMoo();}
+      if(southNeighbor != null) {southNeighbor.setMoo();}
+      if(eastNeighbor != null) {eastNeighbor.setMoo();}
+      if(westNeighbor != null) {westNeighbor.setMoo();}
 
-    if(agent)
-    {
-      attributes[0] = " Tarzan ";
-      attributes[1] = "Got Food";
-      attributes[2] = "        ";
-      attributes[3] = "  +100  ";
-    }
-    else
-    {
+      if(agent && hasFood){
+        hasFood = false;
+        attributes[0] = " Tarzan ";
+        attributes[1] = "Got Food";
+        attributes[2] = "        ";
+        attributes[3] = "  +100  ";
+      }else if(agent && !hasFood){
+          attributes[0] = "  Out   ";
+          attributes[1] = "of Food!";
+          attributes[2] = "        ";
+          attributes[3] = "        ";
+      }else if(!agent){
+        attributes[0] = "        ";
+        attributes[1] = "(\\_/)   ";
+        attributes[2] = "( ^,^)  ";
+        attributes[3] = "(\")_(\") ";
+      }
+    }else if(!pit){
+      if(northNeighbor != null) {northNeighbor.setStench();}
+      if(southNeighbor != null) {southNeighbor.setStench();}
+      if(eastNeighbor != null) {eastNeighbor.setStench();}
+      if(westNeighbor != null) {westNeighbor.setStench();}
+
+      if(agent){
+        attributes[0] = " Tarzan ";
+        attributes[1] = " Eaten  ";
+        attributes[2] = "        ";
+        attributes[3] = " -1000  ";
+      }else{
+        attributes[0] = "        ";
+        attributes[1] = "(\\_/)   ";
+        attributes[2] = "( -,-)  ";
+        attributes[3] = "(\")_(\") ";
+      }
+    }else{
+      if(northNeighbor != null) {northNeighbor.setMoo();}
+      if(southNeighbor != null) {southNeighbor.setMoo();}
+      if(eastNeighbor != null) {eastNeighbor.setMoo();}
+      if(westNeighbor != null) {westNeighbor.setMoo();}
       attributes[0] = "        ";
-      attributes[1] = "(\\_/)   ";
-      attributes[2] = "( ^,^)  ";
-      attributes[3] = "(\")_(\") ";
+      attributes[1] = "_      _";
+      attributes[2] = "[\\_/)  ]";
+      attributes[3] = "[ ^,^) ]";
     }
+
   }
   public void setMoo()
   {
@@ -516,6 +545,8 @@ public class MapNode
   public void setEastWall(){eastWall = true;}
   public void setWestWall(){westWall = true;}
   public void setHasGold(){hasGold = true;}
+  public void setHasFood(){hasFood = true;}
+  public void setActAsWumpus(){actAsWumpus = true;}
 
   public coordinate getCoordinates() {return location;}
 
@@ -532,6 +563,7 @@ public class MapNode
   public boolean getSouthWall(){return southWall;}
   public boolean getEastWall(){return eastWall;}
   public boolean getWestWall(){return westWall;}
+  public boolean getActAsWumpus(){return actAsWumpus;}
   public boolean getNoTrespassing() {return noTrespassing;}
 
   public String getAttr1()
