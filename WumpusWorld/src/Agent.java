@@ -186,7 +186,7 @@ public class Agent
         //  }
         //  else
         //  {
-              kb[x][y].incHazards();
+              kb[x][y].decHazards();
         //  }
         }
       }
@@ -210,7 +210,7 @@ public class Agent
         //  }
         //  else
         //  {
-              kb[x][y].decHazards();
+              kb[x][y].incHazards();
         //  }
         }
       }
