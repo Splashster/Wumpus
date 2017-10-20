@@ -1,8 +1,8 @@
-import java.util.Random;
-import java.util.concurrent.TimeUnit;
-import java.util.ArrayList;
-import java.util.Scanner;
-
+/***************************************************************************
+The WumplusWorld class is the heart of the game. It generates the map,
+the pieces, it triggers the scoring engine, and keeps track of the things going on
+in the world that the agent may not already know.
+***************************************************************************/
 public class WumplusWorld
 {
   private Map m;
@@ -17,9 +17,8 @@ public class WumplusWorld
   private coordinate[] p;
   private coordinate[] noPass;
   private coordinate g;
-  private boolean hasGold, actAsWumpus, hasFood;;
+  private boolean hasGold, actAsWumpus, hasFood, nothingSafe, goingToEscape;
   private boolean inPit, ateByWumpus, ateBySupmuw, fedBySupmuw, savedBySupmuw, gotTheGold, wumpus_alive, displayWumpusDeath;
-  Random random = new Random();
 
   public WumplusWorld()
   {
@@ -27,35 +26,24 @@ public class WumplusWorld
     hasGold = false;
     actAsWumpus = false;
     hasFood = true;
+    goingToEscape = false;
   }
 
   public void generateMap(coordinate wumpus, coordinate supmuw, coordinate[] noPassing, coordinate[] pit, coordinate gold)
   {
     //Set coordinates for User-specified attributes
-    //System.out.println("Inside genreate");
     w = wumpus;
-    //System.out.println("wum done");
     sup = supmuw;
-    //System.out.println("sup done");
     ag = new coordinate(0,0);
-  //  System.out.println("ag done");
     p = pit;
-    //System.out.println("pit done");
     noPass = noPassing;
-    //System.out.println("pass done");
     g = gold;
     if(w != null) {wumpus_alive=true;}
     else {wumpus_alive=false;}
     displayWumpusDeath = true;
-    //System.out.println("gold done");
-    //System.out.println("Print Inside genreate");
-    //System.out.println("Wumpus " + wum.getX() + " " + wum.getY());
-    //System.out.println("Sup " + sup.getX() + " " + sup.getY());
-    //System.out.println("Gold location " + gold.getX() + " " + gold.getY());
-    //System.out.println("Get Pit " + pit[0].getX() + " " + pit[0].getY());
-    //System.out.println("Get Pass " + noPass[0].getX() + " " + noPass[0].getY());
+
     //Create map with given attributes
-    m = new Map(w, sup, g, noPass, p, ag, hasGold, actAsWumpus, wumpus_alive, hasFood);
+    m = new Map(w, sup, g, noPass, p, ag, hasGold, actAsWumpus, wumpus_alive, hasFood, nothingSafe, goingToEscape);
     theWorld = m.getMap();
 
     //Print map layout
@@ -63,109 +51,10 @@ public class WumplusWorld
   }
 
 
-
-/*  public ArrayList<coordinate> getChoices(int x, int y){
-      coordinate left, right, up, down, move, previousMove;
-      ArrayList<coordinate> directions = new ArrayList<coordinate>();
-
-      if(x == 0 && y == 0){
-        up = new coordinate(1,0);
-        right = new coordinate (0,1);
-        directions.add(up);
-        directions.add(right);
-      }else if(x == 0 && y != 9){
-        up = new coordinate(x+1,y);
-        right = new coordinate(0,y+1);
-        left = new coordinate(x,y-1);
-        directions.add(up);
-        directions.add(right);
-        directions.add(left);
-      }else if(y == 0 && x != 9){
-        up = new coordinate(x+1,y);
-        right = new coordinate(x,y+1);
-        down = new coordinate(x-1,y);
-        directions.add(up);
-        directions.add(right);
-        directions.add(down);
-      }else if(x == 9 && y == 9){
-        left = new coordinate(x,y-1);
-        down = new coordinate(x-1,y);
-        directions.add(left);
-        directions.add(down);
-      }else if(x == 9 && y == 0){
-        right = new coordinate(x,y+1);
-        down = new coordinate(x-1,y);
-        directions.add(right);
-        directions.add(down);
-      }else if(y == 9 && x == 0){
-        up = new coordinate(x+1,y);
-        left = new coordinate(x,y-1);
-        directions.add(up);
-        directions.add(left);
-      }else if(x == 9 && y != 0){
-        left = new coordinate(x,y-1);
-        right = new coordinate(x,y+1);
-        down = new coordinate(x-1,y);
-        directions.add(right);
-        directions.add(down);
-        directions.add(left);
-      }else if(y == 9 && x!= 0){
-        up = new coordinate(x+1,y);
-        left = new coordinate(x,y-1);
-        down = new coordinate(x-1,y);
-        directions.add(up);
-        directions.add(left);
-        directions.add(down);
-      }else{
-        up = new coordinate(x+1,y);
-        down = new coordinate(x-1,y);
-        left = new coordinate(x,y-1);
-        right = new coordinate(x,y+1);
-        directions.add(up);
-        directions.add(down);
-        directions.add(left);
-        directions.add(right);
-      }
-      for(int i = 0; i < directions.size(); i++){
-        move = directions.get(i);
-        System.out.println("Tarzan's choice: " + i + " " + move.getX() + "," + move.getY());
-      }
-      return directions;
-  }*/
-
-/*  public boolean beenThere(ArrayList<coordinate> previousMoves, coordinate move){
-      boolean answer = false;
-      coordinate previousMove;
-
-      for(int i = 0; i < previousMoves.size(); i++){
-         previousMove = previousMoves.get(i);
-         System.out.println("Comparing move with Previous Move: " + previousMove.getX() + " " + previousMove.getY());
-         if(move.getX() == previousMove.getX() && move.getY() == previousMove.getY()){
-           answer = true;
-           break;
-         }
-       }
-       return answer;
-     }*/
-
-/*  public void getAgentNextMove(int x, int y, ArrayList<coordinate> previousMoves){
-      coordinate move, previousMove;
-      ArrayList<coordinate> directions = new ArrayList<coordinate>();
-      boolean go = true;
-
-      directions = getChoices(x,y);
-      move = directions.get(random.nextInt(directions.size()));
-    //  if(beenThere(previousMoves,move)){go = false;}
-
-      while(!go){
-            System.out.println("Been there");
-            move = directions.get(random.nextInt(directions.size()));
-            if(!beenThere(previousMoves,move)){go = true;}
-        }
-      moveAgent(move.getX(),move.getY());
-  }*/
-
-
+  //Called by the agent class. Uses the agents next move to
+  //check and see if  the agent should gain points or lose points.
+  //It also regenerates the map to update certain things on the map
+  //based on what the agent did.
   public void moveAgent(int x, int y){
     inPit = false;
     ateByWumpus = false;
@@ -173,8 +62,10 @@ public class WumplusWorld
     savedBySupmuw = false;
     fedBySupmuw = false;
     gotTheGold = false;
+    nothingSafe = agent.noMoreMoves();
+    goingToEscape = agent.shallEscape();
     ag = agent.getAgentPosition();
-    m = new Map(w, sup, g, noPass, p, ag, hasGold, actAsWumpus, hasFood, wumpus_alive);
+    m = new Map(w, sup, g, noPass, p, ag, hasGold, actAsWumpus, hasFood, wumpus_alive, nothingSafe, goingToEscape);
     theWorld = m.getMap();
     isInPit(x,y);
     wumpusAteHim(x,y);
@@ -196,16 +87,12 @@ public class WumplusWorld
     if(gotTheGold){System.out.print("TARZAN GOT THE GOLD!!! TIME TO GET OUT OF HERE!!!!!!");}
   }
 
-  /*public coordinate getAgentPosition(){
-    return agent.getAgentPosition();
-  }*/
-
   //Gets the attributes for the node the Agent is currently in
   public MapNode getPerception(int x, int y){
       return theWorld[x][y];
   }
 
-
+  //Check to see if supmuw is inside of a pit
   public void isInPit(int x, int y){
     if(theWorld[x][y].getPit() && !theWorld[x][y].getSupmuw()){
       se.scoreEvent(3);
@@ -213,6 +100,7 @@ public class WumplusWorld
     }
   }
 
+  //Check to see if the wumpus ate the agent
   public void wumpusAteHim(int x, int y){
     if(theWorld[x][y].getWumpus()){
       se.scoreEvent(3);
@@ -220,9 +108,12 @@ public class WumplusWorld
     }
   }
 
+  //Check to see if the agent in in the same node as the wumpus.
+  //Also check to see how the supmuw should be acting and whether points
+  //should be deducted or not.
   public void inWithSupmuw(int x, int y){
     if(theWorld[x][y].getSupmuw()){
-       if(theWorld[x][y].getActAsWumpus() && !theWorld[x][y].getWumpus()){
+       if(theWorld[x][y].getActAsWumpus() && !theWorld[x][y].getWumpus() && !theWorld[x][y].getPit()){
           se.scoreEvent(3);
           ateBySupmuw = true;
        }else if(!theWorld[x][y].getActAsWumpus() && !theWorld[x][y].getPit()){
@@ -237,6 +128,7 @@ public class WumplusWorld
     }
   }
 
+  //Check to see if the supmuw has any food.
   public boolean hasSomeFood(int x,int y){
     boolean answer = false;
     if(hasFood){
@@ -245,6 +137,7 @@ public class WumplusWorld
     return answer;
   }
 
+  //Check to see if the supmuw should act like a wumpus.
   public boolean actsAsWumpus(int x, int y){
     coordinate left = null, right = null, up = null, down = null;
     boolean answer = false;
@@ -278,25 +171,21 @@ public class WumplusWorld
     }
 
     if(up != null){
-      //System.out.println("UP" + up.getX() + "," + down.getY());
       if(!theWorld[up.getX()][up.getY()].getPit() && (theWorld[up.getX()][up.getY()].getStench() || theWorld[up.getX()][up.getY()].getWumpus())){
         answer = true;
       }
     }
     if(down != null){
-    //  System.out.println("Down" + down.getX() + "," + down.getY());
       if(!theWorld[down.getX()][down.getY()].getPit() && theWorld[down.getX()][down.getY()].getStench() || theWorld[down.getX()][down.getY()].getWumpus()){
         answer = true;
       }
     }
     if(left != null){
-    //  System.out.println("Left" + left.getX() + "," + left.getY());
       if(!theWorld[left.getX()][left.getY()].getPit() && theWorld[left.getX()][left.getY()].getStench() || theWorld[left.getX()][left.getY()].getWumpus()){
         answer = true;
       }
     }
     if(right != null){
-    //  System.out.println("Right" + right.getX() + "," + right.getY());
       if(!theWorld[right.getX()][right.getY()].getPit() && theWorld[right.getX()][right.getY()].getStench() || theWorld[right.getX()][right.getY()].getWumpus()){
         answer = true;
       }
@@ -305,7 +194,7 @@ public class WumplusWorld
 
   }
 
-
+  //Check to see if the the agent found the gold
   public boolean panForGold(int x, int y){
       boolean answer = false;
       if(theWorld[x][y].getGold()){
@@ -317,6 +206,7 @@ public class WumplusWorld
       return answer;
   }
 
+  //Check to see if the agent killed the wumpus
   public void killWumpus(coordinate shoot)
   {
     se.scoreEvent(2);
@@ -327,32 +217,35 @@ public class WumplusWorld
     }
   }
 
+  //Set the agent
   public void setAgent(Agent ag){
     agent = ag;
   }
 
   public void startGame(coordinate w, coordinate sup, coordinate[] noPass, coordinate[] pit, coordinate gold){
     try{
-      //System.out.println("CAlling genreate");
-    //  System.out.println("Wumpus " + wum.getX() + " " + wum.getY());
-    //  System.out.println("Sup " + supm.getX() + " " + supm.getY());
-    //  System.out.println("Gold location " + gold.getX() + " " + gold.getY());
-    //  System.out.println("Get Pit " + pit[0].getX() + " " + pit[0].getY());
-    //  System.out.println("Get Pass " + noPassing[0].getX() + " " + noPassing[0].getY());
+
+      //Generate the WumplusWorld map
       generateMap(w, sup, noPass, pit, gold);
+
+      //Regenerate the WumplusWorld map if the supmuw is acting like a wumpus
       if(actsAsWumpus(sup.getX(), sup.getY())){generateMap(w, sup, noPass, pit, gold);}
     }catch(Exception e){
-        //System.out.println("Please set objects on the map!");
 
     }
     System.out.println("The Wumpus Says COME TO MEEEEEE");
     agent.goGoAgent();
     while(!agent.hasEscaped()){}
+
+    //Check to see if the agent left with the gold.
+    //If so add 1000 points to agent score.
     if(agent.hasGold()){
       se.scoreEvent(5);
     }
 
-    //WumplusTitle wumpTitle = new WumplusTitle();
-    //wumpTitle.printClose();
+    //Print closing title screen and quit game
+    WumplusTitle wumpTitle = new WumplusTitle();
+    wumpTitle.printClose();
+    System.exit(0);
   }
 }
