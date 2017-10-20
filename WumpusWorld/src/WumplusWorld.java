@@ -17,7 +17,7 @@ public class WumplusWorld
   private coordinate[] p;
   private coordinate[] noPass;
   private coordinate g;
-  private boolean hasGold, actAsWumpus;
+  private boolean hasGold, actAsWumpus, hasFood;
   private boolean inPit, ateByWumpus, ateBySupmuw, fedBySupmuw, savedBySupmuw, gotTheGold;
   Random random = new Random();
 
@@ -26,6 +26,7 @@ public class WumplusWorld
     se = new ScoringEngine();
     hasGold = false;
     actAsWumpus = false;
+    hasFood = true;
   }
 
   public void generateMap(coordinate wumpus, coordinate supmuw, coordinate[] noPassing, coordinate[] pit, coordinate gold)
@@ -43,6 +44,7 @@ public class WumplusWorld
     noPass = noPassing;
     //System.out.println("pass done");
     g = gold;
+
     //System.out.println("gold done");
     //System.out.println("Print Inside genreate");
     //System.out.println("Wumpus " + wum.getX() + " " + wum.getY());
@@ -51,7 +53,7 @@ public class WumplusWorld
     //System.out.println("Get Pit " + pit[0].getX() + " " + pit[0].getY());
     //System.out.println("Get Pass " + noPass[0].getX() + " " + noPass[0].getY());
     //Create map with given attributes
-    m = new Map(w, sup, g, noPass, p, ag, hasGold, actAsWumpus);
+    m = new Map(w, sup, g, noPass, p, ag, hasGold, actAsWumpus, hasFood);
     theWorld = m.getMap();
 
     //Print map layout
@@ -170,7 +172,7 @@ public class WumplusWorld
     fedBySupmuw = false;
     gotTheGold = false;
     ag = agent.getAgentPosition();
-    m = new Map(w, sup, g, noPass, p, ag, hasGold, actAsWumpus);
+    m = new Map(w, sup, g, noPass, p, ag, hasGold, actAsWumpus, hasFood);
     theWorld = m.getMap();
     isInPit(x,y);
     wumpusAteHim(x,y);
@@ -216,14 +218,24 @@ public class WumplusWorld
        if(theWorld[x][y].getActAsWumpus() && !theWorld[x][y].getWumpus()){
           se.scoreEvent(3);
           ateBySupmuw = true;
-       }else if(!theWorld[x][y].getActAsWumpus() && !theWorld[x][y].getWumpus() && !theWorld[x][y].getPit()){
-         fedBySupmuw = true;
-         theWorld[x][y].setHasFood();
-         se.scoreEvent(4);
+       }else if(!theWorld[x][y].getActAsWumpus() && !theWorld[x][y].getPit()){
+         if(hasSomeFood(x,y)){
+           fedBySupmuw = true;
+           hasFood = false;
+           se.scoreEvent(4);
+         }
        }else if(theWorld[x][y].getPit()){
          savedBySupmuw = true;
        }
     }
+  }
+
+  public boolean hasSomeFood(int x,int y){
+    boolean answer = false;
+    if(hasFood){
+      answer = true;
+    }
+    return answer;
   }
 
   public boolean actsAsWumpus(int x, int y){

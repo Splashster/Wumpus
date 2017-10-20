@@ -4,7 +4,7 @@ public class Map
 {
   private MapNode[][] map;
 
-  public Map(coordinate wumpus, coordinate supmuw, coordinate gold, coordinate[] noPassZones, coordinate[] pits, coordinate agent, boolean hasGold, boolean actAsWumpus)
+  public Map(coordinate wumpus, coordinate supmuw, coordinate gold, coordinate[] noPassZones, coordinate[] pits, coordinate agent, boolean hasGold, boolean actAsWumpus, boolean hasFood)
   {
     map = new MapNode[10][10];
     coordinate c;
@@ -33,16 +33,18 @@ public class Map
         //Check to see if current node should hold a specified parameter
         if((x == agent.getX() && y == agent.getY()) && hasGold){map[x][y].setHasGold(); map[x][y].setAgent();}
         if(x == agent.getX() && y == agent.getY()){map[x][y].setAgent();}
+        //if(wumpus != null && !wumpus_alive){map[wumpus.getX()][wumpus.getY()].setDeadWumpus();}
         if(wumpus != null && (x == wumpus.getX() && y == wumpus.getY())) {map[x][y].setWumpus();}
+        if(x == gold.getX() && y == gold.getY()) {map[x][y].setGold();}
+        if(pits != null){for(coordinate p : pits) {if(x == p.getX() && y == p.getY()) {map[x][y].setPit();}}}
+        if(noPassZones != null){for(coordinate noPass : noPassZones) {if(x == noPass.getX() && y == noPass.getY()) {map[x][y].setNoTrespassing();}}}
         if(supmuw != null && (x == supmuw.getX() && y == supmuw.getY())) {
           if(actsAsWumpus(x,y)){
             map[x][y].setActAsWumpus();
           }
+          if(hasFood){map[x][y].setHasFood();}
           map[x][y].setSupmuw();
         }
-        if(x == gold.getX() && y == gold.getY()) {map[x][y].setGold();}
-        if(pits != null){for(coordinate p : pits) {if(x == p.getX() && y == p.getY()) {map[x][y].setPit();}}}
-        if(noPassZones != null){for(coordinate noPass : noPassZones) {if(x == noPass.getX() && y == noPass.getY()) {map[x][y].setNoTrespassing();}}}
       }
     }
   }

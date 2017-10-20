@@ -114,28 +114,9 @@ public class Agent
         up = new coordinate(x+1,y);
         left = new coordinate(x,y-1);
         down = new coordinate(x-1,y);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         if(!nWall){choices.add(up);}
         if(!wWall){choices.add(left);}
         if(!sWall){choices.add(down);}
-=======
-=======
->>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
-=======
->>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
-        choices.add(down);
-        choices.add(up);
-        choices.add(left);
-        //up, left, down
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
-=======
->>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
-=======
->>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
       }else{
         up = new coordinate(x+1,y);
         down = new coordinate(x-1,y);
@@ -174,7 +155,7 @@ public class Agent
         nWall = percept.getNorthWall();
         sWall = percept.getSouthWall();
         eWall = percept.getEastWall();
-        wWall = percept.getNorthWall();
+        wWall = percept.getWestWall();
 
     }
 
@@ -252,10 +233,7 @@ public class Agent
 
       return bestMove();
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 0aa66e79371c1b59e50ca7c5078c4fbeea4e98d6
+
 
     /*BACKUP
     public coordinate getAgentNextMove()
